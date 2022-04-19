@@ -49,7 +49,7 @@
 <meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%85%A8%E9%80%9F%E8%BF%90%E8%A1%8C.jpg">
 <meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%89%93%E5%8D%B0%E7%BB%93%E6%9E%9C.jpg">
 <meta property="article:published_time" content="2021-04-11T15:46:42.000Z">
-<meta property="article:modified_time" content="2022-04-19T15:17:51.655Z">
+<meta property="article:modified_time" content="2022-04-19T15:27:06.898Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="mcu">
 <meta property="article:tag" content="STM32">
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.7k字</span>
+      <span class="post-count">1.6k字</span>
     </span>
   </span>
 
@@ -270,7 +270,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
+      <span class="post-count">5分</span>
     </span>
   </span>
 </div>
@@ -334,7 +334,7 @@
 <li>第十步，配置MCU和VS1053B之间通信使用的SPI，我们首先查看原理图，使用的是哪几个引脚以及使用的是哪一个SPI，原理图如图：  <center>
 <div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/VS1053B%E9%83%A8%E5%88%86%E5%8E%9F%E7%90%86%E5%9B%BE.jpg" class="" title="图4-10-1 VS1053B部分原理图">
 </center>  
-&emsp;&emsp;可以看到，使用的是MCU的SPI2，引脚是:</li>
+​		可以看到，使用的是MCU的SPI2，引脚是:</li>
 </ul>
 <table>
 <thead>
@@ -392,7 +392,7 @@
 <div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%812.jpg" class="" title="图4-14-3 生成代码弹出窗口3">
 </center>  
 
-<h2 id="4-2-观察生成的工程"><a href="#4-2-观察生成的工程" class="headerlink" title="4.2 观察生成的工程"></a>4.2 观察生成的工程</h2><p>&amp;emsp;&amp;emsp;STM32CubeIDE下使用STM32CubeMX生成的代码，其结构和IDE各窗口如图所示：  </p>
+<h2 id="4-2-观察生成的工程"><a href="#4-2-观察生成的工程" class="headerlink" title="4.2 观察生成的工程"></a>4.2 观察生成的工程</h2><p>​		STM32CubeIDE下使用STM32CubeMX生成的代码，其结构和IDE各窗口如图所示：  </p>
 <center>
 <div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E7%AA%97%E5%8F%A3%E5%92%8C%E7%BB%93%E6%9E%84.jpg" class="" title="图4-15 工程窗口和结构">  
 </center>  
@@ -401,7 +401,7 @@
 <div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9F%9F.jpg" class="" title="图4-16 添加代码区域">  
 </center>  
 
-<h2 id="4-3-重定位printf-函数"><a href="#4-3-重定位printf-函数" class="headerlink" title="4.3 重定位printf()函数"></a>4.3 重定位printf()函数</h2><p>&amp;emsp;&amp;emsp;在main.c中的</p>
+<h2 id="4-3-重定位printf-函数"><a href="#4-3-重定位printf-函数" class="headerlink" title="4.3 重定位printf()函数"></a>4.3 重定位printf()函数</h2><p>​		在main.c中的</p>
 <pre>
 /* USER CODE BEGIN 0 */
 /* USER CODE END 0 */
@@ -439,7 +439,7 @@ PUTCHAR_PROTOTYPE
 <div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%BC%96%E8%AF%91%E7%BB%93%E6%9E%9C.jpg" class="" title="图4-20 编译结果">  
 </center>  
 
-<h2 id="4-5-调试"><a href="#4-5-调试" class="headerlink" title="4.5 调试"></a>4.5 调试</h2><p>&amp;emsp;&amp;emsp;这一步的前提是，ST-Link已经连上了开发板，并且开发板已经上电。</p>
+<h2 id="4-5-调试"><a href="#4-5-调试" class="headerlink" title="4.5 调试"></a>4.5 调试</h2><p>​		这一步的前提是，ST-Link已经连上了开发板，并且开发板已经上电。</p>
 <h3 id="4-5-1-首先设置调试配置参数"><a href="#4-5-1-首先设置调试配置参数" class="headerlink" title="4.5.1 首先设置调试配置参数"></a>4.5.1 首先设置调试配置参数</h3><p>&amp;emsp;&amp;emsp;可以选择菜单栏上的小甲虫边上的向下箭头选择调试配置，如图：  </p>
 <center>
 <div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B0%8F%E7%94%B2%E8%99%AB.jpg" class="" title="图4-21 小甲虫">  
@@ -458,7 +458,7 @@ PUTCHAR_PROTOTYPE
 </center>  
 这样就开始我们的调试了，至于打断点、单步调试或其他调试手段就不一一介绍了，不会的可以去百度看看。
 ### 4.5.2 初体验
-&emsp;&emsp;这一步的前提是，在调试的前提下，再把开发板上的USB口使用USB线和电脑连接起来。我们在main()函数中的USART1初始化之后，调用一个printf()看下效果，调用printf()函数还要添加一个头文件<font color=#4B0082 size=4 face="黑体">stdio.h</font>添加代码如图：  
+​		这一步的前提是，在调试的前提下，再把开发板上的USB口使用USB线和电脑连接起来。我们在main()函数中的USART1初始化之后，调用一个printf()看下效果，调用printf()函数还要添加一个头文件<font color=#4B0082 size=4 face="黑体">stdio.h</font>添加代码如图：  
 <center>
 <div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/stdio.jpg" class="" title="图4-25 stdio">  
 <div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/printf.jpg" class="" title="图4-26 printf">  
@@ -469,7 +469,7 @@ PUTCHAR_PROTOTYPE
 <div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%89%93%E5%8D%B0%E7%BB%93%E6%9E%9C.jpg" class="" title="图4-28 打印结果">  
 </center>  
 
-<h1 id="5-结尾"><a href="#5-结尾" class="headerlink" title="5. 结尾"></a>5. 结尾</h1><p>&amp;emsp;&amp;emsp;本篇只是新建了一个工程，还没有正式开始对VS1053B的驱动开发。下面一章就会正式开始编写VS1053B的SPI通信部分了。</p>
+<h1 id="5-结尾"><a href="#5-结尾" class="headerlink" title="5. 结尾"></a>5. 结尾</h1><p>​		本篇只是新建了一个工程，还没有正式开始对VS1053B的驱动开发。下面一章就会正式开始编写VS1053B的SPI通信部分了。</p>
 <hr>
 
     
