@@ -6,18 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>摘星</title>
+  <title>Archives: 2022 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇"> -->
   
   <meta name="description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
 <meta property="og:type" content="website">
 <meta property="og:title" content="摘星">
-<meta property="og:url" content="http://slhking.github.io/index.html">
+<meta property="og:url" content="http://slhking.github.io/archives/2022/index.html">
 <meta property="og:site_name" content="摘星">
 <meta property="og:description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
 <meta property="og:locale" content="zh_CN">
@@ -208,61 +204,40 @@
           </div>
           <div id="js-content" class="content-ll">
             
-
   
-    <article id="post-嵌入式Linux学习疑惑随手记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-  
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2022" class="archive-year">2022</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+<a href="/2022/04/22/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%AD%A6%E4%B9%A0%E7%96%91%E6%83%91%E9%9A%8F%E6%89%8B%E8%AE%B0/" class="archive-article-date">
+        <time datetime="2022-04-22T14:52:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-22</time>
+</a>
+
+        </div>
+    	 
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2022/04/22/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%AD%A6%E4%B9%A0%E7%96%91%E6%83%91%E9%9A%8F%E6%89%8B%E8%AE%B0/">嵌入式Linux学习疑惑随手记</a>
+	  <a class="archive-article-title" href="/2022/04/22/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%AD%A6%E4%B9%A0%E7%96%91%E6%83%91%E9%9A%8F%E6%89%8B%E8%AE%B0/">嵌入式Linux学习疑惑随手记</a>
 	
     </h1>
   
 
 
-  
-  
-<a href="/2022/04/22/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%AD%A6%E4%B9%A0%E7%96%91%E6%83%91%E9%9A%8F%E6%89%8B%E8%AE%B0/" class="archive-article-date">
-        <time datetime="2022-04-22T14:52:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="1-嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？"><a href="#1-嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？" class="headerlink" title="1. 嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？"></a>1. 嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？</h1><ul>
-<li>系统会自动挂载，如果没有自动挂载就需要去手动执行挂载命令；我们怎么直到是否自动挂载呢？在终端执行：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/mounts</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看系统设备：</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /dev<span class="comment">/* -l	# 查看所有的设备，包括其主设备号和次设备号</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="E:\slhuan.cn\source_posts\嵌入式Linux学习疑惑随手记\查看设备.png" alt="image-20220422231536254"></p>
-<p>在Linux内核里面，有两类驱动程序：字符(char)设备驱动程序和块(block)设备驱动程序。</p>
-<p>图中，<strong>c</strong>代表字符设备驱动程序，  <strong>89</strong>就是设备的主设备号，<em><strong>0&#x2F;1&#x2F;2</strong></em>就是设备的次设备号。设备节点对应哪一个设备驱动程序通过主设备号来确定，而次设备号则是决定该设备节点对应的是设备驱动程序中对应的哪一个硬件。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -278,83 +253,38 @@
 		</ul>
 	</div>
 
-    
+          
 
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/22/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%AD%A6%E4%B9%A0%E7%96%91%E6%83%91%E9%9A%8F%E6%89%8B%E8%AE%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-ROS的快速体验" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
     
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/22/ROS%E7%9A%84%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/">ROS的快速体验</a>
-	
-    </h1>
-  
-
-
-  
-  
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
 <a href="/2022/04/22/ROS%E7%9A%84%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/" class="archive-article-date">
         <time datetime="2022-04-22T09:36:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-22</time>
 </a>
 
+        </div>
+    	 
   
+    <h1 itemprop="name">
+	
+	  <a class="archive-article-title" href="/2022/04/22/ROS%E7%9A%84%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/">ROS的快速体验</a>
+	
+    </h1>
   
-    
 
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>​	本文参考的是赵虚左老师的博客和视频。主要目的是记录一下快速使用ROS输出Hello World!这个信息的步骤。
-    
-    <a class="article-more-a" href="/2022/04/22/ROS%E7%9A%84%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/#more">more >></a>
-    
-    
 
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -366,83 +296,38 @@
 		</ul>
 	</div>
 
-    
+          
 
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/22/ROS%E7%9A%84%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-ROS环境搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
     
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">ROS环境搭建</a>
-	
-    </h1>
-  
-
-
-  
-  
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
 <a href="/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="archive-article-date">
         <time datetime="2022-04-22T08:42:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-22</time>
 </a>
 
+        </div>
+    	 
   
+    <h1 itemprop="name">
+	
+	  <a class="archive-article-title" href="/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">ROS环境搭建</a>
+	
+    </h1>
   
-    
 
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>​	本文参考的是赵虚左老师的博客以及视频。
-    
-    <a class="article-more-a" href="/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#more">more >></a>
-    
-    
 
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -454,659 +339,19 @@
 		</ul>
 	</div>
 
-    
+          
 
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-VS1053B开发——使用STM32CubeIDE新建工程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/">VS1053B开发——使用STM32CubeIDE新建工程</a>
-	
-    </h1>
+    </div></section>
   
 
-
-  
-  
-<a href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/" class="archive-article-date">
-        <time datetime="2021-04-11T15:46:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
-</a>
-
-  
-  
     
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>​		本篇是记录的是使用STM32CubeIDE新建一个开发VS1053B芯片的工程，包括了对基本外设的配置和FATFS系统以及freeRTOS系统的添加。
-    
-    <a class="article-more-a" href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mcu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">STM32</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">VS1053</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/mcu//" class="article-tag-list-link color4">mcu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-VS1053B开发——手册学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E6%89%8B%E5%86%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">VS1053B开发——手册学习笔记</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E6%89%8B%E5%86%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-        <time datetime="2021-04-11T03:52:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>​		本篇是记录学习VS1053B这个芯片的手册的一些心得和笔记。
-    
-    <a class="article-more-a" href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E6%89%8B%E5%86%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mcu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">STM32</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">VS1053</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/mcu//" class="article-tag-list-link color4">mcu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E6%89%8B%E5%86%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-土豆烧排骨" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/10/%E5%9C%9F%E8%B1%86%E7%83%A7%E6%8E%92%E9%AA%A8/">土豆烧排骨</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/10/%E5%9C%9F%E8%B1%86%E7%83%A7%E6%8E%92%E9%AA%A8/" class="archive-article-date">
-        <time datetime="2021-04-10T06:23:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>​		本篇是记录土豆少排骨这道菜第一次学习烹饪的过程以及总结。
-    
-    <a class="article-more-a" href="/2021/04/10/%E5%9C%9F%E8%B1%86%E7%83%A7%E6%8E%92%E9%AA%A8/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">土豆烧排骨</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">美食</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/美食//" class="article-tag-list-link color3">美食</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/10/%E5%9C%9F%E8%B1%86%E7%83%A7%E6%8E%92%E9%AA%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-学习做梅菜扣肉" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/10/%E5%AD%A6%E4%B9%A0%E5%81%9A%E6%A2%85%E8%8F%9C%E6%89%A3%E8%82%89/">学习做梅菜扣肉</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/10/%E5%AD%A6%E4%B9%A0%E5%81%9A%E6%A2%85%E8%8F%9C%E6%89%A3%E8%82%89/" class="archive-article-date">
-        <time datetime="2021-04-10T05:25:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>​		本篇是记录梅菜扣肉这道菜第一次学习烹饪的过程以及总结。
-    
-    <a class="article-more-a" href="/2021/04/10/%E5%AD%A6%E4%B9%A0%E5%81%9A%E6%A2%85%E8%8F%9C%E6%89%A3%E8%82%89/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">美食</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">梅菜扣肉</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/美食//" class="article-tag-list-link color3">美食</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/10/%E5%AD%A6%E4%B9%A0%E5%81%9A%E6%A2%85%E8%8F%9C%E6%89%A3%E8%82%89/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-学习计划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/">学习计划</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/" class="archive-article-date">
-        <time datetime="2021-04-09T03:17:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-09</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>本贴是对个人学习计划的规划贴。
-    
-    <a class="article-more-a" href="/2021/04/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/学习笔记//" class="article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/09/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Hexo指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/04/Hexo%E6%8C%87%E4%BB%A4/">Hexo指令</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/04/Hexo%E6%8C%87%E4%BB%A4/" class="archive-article-date">
-        <time datetime="2021-04-04T09:36:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>说明：本文档作为Hexo新手学习笔记文档，遇到新命令即记录，不定时更新ing。
-    
-    <a class="article-more-a" href="/2021/04/04/Hexo%E6%8C%87%E4%BB%A4/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/学习笔记//" class="article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/04/Hexo%E6%8C%87%E4%BB%A4/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -1146,9 +391,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
