@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1. 什么是链表？​	链表，别名链式存储结构或者单链表，用于存储逻辑关系为“一对一”的数据。***链表不限制数据的物理存储状态，使用链表存储的数据元素，其物理存储位置是随机的。***">
+  <meta name="description" content="1. 什么是链表？​	链表，别名链式存储结构或者单链表，用于存储逻辑关系为“一对一”的数据。链表不限制数据的物理存储状态，使用链表存储的数据元素，其物理存储位置是随机的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="链表的学习">
 <meta property="og:url" content="http://slhking.github.io/2022/04/23/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="1. 什么是链表？​	链表，别名链式存储结构或者单链表，用于存储逻辑关系为“一对一”的数据。***链表不限制数据的物理存储状态，使用链表存储的数据元素，其物理存储位置是随机的。***">
+<meta property="og:description" content="1. 什么是链表？​	链表，别名链式存储结构或者单链表，用于存储逻辑关系为“一对一”的数据。链表不限制数据的物理存储状态，使用链表存储的数据元素，其物理存储位置是随机的。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-22T23:32:25.000Z">
-<meta property="article:modified_time" content="2022-04-23T15:23:12.394Z">
+<meta property="article:modified_time" content="2022-04-24T12:21:56.608Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="C语言">
 <meta property="article:tag" content="单片机">
@@ -240,7 +240,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">72字</span>
+      <span class="post-count">596字</span>
     </span>
   </span>
 
@@ -249,7 +249,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -260,8 +260,43 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="1-什么是链表？"><a href="#1-什么是链表？" class="headerlink" title="1. 什么是链表？"></a>1. 什么是链表？</h1><p>​	链表，别名<em><strong>链式存储结构</strong></em>或者<em><strong>单链表</strong></em>，用于存储逻辑关系为<strong>“一对一”</strong>的数据。***<font color='red'>链表不限制数据的物理存储状态，使用链表存储的数据元素，其物理存储位置是随机的</font>。***</p>
+    <h1 id="1-什么是链表？"><a href="#1-什么是链表？" class="headerlink" title="1. 什么是链表？"></a>1. 什么是链表？</h1><p>​	链表，别名<em><strong>链式存储结构</strong></em>或者<em><strong>单链表</strong></em>，用于存储逻辑关系为<strong>“一对一”</strong>的数据。<font color='red'><em><strong>链表不限制数据的物理存储状态，使用链表存储的数据元素，其物理存储位置是随机的</strong></em></font>。<span id="more"></span></p>
+<h1 id="2-链表的节点"><a href="#2-链表的节点" class="headerlink" title="2. 链表的节点"></a>2. 链表的节点</h1><p>​	链表中每个数据的存储都由以下两部分组成：</p>
+<ul>
+<li>数据元素本身，其所在的区域成为数据域；</li>
+<li>指向直接后继元素的指针，所在的区域称为指针域；</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">List</span> *<span class="title">pList</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">List</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> data;           <span class="comment">// 数据域</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">List</span> *<span class="title">next</span>;</span>  <span class="comment">// 指针域</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<p>​	一个完整的链表需要以下及部分组成：</p>
+<ul>
+<li><p>头指针：一个普通的指针，它的特点是永远指向链表第一个节点的为止；</p>
+</li>
+<li><p>节点：链表中的节点又细分为头节点、首元节点：</p>
+<ul>
+<li>头节点：其实就是一个不存任何数据的空节点，通常作为链表的第一个节点。对于链表来说，头节点不是必须的，它的作用只是为了方便解决某些实际问题；</li>
+<li>首元节点：由于头节点的缘故，链表中称第一个存有数据的节点为首元节点。首元节点只是对链表中第一个存有数据的节点的一个称谓，没有实际意义；</li>
+<li>其它节点；</li>
+</ul>
+<p><font color='orange'>注意：链表中有头节点时，头指针指向头节点；反之，若链表中没有头节点，则头指针指向首元节点。</font></p>
+</li>
+</ul>
+<h1 id="3-链表的主要操作"><a href="#3-链表的主要操作" class="headerlink" title="3. 链表的主要操作"></a>3. 链表的主要操作</h1><h2 id="3-1-创建一个无头节点的链表"><a href="#3-1-创建一个无头节点的链表" class="headerlink" title="3.1 创建一个无头节点的链表"></a>3.1 创建一个无头节点的链表</h2><p>​	创建一个链表需要做如下工作：</p>
+<ol>
+<li>声明一个头指针，如果有必要，可以声明一个头节点；</li>
+<li>创建多个存储数据的节点，在创建的过程中，<font color='red'>要随时与其前驱节点建立逻辑关系</font>；</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-求链表长度"><a href="#3-2-求链表长度" class="headerlink" title="3.2 求链表长度"></a>3.2 求链表长度</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">GetListLength</span><span class="params">(pList npList)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    pList p = npList;</span><br><span class="line">    <span class="keyword">while</span>(p)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-查找链表节点"><a href="#3-3-查找链表节点" class="headerlink" title="3.3 查找链表节点"></a>3.3 查找链表节点</h2><p>​	按序号查找:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pList <span class="title function_">FindListByNum</span><span class="params">(<span class="type">int</span> k, pList npList)</span></span><br><span class="line">&#123;</span><br><span class="line">    pList p = npList;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(p!=<span class="literal">NULL</span> &amp;&amp; i&lt;k)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(i==k)    <span class="keyword">return</span> p;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	按值查找:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pList <span class="title function_">FineListByValue</span><span class="params">(<span class="type">int</span> value, pList npList)</span></span><br><span class="line">&#123;</span><br><span class="line">    pList p = npList;</span><br><span class="line">    <span class="keyword">while</span>(p!=null &amp;&amp; p-&gt;data!=value)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-在链表中插入节点"><a href="#3-4-在链表中插入节点" class="headerlink" title="3.4 在链表中插入节点"></a>3.4 在链表中插入节点</h2>
     
 
     
@@ -568,11 +603,15 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ROS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,10 +636,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
