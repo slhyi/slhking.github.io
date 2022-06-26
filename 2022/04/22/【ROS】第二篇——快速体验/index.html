@@ -6,26 +6,37 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>ROS环境搭建 | 摘星</title>
+  <title>【ROS】第二篇——快速体验 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="​	本文参考的是赵虚左老师的博客以及视频。">
+  <meta name="description" content="​	本文参考的是赵虚左老师的博客和视频。主要目的是记录一下快速使用ROS输出Hello World!这个信息的步骤。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ROS环境搭建">
-<meta property="og:url" content="http://slhking.github.io/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:title" content="【ROS】第二篇——快速体验">
+<meta property="og:url" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="​	本文参考的是赵虚左老师的博客以及视频。">
+<meta property="og:description" content="​	本文参考的是赵虚左老师的博客和视频。主要目的是记录一下快速使用ROS输出Hello World!这个信息的步骤。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/00ROS%E5%AE%89%E8%A3%85%E4%B9%8Bubuntu%E5%87%86%E5%A4%87.png">
-<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/rosdep%E6%AD%A3%E5%B8%B8%E5%88%9D%E5%A7%8B%E5%8C%96.png">
-<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/rosdep%E6%AD%A3%E5%B8%B8%E6%9B%B4%E6%96%B0.png">
-<meta property="article:published_time" content="2022-04-22T08:42:02.000Z">
-<meta property="article:modified_time" content="2022-04-22T23:01:27.502Z">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B401.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B402.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E5%8C%85%E5%B9%B6%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/ros%E5%8A%9F%E8%83%BD%E5%8C%85.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%88%9B%E5%BB%BA%E6%BA%90%E6%96%87%E4%BB%B6%E5%B9%B6%E7%BC%96%E8%BE%91.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%9B%9E%E9%80%80%E5%88%B0ros%E5%8A%9F%E8%83%BD%E5%8C%85%E6%A0%B9%E7%9B%AE%E5%BD%95.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/add_executable.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/target_link_libraries.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E4%BF%AE%E6%94%B9%E5%90%8E%E7%9A%84add_target.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%9B%9E%E5%88%B0%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E7%BC%96%E8%AF%91.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E4%BF%AE%E6%AD%A3CMakelist.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E7%BC%96%E8%AF%91%E6%88%90%E5%8A%9F.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E6%89%A7%E8%A1%8C%E8%8A%82%E7%82%B9.jpg">
+<meta property="article:published_time" content="2022-04-22T09:36:56.000Z">
+<meta property="article:modified_time" content="2022-06-21T14:18:14.053Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="ROS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/00ROS%E5%AE%89%E8%A3%85%E4%B9%8Bubuntu%E5%87%86%E5%A4%87.png">
+<meta name="twitter:image" content="http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B401.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -210,14 +221,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ROS环境搭建" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-【ROS】第二篇——快速体验" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      ROS环境搭建
+      【ROS】第二篇——快速体验
     </h1>
   
 
@@ -229,8 +240,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-        <time datetime="2022-04-22T08:42:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-22</time>
+<a href="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/" class="archive-article-date">
+        <time datetime="2022-04-22T09:36:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-22</time>
 </a>
 
   
@@ -243,7 +254,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">619字</span>
+      <span class="post-count">958字</span>
     </span>
   </span>
 
@@ -252,7 +263,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">2分</span>
+      <span class="post-count">3分</span>
     </span>
   </span>
 </div>
@@ -263,60 +274,131 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>​	本文参考的是赵虚左老师的博客以及视频。<span id="more"></span></p>
-<h1 id="1-安装虚拟机"><a href="#1-安装虚拟机" class="headerlink" title="1. 安装虚拟机"></a>1. 安装虚拟机</h1><p>​	需要下载的软件：VxWork或者vmware以及ubuntu虚拟机镜像，ubuntu镜像学习使用的版本是20.04。虚拟机的安装步骤比较简单，网上有很多参考，这里略过不写。</p>
-<h1 id="2-安装ROS"><a href="#2-安装ROS" class="headerlink" title="2. 安装ROS"></a>2. 安装ROS</h1><h2 id="2-1-配置ubuntu的软件和更新"><a href="#2-1-配置ubuntu的软件和更新" class="headerlink" title="2.1 配置ubuntu的软件和更新"></a>2.1 配置ubuntu的软件和更新</h2><center>
-<div style="width:75%;margin:auto"><img src="/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/00ROS%E5%AE%89%E8%A3%85%E4%B9%8Bubuntu%E5%87%86%E5%A4%87.png" class="" title="ubuntu软件">  
-</center> 
-
-
-<p>需要保证途中的复选框都勾选上，且<strong>下载自</strong>那个地方要选择一个国内的服务器。</p>
-<h2 id="2-2-设置安装源"><a href="#2-2-设置安装源" class="headerlink" title="2.2 设置安装源"></a>2.2 设置安装源</h2><ul>
-<li>默认的安装源：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c <span class="string">&#x27;echo &quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#x27;</span></span><br></pre></td></tr></table></figure>
-
+    <p>​	本文参考的是赵虚左老师的博客和视频。主要目的是记录一下快速使用ROS输出Hello World!这个信息的步骤。<span id="more"></span></p>
+<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	ROS设计的编程语言主要是C++和python，使用哪一门语言进行开发取决于我们熟悉使用哪一门语言。</p>
+<p>​	实现输出Hello World!的步骤分为如下几步：</p>
 <ul>
-<li>国内清华的安装源：</li>
+<li>创建一个工作空间；</li>
+<li>在工作空间中创建一个功能包；</li>
+<li>编辑源文件；</li>
+<li>编辑配置文件；</li>
+<li>编译并执行；</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c <span class="string">&#x27;. /etc/lsb-release &amp;&amp; echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/ros/ubuntu/ `lsb_release -cs` main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#x27;</span></span><br></pre></td></tr></table></figure>
+<h1 id="2-创建和编译"><a href="#2-创建和编译" class="headerlink" title="2. 创建和编译"></a>2. 创建和编译</h1><h2 id="2-1-创建工作空间并初始化"><a href="#2-1-创建工作空间并初始化" class="headerlink" title="2.1 创建工作空间并初始化"></a>2.1 创建工作空间并初始化</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p 自定义空间名称/src</span><br><span class="line">cd 自定义空间名称</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>国内中科大的安装源：</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c <span class="string">&#x27;. /etc/lsb-release &amp;&amp; echo &quot;deb http://mirrors.ustc.edu.cn/ros/ubuntu/ `lsb_release -cs` main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-3-设置ROS的key"><a href="#2-3-设置ROS的key" class="headerlink" title="2.3 设置ROS的key"></a>2.3 设置ROS的key</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-key adv --keyserver <span class="string">&#x27;hkp://keyserver.ubuntu.com:80&#x27;</span> --recv-key <span class="variable constant_">C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-4-更新源"><a href="#2-4-更新源" class="headerlink" title="2.4 更新源"></a>2.4 更新源</h2><p><code>sudo apt update</code></p>
-<h2 id="2-5-安装ROS"><a href="#2-5-安装ROS" class="headerlink" title="2.5 安装ROS"></a>2.5 安装ROS</h2><p><code>sudo apt install ros-noetic-desktop-full</code></p>
-<p>这个安装过程受限于网络环境和网络速度，过程可能比较漫长，而且过程中还可能会报错，如果报错了就重新执行这条命令，它会从错误的地方开始继续安装，不会从头安装。需要耐心等待。</p>
-<h2 id="2-6-配置环境变量"><a href="#2-6-配置环境变量" class="headerlink" title="2.6 配置环境变量"></a>2.6 配置环境变量</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;source /opt/ros/noetic/setup.bash&quot;</span> &gt;&gt; ~/.<span class="property">bashrc</span></span><br><span class="line">source ~/.<span class="property">bashrc</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="3-ROS依赖安装"><a href="#3-ROS依赖安装" class="headerlink" title="3. ROS依赖安装"></a>3. ROS依赖安装</h1><ul>
-<li>首先安装构建依赖的相关工具：</li>
-</ul>
-<p><code>sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential</code></p>
-<ul>
-<li>初始化rosdep</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rosdep init</span><br><span class="line">rosdep update</span><br></pre></td></tr></table></figure>
-
-<p>如果一切顺利的话：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/rosdep%E6%AD%A3%E5%B8%B8%E5%88%9D%E5%A7%8B%E5%8C%96.png" class="" title="rosdep正常初始化">  
-<div style="width:80%;margin:auto"><img src="/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/rosdep%E6%AD%A3%E5%B8%B8%E6%9B%B4%E6%96%B0.png" class="" title="rosdep正常更新">
-</center> 
+<div style="width:50%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B401.jpg" class="" title="创建工作空间">  
+<div style="width:100%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B402.jpg" class="" title="创建工作空间">  
+</center>
 
 
-<p>但是一般都会在<code>rosdep update</code>这一步出错，在这一步，如果能翻墙的话可以翻墙后重复执行一直到成功，如果不能翻墙，则参考<strong>赵虚左老师</strong>的方法：<a target="_blank" rel="noopener" href="http://www.autolabor.com.cn/book/ROSTutorials">http://www.autolabor.com.cn/book/ROSTutorials</a></p>
-<h1 id="4-验证环境"><a href="#4-验证环境" class="headerlink" title="4. 验证环境"></a>4. 验证环境</h1><ul>
-<li>开启三个终端（ctrl+shift+t可以打开一个终端）；</li>
-<li>终端1输入指令：<code>roscore</code>；开启ROS核心控制器</li>
-<li>终端2输入指令：<code>rosrun turtlesim turtlesim_node</code>；开启乌龟控制图形界面</li>
-<li>终端3输入指令：<code>rosrun turtlesim turtle_teleop_key</code>；开启获取键盘鼠标的ros程序</li>
-<li>将鼠标光标放置终端3窗口，然后按下键盘的上下左右键，如果能控制乌龟则说明ROS环境搭建完成；</li>
+<p>需要注意的是，使用<code>mkdir</code>创建工作空间的时候，后面必须要有<code>/src</code>；初始化的时候，必须是在创建好的工作空间内进行初始化。</p>
+<h2 id="2-2-进入src创建ros功能包并添加依赖"><a href="#2-2-进入src创建ros功能包并添加依赖" class="headerlink" title="2.2 进入src创建ros功能包并添加依赖"></a>2.2 进入src创建ros功能包并添加依赖</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd src</span><br><span class="line">catkin_create_pkg 自定义ROS包名 roscpp rospy std_msgs</span><br></pre></td></tr></table></figure>
+
+<center>
+<div style="width:50%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E5%8C%85%E5%B9%B6%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96.jpg" class="" title="创建工作包并添加依赖">
+</center>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">roscpp: C++的依赖包</span><br><span class="line">rospy: python的依赖包</span><br><span class="line">std_msgs: 标准输入输出的依赖包</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-使用C-实现输出Hello-World"><a href="#2-3-使用C-实现输出Hello-World" class="headerlink" title="2.3 使用C++实现输出Hello World"></a>2.3 使用C++实现输出Hello World</h2><h3 id="2-3-1-ROS功能包内容"><a href="#2-3-1-ROS功能包内容" class="headerlink" title="2.3.1 ROS功能包内容"></a>2.3.1 ROS功能包内容</h3><ul>
+<li>进入刚才创建的ros功能包：</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ros功能包</span><br></pre></td></tr></table></figure>
+
+<center>
+<div style="width:80%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/ros%E5%8A%9F%E8%83%BD%E5%8C%85.jpg" class="" title="ros功能包">
+</center>
+
+
+<p>可以看到这里面也有一个<code>src</code>文件夹，我们需要将当前ros功能包要实现的功能的源代码文件放在这个文件夹下，头文件放在ros功能包中的<code>include</code>文件夹下。需要注意区分<em><strong>工作空间下的<code>src</code>文件夹</strong></em>和<em><strong>ros功能包中的<code>src</code>文件夹</strong></em>。</p>
+<h3 id="2-3-2-创建和编辑节点源文件"><a href="#2-3-2-创建和编辑节点源文件" class="headerlink" title="2.3.2 创建和编辑节点源文件"></a>2.3.2 创建和编辑节点源文件</h3><ul>
+<li><p>进入ros功能包中的src文件夹新建源文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd src</span><br><span class="line">gedit hello.cpp</span><br></pre></td></tr></table></figure>
+
+<p>使用gedit新建并打开hello.cpp，如果不是在vmware或者vxwork中而是使用ssh连接虚拟机的话，需要将gedit换做vim。</p>
+<center>
+<div style="width:80%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%88%9B%E5%BB%BA%E6%BA%90%E6%96%87%E4%BB%B6%E5%B9%B6%E7%BC%96%E8%BE%91.jpg" class="" title="创建源文件并编辑">
+</center>
+</li>
+<li><p>编辑hello.cpp</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ros/ros.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//执行 ros 节点初始化</span></span><br><span class="line">    ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="comment">//创建 ros 节点句柄(非必须)</span></span><br><span class="line">    ros::NodeHandle n;</span><br><span class="line">    <span class="comment">//控制台输出 hello world</span></span><br><span class="line">    <span class="built_in">ROS_INFO</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们要使用ros的库API，需要包含它的头文件。在main函数中，一个简单的ros节点创建和信息输出总结为如下几步：</p>
+<ul>
+<li>使用ros-&gt;init接口初始化节点，第三个参数是节点名称；</li>
+<li>使用ros-&gt;NodeHandle 创建当前ros节点的句柄；</li>
+<li>调用ros标准信息输出接口ROS输出信息；</li>
+</ul>
+<p>编辑好源代码之后保存退出编辑；</p>
+<h3 id="2-3-3-编译配置文件"><a href="#2-3-3-编译配置文件" class="headerlink" title="2.3.3 编译配置文件"></a>2.3.3 编译配置文件</h3><ul>
+<li>编辑ros功能包中的配置文件CMakelist.txt</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/工作空间/src/ros功能包</span><br><span class="line">gedit CMakelist.txt</span><br></pre></td></tr></table></figure>
+
+<center>
+<div style="width:80%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%9B%9E%E9%80%80%E5%88%B0ros%E5%8A%9F%E8%83%BD%E5%8C%85%E6%A0%B9%E7%9B%AE%E5%BD%95.jpg" class="" title="回退到ros功能包根目录">
+</center>
+
+
+<p>找到默认被注释掉的<code>add_executable</code>和<code>target_link_libraries</code>，默认分别是在<code>136行</code>和<code>149行</code>：</p>
+<center>
+<div style="width:100%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/add_executable.jpg" class="" title="add_executable">
+<div style="width:100%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/target_link_libraries.jpg" class="" title="target_link_libraries">
+</center>
+
+
+<p>将他们按照下面的格式修改：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add_executable(步骤3的源文件名</span><br><span class="line">  src/步骤3的源文件名.cpp</span><br><span class="line">)</span><br><span class="line">target_link_libraries(步骤3的源文件名</span><br><span class="line">  $&#123;catkin_LIBRARIES&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<center>
+<div style="width:50%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E4%BF%AE%E6%94%B9%E5%90%8E%E7%9A%84add_target.jpg" class="" title="修改后的add_target">
+</center>
+
+<p>然后保存退出编辑。</p>
+<h3 id="2-3-4-编译功能包"><a href="#2-3-4-编译功能包" class="headerlink" title="2.3.4 编译功能包"></a>2.3.4 编译功能包</h3><ul>
+<li>进入工作空间根目录编译</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/Desktop/工作空间</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+
+<center>
+<div style="width:50%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E5%9B%9E%E5%88%B0%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E7%BC%96%E8%AF%91.jpg" class="" title="回到工作空间编译">
+</center>
+
+<p>如果提示编译失败：</p>
+<center>
+<div style="width:50%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5.jpg" class="" title="编译失败">
+</center>
+
+<p>则根据提示去修改，比如我们这里最初提示在配置文件<code>CMakelist.txt</code>中没有找到<code>hello_node.cpp</code>，也就是我们的配置文件没有修改正确，那我们又去ros功能包中修改<code>CMakelist.txt</code>文件：</p>
+<center>
+<div style="width:50%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E4%BF%AE%E6%AD%A3CMakelist.jpg" class="" title="修正CMakelist">
+</center>
+
+<p>再重新回到工作空间编译，编译成功会有如下提示：</p>
+<center>
+<div style="width:50%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E7%BC%96%E8%AF%91%E6%88%90%E5%8A%9F.jpg" class="" title="编译成功">
+</center>
+
+<h1 id="3-执行"><a href="#3-执行" class="headerlink" title="3. 执行"></a>3. 执行</h1><p>​	需要打开两个终端：</p>
+<ul>
+<li>在终端1中启动ROS：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roscore</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在终端2中启动编译出来的ros节点</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/工作空间</span><br><span class="line">source ./devel/setup.bash</span><br><span class="line">rosrun 包名 C++节点</span><br></pre></td></tr></table></figure>
+
+<center>
+<div style="width:100%;margin:auto"><img src="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/%E6%89%A7%E8%A1%8C%E8%8A%82%E7%82%B9.jpg" class="" title="执行节点">
+</center>
+
+<p>当我们执行后看到了打印信息则证明我们的ROS环境搭建基本没有问题。</p>
+<p><code>source ~/工作空间/devel/setup.bash</code>可以添加进<code>.bashrc</code>文件，使用上更方便，这一步是配置环境变量。</p>
 
     
 
@@ -363,7 +445,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://slhking.github.io/2022/04/22/ROS环境搭建/" title="ROS环境搭建" target="_blank">http://slhking.github.io/2022/04/22/ROS环境搭建/</a>
+          <a href="http://slhking.github.io/2022/04/22/【ROS】第二篇——快速体验/" title="【ROS】第二篇——快速体验" target="_blank">http://slhking.github.io/2022/04/22/【ROS】第二篇——快速体验/</a>
         </li>
         
         <li>
@@ -441,7 +523,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/04/22/ROS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AF%87%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -456,18 +538,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/04/22/ROS%E7%9A%84%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/04/22/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%AD%A6%E4%B9%A0%E7%96%91%E6%83%91%E9%9A%8F%E6%89%8B%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          ROS的快速体验
+          嵌入式Linux学习疑惑随手记
         
       </div>
     </a>
   
   
-    <a href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">VS1053B开发——使用STM32CubeIDE新建工程</div>
+    <a href="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%B8%80%E7%AF%87%E2%80%94%E2%80%94%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【ROS】第一篇——环境搭建</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -486,6 +568,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E5%92%8C%E7%BC%96%E8%AF%91"><span class="toc-number">2.</span> <span class="toc-text">2. 创建和编译</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E5%B9%B6%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 创建工作空间并初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E8%BF%9B%E5%85%A5src%E5%88%9B%E5%BB%BAros%E5%8A%9F%E8%83%BD%E5%8C%85%E5%B9%B6%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 进入src创建ros功能包并添加依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E4%BD%BF%E7%94%A8C-%E5%AE%9E%E7%8E%B0%E8%BE%93%E5%87%BAHello-World"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 使用C++实现输出Hello World</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-ROS%E5%8A%9F%E8%83%BD%E5%8C%85%E5%86%85%E5%AE%B9"><span class="toc-number">2.3.1.</span> <span class="toc-text">2.3.1 ROS功能包内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-%E5%88%9B%E5%BB%BA%E5%92%8C%E7%BC%96%E8%BE%91%E8%8A%82%E7%82%B9%E6%BA%90%E6%96%87%E4%BB%B6"><span class="toc-number">2.3.2.</span> <span class="toc-text">2.3.2 创建和编辑节点源文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-%E7%BC%96%E8%AF%91%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.3.3.</span> <span class="toc-text">2.3.3 编译配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4-%E7%BC%96%E8%AF%91%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="toc-number">2.3.4.</span> <span class="toc-text">2.3.4 编译功能包</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%89%A7%E8%A1%8C"><span class="toc-number">3.</span> <span class="toc-text">3. 执行</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -629,23 +724,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ROS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mcu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">MM32</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,6 +740,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MM32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ROS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
               </li>
              
@@ -665,7 +756,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Liux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">

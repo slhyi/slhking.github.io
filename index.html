@@ -210,7 +210,7 @@
             
 
   
-    <article id="post-移植LVGL到Linux开发板" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -218,7 +218,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2022/06/21/%E7%A7%BB%E6%A4%8DLVGL%E5%88%B0Linux%E5%BC%80%E5%8F%91%E6%9D%BF/">移植LVGL到Linux开发板</a>
+	  <a class="article-title" href="/2022/06/21/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91%E5%88%9D%E6%AD%A5%E7%A7%BB%E6%A4%8DMQTT%E5%88%B0Ubuntu%E5%92%8CLinux%E5%BC%80%E5%8F%91%E6%9D%BF/">【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板</a>
 	
     </h1>
   
@@ -226,7 +226,95 @@
 
   
   
-<a href="/2022/06/21/%E7%A7%BB%E6%A4%8DLVGL%E5%88%B0Linux%E5%BC%80%E5%8F%91%E6%9D%BF/" class="archive-article-date">
+<a href="/2022/06/21/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91%E5%88%9D%E6%AD%A5%E7%A7%BB%E6%A4%8DMQTT%E5%88%B0Ubuntu%E5%92%8CLinux%E5%BC%80%E5%8F%91%E6%9D%BF/" class="archive-article-date">
+        <time datetime="2022-06-21T09:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要是记录将MQTT移植安装到百问网STM32MP157开发板上，并且是跑一下MQTT的一个例程来验证。
+    
+    <a class="article-more-a" href="/2022/06/21/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91%E5%88%9D%E6%AD%A5%E7%A7%BB%E6%A4%8DMQTT%E5%88%B0Ubuntu%E5%92%8CLinux%E5%BC%80%E5%8F%91%E6%9D%BF/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Liux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/06/21/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91%E5%88%9D%E6%AD%A5%E7%A7%BB%E6%A4%8DMQTT%E5%88%B0Ubuntu%E5%92%8CLinux%E5%BC%80%E5%8F%91%E6%9D%BF/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-【嵌入式Linux应用】移植LVGL到Linux开发板" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/06/21/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91%E7%A7%BB%E6%A4%8DLVGL%E5%88%B0Linux%E5%BC%80%E5%8F%91%E6%9D%BF/">【嵌入式Linux应用】移植LVGL到Linux开发板</a>
+	
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/06/21/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91%E7%A7%BB%E6%A4%8DLVGL%E5%88%B0Linux%E5%BC%80%E5%8F%91%E6%9D%BF/" class="archive-article-date">
         <time datetime="2022-06-21T06:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
 </a>
 
@@ -241,7 +329,7 @@
     
     <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要是记录将LVGL移植到百问网STM32MP157开发板上，并且仅是跑一下LVGL的一些例程。
     
-    <a class="article-more-a" href="/2022/06/21/%E7%A7%BB%E6%A4%8DLVGL%E5%88%B0Linux%E5%BC%80%E5%8F%91%E6%9D%BF/#more">more >></a>
+    <a class="article-more-a" href="/2022/06/21/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91%E7%A7%BB%E6%A4%8DLVGL%E5%88%B0Linux%E5%BC%80%E5%8F%91%E6%9D%BF/#more">more >></a>
     
     
 
@@ -268,7 +356,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2022/06/21/%E7%A7%BB%E6%A4%8DLVGL%E5%88%B0Linux%E5%BC%80%E5%8F%91%E6%9D%BF/">展开全文 >></a>
+      <a class="article-more-a" href="/2022/06/21/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91%E7%A7%BB%E6%A4%8DLVGL%E5%88%B0Linux%E5%BC%80%E5%8F%91%E6%9D%BF/">展开全文 >></a>
     </p>
     
 
@@ -916,7 +1004,7 @@
 
 
   
-    <article id="post-ROS的文件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-【ROS】第三篇——文件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -924,7 +1012,7 @@
   
     <h1 itemprop="name">
 	
-	  <a class="article-title" href="/2022/04/30/ROS%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">ROS的文件系统</a>
+	  <a class="article-title" href="/2022/04/30/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">【ROS】第三篇——文件系统</a>
 	
     </h1>
   
@@ -932,7 +1020,7 @@
 
   
   
-<a href="/2022/04/30/ROS%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="archive-article-date">
+<a href="/2022/04/30/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="archive-article-date">
         <time datetime="2022-04-29T22:22:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-30</time>
 </a>
 
@@ -947,7 +1035,7 @@
     
     <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	ROS文件系统指的是在硬盘上ROS源代码的组织形式
     
-    <a class="article-more-a" href="/2022/04/30/ROS%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/#more">more >></a>
+    <a class="article-more-a" href="/2022/04/30/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/#more">more >></a>
     
     
 
@@ -974,7 +1062,7 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/30/ROS%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">展开全文 >></a>
+      <a class="article-more-a" href="/2022/04/30/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">展开全文 >></a>
     </p>
     
 
@@ -1067,98 +1155,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/04/23/%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-嵌入式Linux学习疑惑随手记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/04/22/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%AD%A6%E4%B9%A0%E7%96%91%E6%83%91%E9%9A%8F%E6%89%8B%E8%AE%B0/">嵌入式Linux学习疑惑随手记</a>
-	
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/04/22/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%AD%A6%E4%B9%A0%E7%96%91%E6%83%91%E9%9A%8F%E6%89%8B%E8%AE%B0/" class="archive-article-date">
-        <time datetime="2022-04-22T14:52:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="1-嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？"><a href="#1-嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？" class="headerlink" title="1. 嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？"></a>1. 嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？
-    
-    <a class="article-more-a" href="/2022/04/22/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%AD%A6%E4%B9%A0%E7%96%91%E6%83%91%E9%9A%8F%E6%89%8B%E8%AE%B0/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/04/22/%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%AD%A6%E4%B9%A0%E7%96%91%E6%83%91%E9%9A%8F%E6%89%8B%E8%AE%B0/">展开全文 >></a>
     </p>
     
 
@@ -1321,23 +1317,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ROS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mcu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">MM32</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1349,6 +1333,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MM32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ROS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
               </li>
              
@@ -1357,7 +1349,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Liux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
