@@ -18,9 +18,9 @@
 <meta property="og:description" content="1. 概述​	本篇主要是记录将MQTT移植安装到百问网STM32MP157开发板上，并且是跑一下MQTT的一个例程来验证。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-21T09:53:26.000Z">
-<meta property="article:modified_time" content="2022-06-22T16:13:30.847Z">
+<meta property="article:modified_time" content="2022-06-28T02:18:31.790Z">
 <meta property="article:author" content="摘星星的小朋友">
-<meta property="article:tag" content="Liux">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
@@ -239,7 +239,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">218字</span>
+      <span class="post-count">429字</span>
     </span>
   </span>
 
@@ -262,8 +262,21 @@
     <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要是记录将MQTT移植安装到百问网STM32MP157开发板上，并且是跑一下MQTT的一个例程来验证。<span id="more"></span></p>
 <h1 id="2-软件平台"><a href="#2-软件平台" class="headerlink" title="2. 软件平台"></a>2. 软件平台</h1><p>​	本次使用的是Ubuntu18.04，是由百问网提供的，并且是按照他们的手册搭建好了交叉编译环境，花了一点时间将Linux内核编译好之后才进行的LVGL移植，本次移植必须搭建好嵌入式Linux的交叉编译环境且内核也必须编译好，否则无法完成移植。</p>
 <h1 id="3-移植所需要的资源"><a href="#3-移植所需要的资源" class="headerlink" title="3. 移植所需要的资源"></a>3. 移植所需要的资源</h1><p>​	本次实验主要是要将paho mqtt的官方库克隆到本地pc，将其编译后得到链接库，然后安装到本地pc以及开发板上，这样才能运行paho mqtt编译后的可执行文件，paho mqtt的官方仓库地址：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/eclipse/paho.mqtt.c.git</span><br></pre></td></tr></table></figure>
 
+<p>在Ubuntu的<code>/home/book</code>目录下新建一个工作区用来保存工程和开发资料：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /home/book</span><br><span class="line">book@100ask:~$ mkdir workspace &amp;&amp; cd workspace</span><br><span class="line">book@100ask:~/workspace$ mkdir mqtt &amp;&amp; cd mqtt</span><br></pre></td></tr></table></figure>
+
+<p>在<code>/home/book/workspace/mqtt</code>下讲paho mqtt的仓库克隆下来：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt$ git clone https://github.com/eclipse/paho.mqtt.c.git</span><br></pre></td></tr></table></figure>
+
+<p>等待下载完成：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Cloning into &#x27;paho.mqtt.c&#x27;...</span><br><span class="line">remote: Enumerating objects: 11797, done.</span><br><span class="line">remote: Counting objects: 100% (1741/1741), done.</span><br><span class="line">remote: Compressing objects: 100% (485/485), done.</span><br><span class="line">remote: Total 11797 (delta 1272), reused 1628 (delta 1204), pack-reused 10056</span><br><span class="line">Receiving objects: 100% (11797/11797), 9.27 MiB | 6.78 MiB/s, done.</span><br><span class="line">Resolving deltas: 100% (8385/8385), done.</span><br></pre></td></tr></table></figure>
+
+<p>进入刚才克隆下来的这个仓库<code>paho.mqtt.c</code>，修改Makefile：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt$ cd paho.mqtt.c/</span><br><span class="line">book@100ask:~/workspace/mqtt/paho.mqtt.c$ vim Makefile</span><br></pre></td></tr></table></figure>
+
+<p>进入vim后如果要显示行号首先按下键盘的<code>ESC</code>键，然后键入<code>:set nu</code>就可以显示行号了：</p>
 
     
 
@@ -332,7 +345,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Liux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
@@ -580,6 +593,10 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -612,15 +629,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Liux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
