@@ -6,56 +6,36 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>VS1053B开发——使用STM32CubeIDE新建工程 | 摘星</title>
+  <title>【嵌入式Linux应用】温湿度监控系统——绘制温湿度折线图 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="​		本篇是记录的是使用STM32CubeIDE新建一个开发VS1053B芯片的工程，包括了对基本外设的配置和FATFS系统以及freeRTOS系统的添加。">
+  <meta name="description" content="1. 概述​	本篇的主要内容是使用SquareLine Studio绘制一个显示温湿度曲线图的表格，将其移植到100ASK STM32MP157开发板上显示，效果图如图所示：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VS1053B开发——使用STM32CubeIDE新建工程">
-<meta property="og:url" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/index.html">
+<meta property="og:title" content="【嵌入式Linux应用】温湿度监控系统——绘制温湿度折线图">
+<meta property="og:url" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="​		本篇是记录的是使用STM32CubeIDE新建一个开发VS1053B芯片的工程，包括了对基本外设的配置和FATFS系统以及freeRTOS系统的添加。">
+<meta property="og:description" content="1. 概述​	本篇的主要内容是使用SquareLine Studio绘制一个显示温湿度曲线图的表格，将其移植到100ASK STM32MP157开发板上显示，效果图如图所示：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E5%B7%A5%E4%BD%9C%E5%8C%BA.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BASTM32%E5%B7%A5%E7%A8%8B.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E8%8A%AF%E7%89%87.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%90%8D%E7%A7%B0%E5%8F%8A%E6%A8%A1%E6%9D%BF.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%88%9D%E5%A7%8B%E5%8C%96%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AEDebug.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESDIO.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEFATFS.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/VS1053B%E9%83%A8%E5%88%86%E5%8E%9F%E7%90%86%E5%9B%BE.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESPI2.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E5%8E%9F%E7%90%86%E5%9B%BE.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E9%85%8D%E7%BD%AE.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEfreeFTOS.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%8F%82%E6%95%B0.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%812.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E7%AA%97%E5%8F%A3%E5%92%8C%E7%BB%93%E6%9E%84.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9F%9F.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%87%8D%E5%AE%9A%E4%BD%8Dprintf.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%8F%9C%E5%8D%95%E6%A0%8F%E7%BC%96%E8%AF%91.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E5%B7%A5%E7%A8%8B%E7%BC%96%E8%AF%91.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%BC%96%E8%AF%91%E7%BB%93%E6%9E%9C.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B0%8F%E7%94%B2%E8%99%AB.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E8%B0%83%E8%AF%95.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/switch.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/stdio.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/printf.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%85%A8%E9%80%9F%E8%BF%90%E8%A1%8C.jpg">
-<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%89%93%E5%8D%B0%E7%BB%93%E6%9E%9C.jpg">
-<meta property="article:published_time" content="2021-04-11T15:46:42.000Z">
-<meta property="article:modified_time" content="2022-04-19T15:27:06.898Z">
+<meta property="og:image" content="http://slhking.github.io/.io//1.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//2.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//3.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//4.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//5.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//6.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//7.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//8.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//9.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//10.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//11.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//12.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//13.jpg">
+<meta property="article:published_time" content="2022-07-01T13:56:02.000Z">
+<meta property="article:modified_time" content="2022-07-01T14:10:32.032Z">
 <meta property="article:author" content="摘星星的小朋友">
-<meta property="article:tag" content="mcu">
-<meta property="article:tag" content="STM32">
-<meta property="article:tag" content="VS1053">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9.jpg">
+<meta name="twitter:image" content="http://slhking.github.io/.io//1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -240,14 +220,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-VS1053B开发——使用STM32CubeIDE新建工程" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-LinuxApp-TempHumiChart" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      VS1053B开发——使用STM32CubeIDE新建工程
+      【嵌入式Linux应用】温湿度监控系统——绘制温湿度折线图
     </h1>
   
 
@@ -259,8 +239,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/" class="archive-article-date">
-        <time datetime="2021-04-11T15:46:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
+<a href="/2022/07/01/LinuxApp-TempHumiChart/" class="archive-article-date">
+        <time datetime="2022-07-01T13:56:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-01</time>
 </a>
 
   
@@ -273,7 +253,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.6k字</span>
+      <span class="post-count">1.9k字</span>
     </span>
   </span>
 
@@ -282,7 +262,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">5分</span>
+      <span class="post-count">6分</span>
     </span>
   </span>
 </div>
@@ -293,196 +273,138 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>​		本篇是记录的是使用STM32CubeIDE新建一个开发VS1053B芯片的工程，包括了对基本外设的配置和FATFS系统以及freeRTOS系统的添加。<span id="more"></span></p>
-<h3 id="我的VS1053B开发系列所有文章"><a href="#我的VS1053B开发系列所有文章" class="headerlink" title="我的VS1053B开发系列所有文章"></a>我的VS1053B开发系列所有文章</h3><ul>
-<li><a href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E6%89%8B%E5%86%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="VS1053B开发——手册学习笔记">VS1053B开发——手册学习笔记</a></li>
-<li><a href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/" title="VS1053B开发——使用STM32CubeIDE新建工程">VS1053B开发——使用STM32CubeIDE新建工程</a>。</li>
-</ul>
-<h3 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h3><ul>
-<li>新建工程源码：<a target="_blank" rel="noopener" href="https://gitee.com/slhking/vs1053-b_-prj_-new-project.git">VS1053B_Prj_NewProject</a></li>
-<li>使用命令 <code>git clone https://gitee.com/slhking/vs1053-b_-prj_-new-project.git</code>将工程下载到本地。</li>
-</ul>
-<h1 id="1-开发环境"><a href="#1-开发环境" class="headerlink" title="1. 开发环境"></a>1. 开发环境</h1><ul>
-<li>硬件环境：STM32F103 + VS1053B + 咪头 + 运放喇叭</li>
-<li>软件环境：STM32CubeIDE</li>
-<li>串口调试工具：Mobaxterm</li>
-<li>其他工具：需要SD卡，因为使用了FATFS来读取SD卡内的MP3文件</li>
-<li>预先使用这些，后面使用到了再来添加</li>
-</ul>
-<h1 id="2-硬件框图"><a href="#2-硬件框图" class="headerlink" title="2. 硬件框图"></a>2. 硬件框图</h1><h1 id="3-程序流程图"><a href="#3-程序流程图" class="headerlink" title="3. 程序流程图"></a>3. 程序流程图</h1><h1 id="4-建立工程"><a href="#4-建立工程" class="headerlink" title="4. 建立工程"></a>4. 建立工程</h1><ul>
-<li>使用HAL库；</li>
-<li>MCU主频72MHz；</li>
-<li>使用freeFTOS;</li>
-<li>使用FATFS；</li>
-</ul>
-<h2 id="4-1-使用STM32CubeIDE创建基础工程"><a href="#4-1-使用STM32CubeIDE创建基础工程" class="headerlink" title="4.1 使用STM32CubeIDE创建基础工程"></a>4.1 使用STM32CubeIDE创建基础工程</h2><ul>
-<li>第一步，创建工程文件夹：在保存项目工程的路径下新建项目文件夹，我的就取名叫<font color="#DC143C" size="4" face="微软雅黑">VS1053B_Prj</font>，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9.jpg" class title="图4-1 新建项目文件夹">
-</div></center>  </li>
-<li>第二步，打开STM32CubeIDE，选择工作区路径，我们就选择在项目文件夹下，然后点击<font color="#4B0082" size="4" face="黑体">Launch</font>，如图:  <center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E5%B7%A5%E4%BD%9C%E5%8C%BA.jpg" class title="图4-2 选择工作区">
-</div></center>  </li>
-<li>第三步，新建STM32工程，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BASTM32%E5%B7%A5%E7%A8%8B.jpg" class title="图4-3 新建STM32工程">
-</div></center>  </li>
-<li>第四步，选择芯片，首先搜索我们使用的芯片，然后根据封装选择具体是哪一个，随后点击<font color="#4B0082" size="4" face="黑体">Next</font>，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E8%8A%AF%E7%89%87.jpg" class title="图4-4 选择芯片">
-</div></center>  </li>
-<li>第五步，设置工程名称及模板，首先给工程取一个名字，我们就和项目名称一样，然后操作条件即工程模板就使用默认参数，随后点击<font color="#4B0082" size="4" face="黑体">Finish</font>，在弹出来的框体中选择<font color="#4B0082" size="4" face="黑体">Yes</font>，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%90%8D%E7%A7%B0%E5%8F%8A%E6%A8%A1%E6%9D%BF.jpg" class title="图4-5 设置工程名称及模板">
-</div></center>  </li>
-<li>第六步，初始化系统时钟，我习惯上先初始化系统时钟，选择外部晶振，随后去配置PLL时钟源来自<font color="#4B0082" size="4" face="黑体">HSE</font>，系统时钟源来自<font color="#4B0082" size="4" face="黑体">PLLCLK</font>，主频设置为72MHz，然后敲击回车让STM32CubeMX自动得到时钟方案，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%88%9D%E5%A7%8B%E5%8C%96%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F.jpg" class title="图4-6 初始化系统时钟">
-</div></center>  </li>
-<li>第七步，设置Debug，默认是不使能Debug功能，但是我们开发过程中肯定会使用到Debug功能的，因而这里随意选择一种都可以，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AEDebug.jpg" class title="图4-7 设置Debug">
-</div></center>  </li>
-<li>第八步，配置SDIO，选择<font color="#4B0082" size="4" face="黑体">SD 4 bits Wide Bus</font>，然后其他参数默认就好，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESDIO.jpg" class title="图4-8 配置SDIO">
-</div></center>  </li>
-<li>第九步，配置FATFS。我们需要FATFS文件系统来读取SD卡内的MP3文件，所以需要添加FATFS。模式选择<font color="#4B0082" size="4" face="黑体">SD Card</font>，参数使用默认参数，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEFATFS.jpg" class title="图4-9 配置FATFS">
-</div></center>  </li>
-<li>第十步，配置MCU和VS1053B之间通信使用的SPI，我们首先查看原理图，使用的是哪几个引脚以及使用的是哪一个SPI，原理图如图：  <center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/VS1053B%E9%83%A8%E5%88%86%E5%8E%9F%E7%90%86%E5%9B%BE.jpg" class title="图4-10-1 VS1053B部分原理图">
-</div></center>  
-​		可以看到，使用的是MCU的SPI2，引脚是:</li>
-</ul>
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇的主要内容是使用SquareLine Studio绘制一个显示温湿度曲线图的表格，将其移植到100ASK STM32MP157开发板上显示，效果图如图所示：<span id="more"></span></p>
+<p><img src="/.io//1.jpg"></p>
+<p><img src="/.io//2.jpg"></p>
+<h1 id="2-使用SquareLine-Studio绘制UI"><a href="#2-使用SquareLine-Studio绘制UI" class="headerlink" title="2. 使用SquareLine Studio绘制UI"></a>2. 使用SquareLine Studio绘制UI</h1><p>​	我们先使用SquareLine Studio绘制要显示的UI的草图，首先打开这个工具，点击<code>Create</code>，设置好工程名、分辨率和颜色深度后点击绿色按钮<code>CREATE</code>：</p>
+<p><img src="/.io//3.jpg" alt="image-20220701180849818"></p>
+<p>然后就进入了UI绘制界面，我们先将工程到处的路径设置好：</p>
+<p><img src="/.io//4.jpg" alt="image-20220701181119979"></p>
+<p><img src="/.io//5.jpg" alt="image-20220701181205878"></p>
+<p>设置好之后点击绿色按钮<code>APPLY CHANGES</code>应用设置。</p>
+<h2 id="2-1-基本控件"><a href="#2-1-基本控件" class="headerlink" title="2.1 基本控件"></a>2.1 基本控件</h2><p>​	本篇绘制的界面比较简单，只用到了LVGL的表格Chart和滑动条Slider，表格用来绘制温湿度数值的折线图，滑动条用来显示温湿度数值：</p>
+<p><img src="/.io//6.jpg" alt="image-20220701181602719"></p>
+<p>各个窗体的作用描述如下：</p>
 <table>
 <thead>
 <tr>
-<th align="left">引脚号</th>
-<th align="left">SPI 线</th>
-<th align="left">功能描述</th>
+<th align="center">序号</th>
+<th align="center">名称</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">PB12</td>
-<td align="left">SPI2_CS0</td>
-<td align="left">硬件片选</td>
+<td align="center">①</td>
+<td align="center">Hierarchy-层级；Animations-动画</td>
+<td>层级是用来表示UI中的控件的layout布局；动画则是在添加不同screen切换的动画效果</td>
 </tr>
 <tr>
-<td align="left">PB13</td>
-<td align="left">SPI2_SCK</td>
-<td align="left">SPI时钟线</td>
+<td align="center">②</td>
+<td align="center">Widgets-窗体</td>
+<td>里面是LVGL的基础控件</td>
 </tr>
 <tr>
-<td align="left">PB14</td>
-<td align="left">SPI2_MISO</td>
-<td align="left">SPI主机接收从机输出</td>
+<td align="center">③</td>
+<td align="center">Assets-资源；Console-终端</td>
+<td>资源里面表示的是我们导入的外部的资源，比如图片、动画等；终端则是显示的是在这个工具中的操作在终端下的命令</td>
 </tr>
 <tr>
-<td align="left">PB15</td>
-<td align="left">SPI2_MOSI</td>
-<td align="left">SPI主机输出从机输入</td>
+<td align="center">④</td>
+<td align="center">控件设置窗体</td>
+<td>用来设置选中的空间的参数，比如名称、初始值、颜色这些</td>
+</tr>
+<tr>
+<td align="center">④</td>
+<td align="center">EVENTS-事件窗</td>
+<td>用来添加选中空间需要的事件，比如VALUE_CHANGED这些的事件</td>
 </tr>
 </tbody></table>
-<p>所以我们来配置SPI2的参数，首先选择全双工主机模式，然后是硬件片选，随后是分频倍数，因为在上一篇我们知道，在配置VS1053的时候VS1053B的SPI频率在外部晶振是12.288MHz时最大是6MHz，读写RAM的时候最大是9MHz，所以我们在初始化的时候选择8分频。即<font color="#4B0082" size="4" face="黑体">36MHz&#x2F;8&#x3D;4.5MHz</font>，其他的先暂时使用默认值，如图：  </p>
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESPI2.jpg" class title="图4-10-2 配置SPI2">
-</div></center>  
-- 第十一步，配置USART1，原理图上使用的引脚是PA9和PA10，如图：  
-<center>
-<img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E5%8E%9F%E7%90%86%E5%9B%BE.jpg" class title="图4-11-1 USART1原理图">
-</center>  
-所以我们在STM32CubeMX里来配置USART1，首先选择USART1，模式选择异步通信，波特率设置为115200，数据位是8bit，没有校验位，1bit的停止位，全双工模式，如图：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E9%85%8D%E7%BD%AE.jpg" class title="图4-11-2 USART1配置">
-</div></center>  
-- 第十二步，配置freeFTOS，接口那里选择V1或者V2都可以，我选择的是V2（对freeRTOS的了解还不深，解释不了为什么，到后面学习freeRTOS后再来天坑），其他参数使用默认值，如图：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEfreeFTOS.jpg" class title="图4-12 配置freeFTOS">
-</div></center>  
-- 第十三步，设置工程参数，主要是设置一个给配置的外设添加对应的.c和.h文件，如图所示：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%8F%82%E6%95%B0.jpg" class title="图4-13 设置工程参数">
-</div></center>  
-- 第十四步，保存STM32CubeMX的配置，键盘按<font color="#4B0082" size="4" face="黑体">Ctrl + S</font>，然后生成代码，然后在过程中弹出来的窗口都选择<font color="#4B0082" size="4" face="黑体">Yes</font>就好了，如图：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81.jpg" class title="图4-14-1 生成代码弹出窗口1">  
-<div style="width:50%;margin:auto">  
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%812.jpg" class title="图4-14-3 生成代码弹出窗口3">
-</div></div></div></center>  
+<p>上图中的两个slider和chart的大小、位置就是根据④中的设置来改变调整的。</p>
+<h2 id="2-2-调整chart"><a href="#2-2-调整chart" class="headerlink" title="2.2 调整chart"></a>2.2 调整chart</h2><ul>
+<li>名称：因为目前就一个screen，也只需要一个chart，所以取名就叫chart；</li>
+<li>大小：根据屏幕分辨率，还考虑到后期可能会在边缘加上刻度，所以不能把char的大小设置为和屏幕一样大，我们还是弄小一点，设置成800*400；</li>
+<li>对齐方式：这个地方设置的是控件在屏幕上的对齐方式，是居中显示还是左上显示还是怎样，我们期望我们的表格是屏幕居中显示的，所以就设置为<em><strong>CENTER</strong></em>；</li>
+<li>位置：控件的位置值设置的是控件中心对称点的位置，所以chart要居中显示的话，chart的中心对称点就应该是屏幕的中心对称点，位置(0, 0);</li>
+</ul>
+<p><img src="/.io//7.jpg" alt="image-20220701183623691"></p>
+<ul>
+<li>其它的设置先暂时不弄</li>
+</ul>
+<h2 id="2-3-调整slider基本属性"><a href="#2-3-调整slider基本属性" class="headerlink" title="2.3 调整slider基本属性"></a>2.3 调整slider基本属性</h2><ul>
+<li>名称：根据我们的项目，我们要显示两个东西，温度和湿度，所以两个slider分别取名叫做<strong>tempSlider</strong>和<strong>humiSlider</strong>；</li>
+<li>大小：根据屏幕和表格大小调整，这里设置的是15*390；</li>
+<li>对齐方式：我们是以chart位中心来设置位置的，所以slider的对齐方式要和chart的一样，设置为<em><strong>CENTER</strong></em>；</li>
+<li>位置：根据表格的宽度和高度设置，这里设置的是(-390， 0)和(390， 0);</li>
+<li>范围：温度的范围设置为[-20, 60]，湿度设置为[0, 100]，这个根据常识设置；</li>
+<li>模式：有普通模式、对称模式和范围模式，这里设置为普通模式即可，其它模式大家可以自己在studio中探索；</li>
+<li>初值：设置为0；</li>
+<li>左值：同样设置为0，只有在范围模式下有用；</li>
+</ul>
+<p><img src="/.io//8.jpg" alt="image-20220701184650439"></p>
+<p>这样设置后slider的效果如下图：</p>
+<p><img src="/.io//9.jpg" alt="image-20220701184745199"></p>
+<h2 id="2-4-优化slider显示效果"><a href="#2-4-优化slider显示效果" class="headerlink" title="2.4 优化slider显示效果"></a>2.4 优化slider显示效果</h2><ul>
+<li>设置主体背景颜色：主体背景就是整条滑动条的底色，这里设置为白色，RGB(255，255，255):</li>
+</ul>
+<p><img src="/.io//10.jpg" alt="image-20220701185009539"></p>
+<ul>
+<li>设置方向背景颜色：方向背景颜色就是这里增量方向的背景颜色，这里设置为渐变色，温度从白色渐变到红色；湿度从白色渐变到蓝色：</li>
+</ul>
+<p><img src="/.io//11.jpg" alt="image-20220701185507186"></p>
+<ul>
+<li>设置指向标颜色：指向标就是滑动条上的那个实心圆，我们可以用相同的放射将其设置为纯色或者渐变色：</li>
+</ul>
+<p><img src="/.io//12.jpg" alt="image-20220701185841611"></p>
+<h2 id="2-4-导出UI源文件"><a href="#2-4-导出UI源文件" class="headerlink" title="2.4 导出UI源文件"></a>2.4 导出UI源文件</h2><p>​	本次项目的效果比较简单，没有用到很复杂的控件设置(复杂的设置SquareLine也设置不了)，也没有用到事件这些，现在九江这个UI的源文件导出去添加到模拟器，因为在模拟器上我们可以轻松快速的编辑UI的详细设置且看到效果，在模拟器上编辑的差不多了再移植到Linux中。</p>
+<p>​	导出和移植到模拟器在上一篇已经讲过了，这里就不再重复讲了。</p>
+<h1 id="3-使用模拟器丰富UI"><a href="#3-使用模拟器丰富UI" class="headerlink" title="3. 使用模拟器丰富UI"></a>3. 使用模拟器丰富UI</h1><p>​	我们的表格现在还只是一张空的表格，我们还希望它能显示两条折线、X轴和Y轴显示刻度值，根据官方的例程和手册，这里将补充用到的LVGL接口函数总结下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数名称</th>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">lv_chart_set_div_line_count</td>
+<td>lv_obj_t * obj：控件对象；<br>uint8_t hdiv：纵坐标平均点数<br>uint8_t vdiv：横坐标平均点数</td>
+<td>设置表格的横纵坐标显示点数</td>
+</tr>
+<tr>
+<td align="center">lv_chart_set_point_count</td>
+<td>lv_obj_t * obj：控件对象；<br>uint16_t cnt：绘制点数</td>
+<td>设置表格中显示数据的点数，比如设置成20，那么整张表就最多只绘制出20个点出来</td>
+</tr>
+<tr>
+<td align="center">lv_chart_set_range</td>
+<td>lv_obj_t * obj：控件对象；<br>lv_chart_axis_t axis：坐标轴<br>lv_coord_t min&#x2F;max:坐标轴的最大最小值</td>
+<td>设置表格的坐标轴数值范围，坐标轴<br>LV_CHART_AXIS_PRIMARY_Y表示表格左侧Y轴；<br>LV_CHART_AXIS_SECONDARY_Y表示表格右侧Y轴；<br>LV_CHART_AXIS_PRIMARY_X表示表格下方X轴；<br>LV_CHART_AXIS_SECONDARY_X表示表格上方X轴</td>
+</tr>
+<tr>
+<td align="center">lv_chart_add_series</td>
+<td>lv_obj_t * obj：控件对象；<br>lv_color_t color：折线颜色；<br>lv_chart_axis_t axis：折线对齐的坐标轴</td>
+<td>返回一个从属于对象表格的折线对象，可以通过设置折线对象的值来让其显示到对象表格中</td>
+</tr>
+<tr>
+<td align="center">lv_chart_set_axis_tick</td>
+<td>lv_obj_t * obj：控件对象；<br>lv_chart_axis_t axis：坐标轴；<br>lv_coord_t major_len：主刻度长度；<br>lv_coord_t minor_len：副刻度长度;<BR>lv_coord_t major_cnt:主刻度点数；<BR>lv_coord_t minor_cnt：副刻度点数；<BR>bool label_en:是否显示主刻度数值;<BR>lv_coord_t draw_size：刻度尺的大小；</BR></BR></BR></BR></td>
+<td>根据参数设置X&#x2F;Y轴的刻度</td>
+</tr>
+</tbody></table>
+<p>这里设置的是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局变量:折线对象</span></span><br><span class="line"><span class="type">lv_chart_series_t</span>* temp;</span><br><span class="line"><span class="type">lv_chart_series_t</span>* humi;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 表格的设置</span></span><br><span class="line">lv_chart_set_div_line_count(ui_chart, <span class="number">121</span>, <span class="number">21</span>);</span><br><span class="line">lv_chart_set_point_count(ui_chart, <span class="number">50</span>);</span><br><span class="line">lv_chart_set_range(ui_chart, LV_CHART_AXIS_PRIMARY_Y, <span class="number">-20</span>, <span class="number">60</span>);</span><br><span class="line">lv_chart_set_range(ui_chart, LV_CHART_AXIS_SECONDARY_Y, <span class="number">0</span>, <span class="number">120</span>);</span><br><span class="line">temp = lv_chart_add_series(ui_chart, lv_color_make(<span class="number">0xFF</span>, <span class="number">0x00</span>, <span class="number">0x00</span>), LV_CHART_AXIS_PRIMARY_Y);</span><br><span class="line">humi = lv_chart_add_series(ui_chart, lv_color_make(<span class="number">0x00</span>, <span class="number">0x80</span>, <span class="number">0x00</span>), LV_CHART_AXIS_SECONDARY_Y);</span><br><span class="line">lv_chart_set_axis_tick(ui_chart, LV_CHART_AXIS_PRIMARY_X, <span class="number">10</span>, <span class="number">5</span>, <span class="number">20</span>, <span class="number">1</span>, <span class="literal">true</span>, <span class="number">50</span>);</span><br><span class="line">lv_chart_set_axis_tick(ui_chart, LV_CHART_AXIS_PRIMARY_Y, <span class="number">10</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="literal">true</span>, <span class="number">50</span>);</span><br><span class="line">lv_chart_set_axis_tick(ui_chart, LV_CHART_AXIS_SECONDARY_Y, <span class="number">10</span>, <span class="number">5</span>, <span class="number">12</span>, <span class="number">10</span>, <span class="literal">true</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
 
-<h2 id="4-2-观察生成的工程"><a href="#4-2-观察生成的工程" class="headerlink" title="4.2 观察生成的工程"></a>4.2 观察生成的工程</h2><p>​		STM32CubeIDE下使用STM32CubeMX生成的代码，其结构和IDE各窗口如图所示：  </p>
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E7%AA%97%E5%8F%A3%E5%92%8C%E7%BB%93%E6%9E%84.jpg" class title="图4-15 工程窗口和结构">  
-</div></center>  
-因为使用了STM32CubeMX，而且在可见的未来，我们后续还会使用CubeMX来配置某些外设，因而在编辑代码的时候就要遵循一个规则，即在<font color="#4B0082" size="4" face="黑体">USER CODE BEGIN</font>和<font color="#4B0082" size="4" face="黑体">USER CODE END</font>之间添加我们想要添加的代码，这样是为了避免下次使用CubeMX配置别的外设的时候，重新生成代码时，我们在这个区域外添加的代码被覆盖消失掉，如图：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9F%9F.jpg" class title="图4-16 添加代码区域">  
-</div></center>  
+<p>模拟器上的显示：</p>
+<p><img src="/.io//13.jpg" alt="image-20220701192121756"></p>
+<p>需要注意的是，定义的折现对象全局变量要去ui.h里面声明，后面mqtt获取远程温湿度监测设备的温度的时候需要设置他们来在表格中显示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ui.h</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">lv_chart_series_t</span>* temp;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">lv_chart_series_t</span>* humi;</span><br></pre></td></tr></table></figure>
 
-<h2 id="4-3-重定位printf-函数"><a href="#4-3-重定位printf-函数" class="headerlink" title="4.3 重定位printf()函数"></a>4.3 重定位printf()函数</h2><p>​		在main.c中的</p>
-<pre>
-/* USER CODE BEGIN 0 */
-/* USER CODE END 0 */
-</pre>
-<p>中间添加如下代码：</p>
-<pre>
-#ifdef __GNUC__
 
-#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 
-PUTCHAR_PROTOTYPE
-{
-
-  HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
-  return ch;
-}
-#endif
-</pre>
-<p>如图所示：  </p>
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%87%8D%E5%AE%9A%E4%BD%8Dprintf.jpg" class title="图4-17 重定位printf">  
-</div></center>  
-添加了这段代码之后，就可以调用<font color="#4B0082" size="4" face="黑体">printf()</font>函数进行调试打印了。
-
-<h2 id="4-4-编译和清理"><a href="#4-4-编译和清理" class="headerlink" title="4.4 编译和清理"></a>4.4 编译和清理</h2><p>&amp;emsp;&amp;emsp;编译可以选择菜单栏的那个锤子图标，如图：  </p>
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%8F%9C%E5%8D%95%E6%A0%8F%E7%BC%96%E8%AF%91.jpg" class title="图4-18 菜单栏编译">  
-</div></center>  
-也可以右键工程，选择编译：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E5%B7%A5%E7%A8%8B%E7%BC%96%E8%AF%91.jpg" class title="图4-19 右键工程编译">  
-</div></center>  
-然后来查看编译结果：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%BC%96%E8%AF%91%E7%BB%93%E6%9E%9C.jpg" class title="图4-20 编译结果">  
-</div></center>  
-
-<h2 id="4-5-调试"><a href="#4-5-调试" class="headerlink" title="4.5 调试"></a>4.5 调试</h2><p>​		这一步的前提是，ST-Link已经连上了开发板，并且开发板已经上电。</p>
-<h3 id="4-5-1-首先设置调试配置参数"><a href="#4-5-1-首先设置调试配置参数" class="headerlink" title="4.5.1 首先设置调试配置参数"></a>4.5.1 首先设置调试配置参数</h3><p>&amp;emsp;&amp;emsp;可以选择菜单栏上的小甲虫边上的向下箭头选择调试配置，如图：  </p>
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B0%8F%E7%94%B2%E8%99%AB.jpg" class title="图4-21 小甲虫">  
-</div></center>  
-也可以选择右键工程，选择Debug，然后选择调试配置，如图：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E8%B0%83%E8%AF%95.jpg" class title="图4-22 右键调试">  
-</div></center>  
-然后在弹出的这个窗口进行如下配置之后点击<font color="#4B0082" size="4" face="黑体">Apply</font>和<font color="#4B0082" size="4" face="黑体">OK</font>，然后就开始使用ST-Link连接芯片调试：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE.jpg" class title="图4-23 调试配置">  
-</div></center>  
-在过程中弹出的这个窗口可以这样选择：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/switch.jpg" class title="图4-24 switch">  
-</div></center>  
-这样就开始我们的调试了，至于打断点、单步调试或其他调试手段就不一一介绍了，不会的可以去百度看看。
-### 4.5.2 初体验
-​		这一步的前提是，在调试的前提下，再把开发板上的USB口使用USB线和电脑连接起来。我们在main()函数中的USART1初始化之后，调用一个printf()看下效果，调用printf()函数还要添加一个头文件<font color="#4B0082" size="4" face="黑体">stdio.h</font>添加代码如图：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/stdio.jpg" class title="图4-25 stdio">  
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/printf.jpg" class title="图4-26 printf">  
-</div></div></center>  
-然后编译调试，且打开串口调试工具查看：  
-<center>
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%85%A8%E9%80%9F%E8%BF%90%E8%A1%8C.jpg" class title="图4-27 全速运行">  
-<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%89%93%E5%8D%B0%E7%BB%93%E6%9E%9C.jpg" class title="图4-28 打印结果">  
-</div></div></center>  
-
-<h1 id="5-结尾"><a href="#5-结尾" class="headerlink" title="5. 结尾"></a>5. 结尾</h1><p>​		本篇只是新建了一个工程，还没有正式开始对VS1053B的驱动开发。下面一章就会正式开始编写VS1053B的SPI通信部分了。</p>
-<hr>
+<h1 id="4-移植UI到Linux"><a href="#4-移植UI到Linux" class="headerlink" title="4. 移植UI到Linux"></a>4. 移植UI到Linux</h1><p>​	如何将UI源文件移植到Ubuntu进行交叉编译并且移植到的开发板上显示，前面的文章已经讲过方法了，这里就不多说了。</p>
+<h1 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h1><p>​	利用SquareLine可以很快的绘制比较好看的UI然后利用模拟器来完善，最终移植到Linux开发板上显示，整个过程比价复杂的是在SquareLine设置控件的基本属性，这需要我们慢慢的探索和熟悉这个工具；另外最重要的还是我们对LVGL本身的学习了解，才能在模拟器上丰富和完善UI草图；然后后面的移植操作就比较简单了。</p>
+<p>​	下一步就是将mqtt移植到我们的这个UI工程里面来，通过mqtt获取云端数据然后在屏幕上显示温湿度监控子设备上传的数据。</p>
 
     
 
@@ -529,7 +451,7 @@ PUTCHAR_PROTOTYPE
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://slhking.github.io/2021/04/11/VS1053B开发——使用STM32CubeIDE新建工程/" title="VS1053B开发——使用STM32CubeIDE新建工程" target="_blank">http://slhking.github.io/2021/04/11/VS1053B开发——使用STM32CubeIDE新建工程/</a>
+          <a href="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/" title="【嵌入式Linux应用】温湿度监控系统——绘制温湿度折线图" target="_blank">http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/</a>
         </li>
         
         <li>
@@ -551,32 +473,13 @@ PUTCHAR_PROTOTYPE
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mcu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">STM32</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">VS1053</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
 	</div>
 
     
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/mcu//" class="article-tag-list-link color4">mcu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
     
 
@@ -626,7 +529,7 @@ PUTCHAR_PROTOTYPE
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -641,18 +544,9 @@ PUTCHAR_PROTOTYPE
 
 <nav id="article-nav">
   
-    <a href="/2022/04/22/%E3%80%90ROS%E3%80%91%E7%AC%AC%E4%B8%80%E7%AF%87%E2%80%94%E2%80%94%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          【ROS】第一篇——环境搭建
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E6%89%8B%E5%86%8C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">VS1053B开发——手册学习笔记</div>
+    <a href="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【嵌入式Linux应用】SquareLine Studio与LVGL模拟器</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -671,19 +565,6 @@ PUTCHAR_PROTOTYPE
             </div>
         </div>
         
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84VS1053B%E5%BC%80%E5%8F%91%E7%B3%BB%E5%88%97%E6%89%80%E6%9C%89%E6%96%87%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">我的VS1053B开发系列所有文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="toc-number">2.</span> <span class="toc-text">源码地址</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number"></span> <span class="toc-text">1. 开发环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%A1%AC%E4%BB%B6%E6%A1%86%E5%9B%BE"><span class="toc-number"></span> <span class="toc-text">2. 硬件框图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number"></span> <span class="toc-text">3. 程序流程图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%BB%BA%E7%AB%8B%E5%B7%A5%E7%A8%8B"><span class="toc-number"></span> <span class="toc-text">4. 建立工程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E4%BD%BF%E7%94%A8STM32CubeIDE%E5%88%9B%E5%BB%BA%E5%9F%BA%E7%A1%80%E5%B7%A5%E7%A8%8B"><span class="toc-number"></span> <span class="toc-text">4.1 使用STM32CubeIDE创建基础工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E8%A7%82%E5%AF%9F%E7%94%9F%E6%88%90%E7%9A%84%E5%B7%A5%E7%A8%8B"><span class="toc-number"></span> <span class="toc-text">4.2 观察生成的工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E9%87%8D%E5%AE%9A%E4%BD%8Dprintf-%E5%87%BD%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">4.3 重定位printf()函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E7%BC%96%E8%AF%91%E5%92%8C%E6%B8%85%E7%90%86"><span class="toc-number"></span> <span class="toc-text">4.4 编译和清理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-%E8%B0%83%E8%AF%95"><span class="toc-number"></span> <span class="toc-text">4.5 调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-1-%E9%A6%96%E5%85%88%E8%AE%BE%E7%BD%AE%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">4.5.1 首先设置调试配置参数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E7%BB%93%E5%B0%BE"><span class="toc-number"></span> <span class="toc-text">5. 结尾</span></a>
-                    </div>
-                </span>
-            </div>
-        </div>
         
     </div>
 </aside>
@@ -836,14 +717,6 @@ PUTCHAR_PROTOTYPE
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">mcu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">STM32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VS1053</a>
               </li>
              
               <li class="article-tag-list-item">
