@@ -6,19 +6,61 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>Archives: 2022/6 | 摘星</title>
+  <title>【MM32】第一篇——新建MDK工程 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
-<meta property="og:type" content="website">
-<meta property="og:title" content="摘星">
-<meta property="og:url" content="http://slhking.github.io/archives/2022/06/index.html">
+  <meta name="description" content="1. 前言​	本文的目的是从0开始搭建一个基于MM32单片机的MDK工程，使用的主控芯片是MM32F3277G9P，移植使用的SDK是灵动微官方的MindSDK。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【MM32】第一篇——新建MDK工程">
+<meta property="og:url" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
+<meta property="og:description" content="1. 前言​	本文的目的是从0开始搭建一个基于MM32单片机的MDK工程，使用的主控芯片是MM32F3277G9P，移植使用的SDK是灵动微官方的MindSDK。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/MindSDK_where.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/choose_toolchain.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/05/07/MM32-1-CreateMDKProject/choose_board.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/build_sdk_prj.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/download_sdk.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/sdk_folder.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/device.png">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/self_prj_folder.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/project_frame.png">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/device_copy2CoreDevice.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/create_new_project.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/give_project_name.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/select_mcu_type.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/prj_manager_menubtn.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/manager_prj_items.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/target_prj_name.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/target_prj_group.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/target_prj_mult_group.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/add_file_to_group.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/add_core_file.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/finnal_target.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/options_for_target.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/compilerv6.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/global_define_symbol.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/global_code_config.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/include_path.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/setup_compiler_path.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/set_linker.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/set_linker_finish.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/set_debug.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/debug_driver_setup.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/new_file.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/new_file_window.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/savefile_default_path.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/setupfile_specifc_path.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/add_mainc_to_app.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/compiler_result.jpg">
+<meta property="article:published_time" content="2022-05-07T05:53:14.000Z">
+<meta property="article:modified_time" content="2022-07-01T15:14:15.156Z">
 <meta property="article:author" content="摘星星的小朋友">
+<meta property="article:tag" content="mcu">
+<meta property="article:tag" content="MM32">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/MindSDK_where.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -203,155 +245,432 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-MM32-1-CreateMDKProject" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/28/LinuxApp-SquareLineAndSimulator/" class="archive-article-date">
-        <time datetime="2022-06-28T02:26:43.191Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-28</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/28/LinuxApp-SquareLineAndSimulator/">【嵌入式Linux应用】SquareLine Studio与LVGL模拟器</a>
-	
+    <h1 class="article-title" itemprop="name">
+      【MM32】第一篇——新建MDK工程
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2022/05/07/MM32-1-CreateMDKProject/" class="archive-article-date">
+        <time datetime="2022-05-07T05:53:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-07</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">2.2k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">7分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>​	本文的目的是从0开始搭建一个基于MM32单片机的MDK工程，使用的主控芯片是MM32F3277G9P，移植使用的SDK是灵动微官方的MindSDK。<span id="more"></span></p>
+<h1 id="2-SDK的获取"><a href="#2-SDK的获取" class="headerlink" title="2. SDK的获取"></a>2. SDK的获取</h1><h2 id="2-1-SDK在官网的位置"><a href="#2-1-SDK在官网的位置" class="headerlink" title="2.1 SDK在官网的位置"></a>2.1 SDK在官网的位置</h2><p>​	在写本文的时候(2022.5.7)，灵动微官方将其最新的MindSDK放在其官网的【支持】栏中：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/MindSDK_where.jpg"></p>
+<ul>
+<li></li>
+</ul>
+<p>要获取这个SDK的资源需要注册登录。</p>
+<h2 id="2-2-选择SDK"><a href="#2-2-选择SDK" class="headerlink" title="2.2 选择SDK"></a>2.2 选择SDK</h2><ul>
+<li>选择开发工具</li>
+</ul>
+<p>官方支持的开发工具有：armgcc、MDK和IAR，按需选择：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/choose_toolchain.jpg"></p>
+<p>本文选择的是MDK。</p>
+<ul>
+<li>选择主控</li>
+</ul>
+<p>目前(2022.5.7)官方支持的有3种主控对应其三张评估板：</p>
+<center>
+<div style="width:50%;margin:auto"><img src="/2022/05/07/MM32-1-CreateMDKProject/05/07/MM32-1-CreateMDKProject/choose_board.jpg" class title="图2-2 选择评估版">
+</div></center> 
+![](MM32-1-CreateMDKProject/choose_board.jpg)
+
+
+<p>本文选择的是F3270系列的评估板。</p>
+<ul>
+<li>构建工程</li>
+</ul>
+<p>根据自己的需求选择好开发工具和主控之后，就点击【BUILD PROJECT】构建工程：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/build_sdk_prj.jpg"></p>
+<p>构建好之后，就会跳转到生成的SDK样板记录，点击标题即可下载到本地：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/download_sdk.jpg"></p>
+<h1 id="3-SDK的结构"><a href="#3-SDK的结构" class="headerlink" title="3. SDK的结构"></a>3. SDK的结构</h1><p>​	从官网下载下来的SDK文件目录如图所示：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/sdk_folder.jpg"></p>
+<ul>
+<li>components(组件)：提供了一些三方组件的源文件，如LVGL，内存管理、TinyUSB等；</li>
+<li>demo_apps：提供了一些三方组件的例程；</li>
+<li>device：当前处理器的一些库文件和核心文件：</li>
+<li><img src="/2022/05/07/MM32-1-CreateMDKProject/device.png"></li>
+</ul>
+<p>其中【mdk】中的linker下的文件，是MDK工程中需要我们指定的分散加载链接文件，在稍后新建工程的时候会介绍到。</p>
+<ul>
+<li>driver_examples：当前处理器基于此SDK的一些驱动例程；</li>
+</ul>
+<p>对于中这个SDK，我们要移植到自己工程中的只有【device】下的文件，其它文件夹都是给我们做参考用。</p>
+<h1 id="4-新建工程"><a href="#4-新建工程" class="headerlink" title="4. 新建工程"></a>4. 新建工程</h1><h2 id="4-1-构建工程结构"><a href="#4-1-构建工程结构" class="headerlink" title="4.1 构建工程结构"></a>4.1 构建工程结构</h2><p>​	在新建MDK工程之前，理应先设计好自己的工程的目录结构，以便于管理文件，这个地方完全根据个人习惯或者公司规定，没有定式，我个人习惯构建如下的工程目录结构：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/self_prj_folder.jpg"></p>
+<p>这些文件夹的作用如图所示：</p>
+<img src="/2022/05/07/MM32-1-CreateMDKProject/project_frame.png" style="zoom:50%;">
+
+<p>我们将MM32的SDK中的【device】下的所有文件和文件夹copy到【7_CoreDevice】中：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/device_copy2CoreDevice.jpg"></p>
+<h2 id="4-2-创建MM32F3277G9P的MDK工程"><a href="#4-2-创建MM32F3277G9P的MDK工程" class="headerlink" title="4.2 创建MM32F3277G9P的MDK工程"></a>4.2 创建MM32F3277G9P的MDK工程</h2><ol>
+<li>新建工程</li>
+</ol>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/create_new_project.jpg"></p>
+<ol start="2">
+<li>选择工程的保存路径：【ProjectName】–&gt;【8_Project】；</li>
+<li>给工程取名字，例如【Template】，然后保存：</li>
+</ol>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/give_project_name.jpg"></p>
+<ol start="4">
+<li>选择主控芯片型号：MM32F3277G9P</li>
+</ol>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/select_mcu_type.jpg"></p>
+<p>选择好之后点击【确定】，然后回弹出来一个管理软件组件的窗口，我们一开始先不管这个，直接点击【OK】。</p>
+<h2 id="4-3-管理MDK工程结构"><a href="#4-3-管理MDK工程结构" class="headerlink" title="4.3 管理MDK工程结构"></a>4.3 管理MDK工程结构</h2><p>​	刚才初创了MDK工程后，原始的MDK工程结构通常是无法满足我们自己的工程管理需求的，因而需要进行重新设计管理。</p>
+<ol>
+<li><p>改变MDK工程名</p>
+<ul>
+<li>点击菜单栏的【工程管理按钮】：</li>
+</ul>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/prj_manager_menubtn.jpg"></p>
+<ul>
+<li>在【Project Targets】中我们可以增加、删除、修改工程名：</li>
+</ul>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/manager_prj_items.jpg"></p>
+<p>我们将目标工程名字和我们之前初创的时候取的工程名一样：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/target_prj_name.jpg"></p>
+</li>
+<li><p>管理目标工程的文件组</p>
+<ul>
+<li>在【Groups】窗口中就是当前目标工程会包含的文件组，我们将其设计为和我们在【4.1】小节构建的工程结构一致，只是对于工程结构中的【8_Project】这一项去掉：</li>
+</ul>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/target_prj_group.jpg"></p>
+<ul>
+<li>当一个文件组中有很多的层次时，比如我们的【7_CoreDevice】中有核心文件，也有HAL库文件，我们可以根据层次进行这样的设计：</li>
+</ul>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/target_prj_mult_group.jpg"></p>
+</li>
+<li><p>添加文件</p>
+</li>
+</ol>
+<p>​	当我们将文件组设计好之后，就可以根据这个设计添加文件到对应的组别了，比如我们可以将HAL库文件添加到【7_CoreDevice&#x2F;HAL】这个文件组中：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/add_file_to_group.jpg"></p>
+<p>对于HAL库文件，我们不一定都要全部添加进来，通常都是按需添加。</p>
+<p>我们需要添加的MCU核心文件如图所示：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/add_core_file.jpg"></p>
+<p>一个是系统配置文件【systetem_mm32f3277g.c】，另一个是系统启动文件【startup_mm32f3277g7.s】。</p>
+<p>至此，管理目标工程的基本步骤就到此结束了，如果后续的开发需要添加额外的目标工程、文件组或者文件，根据这几步按需做就好了。</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/finnal_target.jpg"></p>
+<h2 id="4-4-配置工程"><a href="#4-4-配置工程" class="headerlink" title="4.4 配置工程"></a>4.4 配置工程</h2><p>​	当我们管理好基本的工程之后，还要设置这个工程，比如编译器版本选择、编译条件选择、编译路径选择、分散加载等等，我们来分别说明下。</p>
+<p>​	首先点击菜单栏的【Options for Target】进入工程配置界面：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/options_for_target.jpg"></p>
+<ol>
+<li>编译器版本选择</li>
+</ol>
+<p>​	MDK的编译器版本支持V5和V6两种，目前常用的是V5版本，也有V6版本的，V6版本对比于V5，是在编译优化上的提升，通常V6编译速度会比V5快，且MindSDK的分散加载文件的指令用到了V6编译器的指令，所以我们默认还是选择V6版本的编译器：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/compilerv6.jpg"></p>
+<ol start="2">
+<li>编译条件</li>
+</ol>
+<p>​	编译条件主要涉及两个东西，一个是全局宏定义标志，另一个是代码全局设置，比如是否支持C99，优化等级选择多高等等：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/global_define_symbol.jpg"></p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/global_code_config.jpg"></p>
+<p>红框中选中的是最低等级的优化等级，然后后面的C99使用MindSDK所必须要选择设置上的，因为MindSDK的库文件代码使用了这种标准。</p>
+<ol start="3">
+<li>编译路径</li>
+</ol>
+<p>​	编译器在编译过程中的预处理阶段会去展开源文件中<code>#include</code>的头文件，如果不指定使用到的这些头文件所在的路径，那么编译器就找不到无法展开，编译就会出错，所以我们需要设置这里的编译路径：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/include_path.jpg"></p>
+<p>凡是源文件中会用到的头文件（自定义的或者库文件的头文件）所在路径都必须在这里设置添加进来，C标准库的不用（比如stdio.h这些）：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/setup_compiler_path.jpg"></p>
+<p>选择好之后点击【OK】就完成了编译路径的设置，如果后续有新增文件夹路径，再来这里添加进去就好。</p>
+<ol start="4">
+<li>指定分散加载文件</li>
+</ol>
+<p>​	MindSDK有个特别的地方就是，它提供的启动代码在初始化堆栈指针的时候，是通过分散加载文件完成的，而不是直接在启动文件中完成的，就是我们在前文提到的【mdk】中的linker下的那个文件，因而我们需要去指定那个文件到MDK工程的链接中：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/set_linker.jpg"></p>
+<p>① 在【Options for Target】中选择【Linker】项；</p>
+<p>② 此项去勾选；</p>
+<p>③ 选择MindSDK提供的分散加载文件；</p>
+<p>设置好后的结果如下图所示：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/set_linker_finish.jpg"></p>
+<ol start="5">
+<li>设置调试器</li>
+</ol>
+<p>根据自己的调试器类型选择，比如ST-Link&#x2F;J-Link等，我使用的是官方评估板，上面自带有他们的MM32-Link：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/set_debug.jpg"></p>
+<p>选择好调试器之后，点击旁边的【Settings】进入调试器设置：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/debug_driver_setup.jpg"></p>
+<p>① 点击【Settings】进入设置；</p>
+<p>② 此处可以观察调试器是否将PC和处理器正常连接了；</p>
+<p>③ 此处勾选上后，在MDK中下载程序到处理器之后，处理器就可以自动复位运行程序；</p>
+<p>当上述的工程配置都完成之后，就点击【OK】退出配置。</p>
+<h1 id="5-编译工程"><a href="#5-编译工程" class="headerlink" title="5. 编译工程"></a>5. 编译工程</h1><h2 id="5-1-新建源文件-x2F-头文件"><a href="#5-1-新建源文件-x2F-头文件" class="headerlink" title="5.1 新建源文件&#x2F;头文件"></a>5.1 新建源文件&#x2F;头文件</h2><p>​	经过前面的步骤，我们对当前工程完成了基本设置，但是还缺少一个东西：main函数。至于为何mdk工程必须要有一个确切实现的main函数，大家可以翻阅ARM的C标准库的手册，里面有详细说明。</p>
+<p>​	我们将main函数放到源文件【main.c】中定义实现，但是当前工程是没有【main.c】的，因而我们需要新建一个：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/new_file.jpg"></p>
+<p>点击这个快捷键后，在MDK的编辑区就会弹出一个新的文件编辑窗口：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/new_file_window.jpg"></p>
+<p>这时候我们点击保存或者按快捷键【ctrl+s】保存：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/savefile_default_path.jpg"></p>
+<p>我们将main.c保存到【1_App】中，理所应当的，文件名处我们就填写【main.c】就好：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/setupfile_specifc_path.jpg"></p>
+<p>然后点击【保存】即可。</p>
+<p>​	新建文件之后，如果是源文件，且还期望其能被编译，就要将这个文件添加到MDK工程中，添加文件的步骤前面已经讲过了，除了那种方式，我们也可以在目标文件组双击鼠标左键去寻找添加，大家自己尝试：</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/add_mainc_to_app.jpg"></p>
+<h2 id="5-2-编辑文件"><a href="#5-2-编辑文件" class="headerlink" title="5.2 编辑文件"></a>5.2 编辑文件</h2><p>​	编辑没啥好说的，根据C语言规则以及我们的设计需求设计程序就好，我们这里做模板工程用，因而就在【main.c】中定义实现main函数就好：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-3-编译"><a href="#5-3-编译" class="headerlink" title="5.3 编译"></a>5.3 编译</h2><p>​	按快捷键【F7】或者在菜单栏点击编译选项编译:</p>
+<p><img src="/2022/05/07/MM32-1-CreateMDKProject/compiler_result.jpg"></p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          摘星星的小朋友
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/" title="【MM32】第一篇——新建MDK工程" target="_blank">http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mcu</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LVGL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MM32</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-PortingMQTTForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T09:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-PortingMQTTForSTM32MP157/">【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="/categories/mcu//" class="article-tag-list-link color4">mcu</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/05/07/MM32-1-CreateMDKProject/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T06:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
 
+
+<nav id="article-nav">
+  
+    <a href="/2022/05/07/MM32-2-LightLED/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          【MM32】第二篇——点亮LED
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/22/LinuxLearnNote/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">嵌入式Linux学习疑惑随手记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/">【嵌入式Linux应用】移植LVGL到Linux开发板</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">1. 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-SDK%E7%9A%84%E8%8E%B7%E5%8F%96"><span class="toc-number">2.</span> <span class="toc-text">2. SDK的获取</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-SDK%E5%9C%A8%E5%AE%98%E7%BD%91%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 SDK在官网的位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E9%80%89%E6%8B%A9SDK"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 选择SDK</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-SDK%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">3. SDK的结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">4. 新建工程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E6%9E%84%E5%BB%BA%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 构建工程结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E5%88%9B%E5%BB%BAMM32F3277G9P%E7%9A%84MDK%E5%B7%A5%E7%A8%8B"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 创建MM32F3277G9P的MDK工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E7%AE%A1%E7%90%86MDK%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 管理MDK工程结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E9%85%8D%E7%BD%AE%E5%B7%A5%E7%A8%8B"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 配置工程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E7%BC%96%E8%AF%91%E5%B7%A5%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">5. 编译工程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E6%96%B0%E5%BB%BA%E6%BA%90%E6%96%87%E4%BB%B6-x2F-%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 新建源文件&#x2F;头文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E7%BC%96%E8%BE%91%E6%96%87%E4%BB%B6"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 编辑文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-%E7%BC%96%E8%AF%91"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 编译</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+        
+    </div>
+</aside>
 
-    
+
+
+
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -392,8 +711,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

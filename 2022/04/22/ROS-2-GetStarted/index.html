@@ -6,19 +6,37 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>Archives: 2022/6 | 摘星</title>
+  <title>【ROS】第二篇——快速体验 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
-<meta property="og:type" content="website">
-<meta property="og:title" content="摘星">
-<meta property="og:url" content="http://slhking.github.io/archives/2022/06/index.html">
+  <meta name="description" content="​	本文参考的是赵虚左老师的博客和视频。主要目的是记录一下快速使用ROS输出Hello World!这个信息的步骤。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ROS】第二篇——快速体验">
+<meta property="og:url" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
+<meta property="og:description" content="​	本文参考的是赵虚左老师的博客和视频。主要目的是记录一下快速使用ROS输出Hello World!这个信息的步骤。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B401.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B402.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E5%8C%85%E5%B9%B6%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/ros%E5%8A%9F%E8%83%BD%E5%8C%85.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E5%88%9B%E5%BB%BA%E6%BA%90%E6%96%87%E4%BB%B6%E5%B9%B6%E7%BC%96%E8%BE%91.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E5%9B%9E%E9%80%80%E5%88%B0ros%E5%8A%9F%E8%83%BD%E5%8C%85%E6%A0%B9%E7%9B%AE%E5%BD%95.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/add_executable.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/target_link_libraries.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E4%BF%AE%E6%94%B9%E5%90%8E%E7%9A%84add_target.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E5%9B%9E%E5%88%B0%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E7%BC%96%E8%AF%91.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E4%BF%AE%E6%AD%A3CMakelist.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E7%BC%96%E8%AF%91%E6%88%90%E5%8A%9F.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E6%89%A7%E8%A1%8C%E8%8A%82%E7%82%B9.jpg">
+<meta property="article:published_time" content="2022-04-22T09:36:56.000Z">
+<meta property="article:modified_time" content="2022-07-01T15:05:42.660Z">
 <meta property="article:author" content="摘星星的小朋友">
+<meta property="article:tag" content="ROS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B401.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -203,155 +221,342 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-ROS-2-GetStarted" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/28/LinuxApp-SquareLineAndSimulator/" class="archive-article-date">
-        <time datetime="2022-06-28T02:26:43.191Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-28</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/28/LinuxApp-SquareLineAndSimulator/">【嵌入式Linux应用】SquareLine Studio与LVGL模拟器</a>
-	
+    <h1 class="article-title" itemprop="name">
+      【ROS】第二篇——快速体验
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2022/04/22/ROS-2-GetStarted/" class="archive-article-date">
+        <time datetime="2022-04-22T09:36:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-22</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">958字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">3分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>​	本文参考的是赵虚左老师的博客和视频。主要目的是记录一下快速使用ROS输出Hello World!这个信息的步骤。<span id="more"></span></p>
+<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	ROS设计的编程语言主要是C++和python，使用哪一门语言进行开发取决于我们熟悉使用哪一门语言。</p>
+<p>​	实现输出Hello World!的步骤分为如下几步：</p>
+<ul>
+<li>创建一个工作空间；</li>
+<li>在工作空间中创建一个功能包；</li>
+<li>编辑源文件；</li>
+<li>编辑配置文件；</li>
+<li>编译并执行；</li>
+</ul>
+<h1 id="2-创建和编译"><a href="#2-创建和编译" class="headerlink" title="2. 创建和编译"></a>2. 创建和编译</h1><h2 id="2-1-创建工作空间并初始化"><a href="#2-1-创建工作空间并初始化" class="headerlink" title="2.1 创建工作空间并初始化"></a>2.1 创建工作空间并初始化</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p 自定义空间名称/src</span><br><span class="line">cd 自定义空间名称</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/22/ROS-2-GetStarted/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B401.jpg"></p>
+<p><img src="/2022/04/22/ROS-2-GetStarted/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B402.jpg" alt="创建工作空间02"></p>
+<p>需要注意的是，使用<code>mkdir</code>创建工作空间的时候，后面必须要有<code>/src</code>；初始化的时候，必须是在创建好的工作空间内进行初始化。</p>
+<h2 id="2-2-进入src创建ros功能包并添加依赖"><a href="#2-2-进入src创建ros功能包并添加依赖" class="headerlink" title="2.2 进入src创建ros功能包并添加依赖"></a>2.2 进入src创建ros功能包并添加依赖</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd src</span><br><span class="line">catkin_create_pkg 自定义ROS包名 roscpp rospy std_msgs</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/22/ROS-2-GetStarted/%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E5%8C%85%E5%B9%B6%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96.jpg"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">roscpp: C++的依赖包</span><br><span class="line">rospy: python的依赖包</span><br><span class="line">std_msgs: 标准输入输出的依赖包</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-使用C-实现输出Hello-World"><a href="#2-3-使用C-实现输出Hello-World" class="headerlink" title="2.3 使用C++实现输出Hello World"></a>2.3 使用C++实现输出Hello World</h2><h3 id="2-3-1-ROS功能包内容"><a href="#2-3-1-ROS功能包内容" class="headerlink" title="2.3.1 ROS功能包内容"></a>2.3.1 ROS功能包内容</h3><ul>
+<li>进入刚才创建的ros功能包：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ros功能包</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/22/ROS-2-GetStarted/ros%E5%8A%9F%E8%83%BD%E5%8C%85.jpg"></p>
+<p>可以看到这里面也有一个<code>src</code>文件夹，我们需要将当前ros功能包要实现的功能的源代码文件放在这个文件夹下，头文件放在ros功能包中的<code>include</code>文件夹下。需要注意区分<em><strong>工作空间下的<code>src</code>文件夹</strong></em>和<em><strong>ros功能包中的<code>src</code>文件夹</strong></em>。</p>
+<h3 id="2-3-2-创建和编辑节点源文件"><a href="#2-3-2-创建和编辑节点源文件" class="headerlink" title="2.3.2 创建和编辑节点源文件"></a>2.3.2 创建和编辑节点源文件</h3><ul>
+<li><p>进入ros功能包中的src文件夹新建源文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd src</span><br><span class="line">gedit hello.cpp</span><br></pre></td></tr></table></figure>
+
+<p>使用gedit新建并打开hello.cpp，如果不是在vmware或者vxwork中而是使用ssh连接虚拟机的话，需要将gedit换做vim。</p>
+<p><img src="/2022/04/22/ROS-2-GetStarted/%E5%88%9B%E5%BB%BA%E6%BA%90%E6%96%87%E4%BB%B6%E5%B9%B6%E7%BC%96%E8%BE%91.jpg"></p>
+</li>
+<li><p>编辑hello.cpp</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ros/ros.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//执行 ros 节点初始化</span></span><br><span class="line">    ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    <span class="comment">//创建 ros 节点句柄(非必须)</span></span><br><span class="line">    ros::NodeHandle n;</span><br><span class="line">    <span class="comment">//控制台输出 hello world</span></span><br><span class="line">    <span class="built_in">ROS_INFO</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们要使用ros的库API，需要包含它的头文件。在main函数中，一个简单的ros节点创建和信息输出总结为如下几步：</p>
+<ul>
+<li>使用ros-&gt;init接口初始化节点，第三个参数是节点名称；</li>
+<li>使用ros-&gt;NodeHandle 创建当前ros节点的句柄；</li>
+<li>调用ros标准信息输出接口ROS输出信息；</li>
+</ul>
+<p>编辑好源代码之后保存退出编辑；</p>
+<h3 id="2-3-3-编译配置文件"><a href="#2-3-3-编译配置文件" class="headerlink" title="2.3.3 编译配置文件"></a>2.3.3 编译配置文件</h3><ul>
+<li>编辑ros功能包中的配置文件CMakelist.txt</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/工作空间/src/ros功能包</span><br><span class="line">gedit CMakelist.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/22/ROS-2-GetStarted/%E5%9B%9E%E9%80%80%E5%88%B0ros%E5%8A%9F%E8%83%BD%E5%8C%85%E6%A0%B9%E7%9B%AE%E5%BD%95.jpg"></p>
+<p>找到默认被注释掉的<code>add_executable</code>和<code>target_link_libraries</code>，默认分别是在<code>136行</code>和<code>149行</code>：</p>
+<p><img src="/2022/04/22/ROS-2-GetStarted/add_executable.jpg"></p>
+<p><img src="/2022/04/22/ROS-2-GetStarted/target_link_libraries.jpg" alt="target_link_libraries"></p>
+<p>将他们按照下面的格式修改：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add_executable(步骤3的源文件名</span><br><span class="line">  src/步骤3的源文件名.cpp</span><br><span class="line">)</span><br><span class="line">target_link_libraries(步骤3的源文件名</span><br><span class="line">  $&#123;catkin_LIBRARIES&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/22/ROS-2-GetStarted/%E4%BF%AE%E6%94%B9%E5%90%8E%E7%9A%84add_target.jpg"></p>
+<p>然后保存退出编辑。</p>
+<h3 id="2-3-4-编译功能包"><a href="#2-3-4-编译功能包" class="headerlink" title="2.3.4 编译功能包"></a>2.3.4 编译功能包</h3><ul>
+<li>进入工作空间根目录编译</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/Desktop/工作空间</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/22/ROS-2-GetStarted/%E5%9B%9E%E5%88%B0%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E7%BC%96%E8%AF%91.jpg"></p>
+<p>如果提示编译失败：</p>
+<p><img src="/2022/04/22/ROS-2-GetStarted/%E7%BC%96%E8%AF%91%E5%A4%B1%E8%B4%A5.jpg"></p>
+<p>则根据提示去修改，比如我们这里最初提示在配置文件<code>CMakelist.txt</code>中没有找到<code>hello_node.cpp</code>，也就是我们的配置文件没有修改正确，那我们又去ros功能包中修改<code>CMakelist.txt</code>文件：</p>
+<p><img src="/2022/04/22/ROS-2-GetStarted/%E4%BF%AE%E6%AD%A3CMakelist.jpg"></p>
+<p>再重新回到工作空间编译，编译成功会有如下提示：</p>
+<p><img src="/2022/04/22/ROS-2-GetStarted/%E7%BC%96%E8%AF%91%E6%88%90%E5%8A%9F.jpg"></p>
+<h1 id="3-执行"><a href="#3-执行" class="headerlink" title="3. 执行"></a>3. 执行</h1><p>​	需要打开两个终端：</p>
+<ul>
+<li>在终端1中启动ROS：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roscore</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在终端2中启动编译出来的ros节点</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/工作空间</span><br><span class="line">source ./devel/setup.bash</span><br><span class="line">rosrun 包名 C++节点</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/22/ROS-2-GetStarted/%E6%89%A7%E8%A1%8C%E8%8A%82%E7%82%B9.jpg"></p>
+<p>当我们执行后看到了打印信息则证明我们的ROS环境搭建基本没有问题。</p>
+<p><code>source ~/工作空间/devel/setup.bash</code>可以添加进<code>.bashrc</code>文件，使用上更方便，这一步是配置环境变量。</p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          摘星星的小朋友
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://slhking.github.io/2022/04/22/ROS-2-GetStarted/" title="【ROS】第二篇——快速体验" target="_blank">http://slhking.github.io/2022/04/22/ROS-2-GetStarted/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LVGL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ROS</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/04/22/ROS-2-GetStarted/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-PortingMQTTForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T09:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
 
+
+<nav id="article-nav">
+  
+    <a href="/2022/04/22/LinuxLearnNote/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          嵌入式Linux学习疑惑随手记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/22/ROS-1-SetupEnv/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【ROS】第一篇——环境搭建</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-PortingMQTTForSTM32MP157/">【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E5%92%8C%E7%BC%96%E8%AF%91"><span class="toc-number">2.</span> <span class="toc-text">2. 创建和编译</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E5%B9%B6%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 创建工作空间并初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E8%BF%9B%E5%85%A5src%E5%88%9B%E5%BB%BAros%E5%8A%9F%E8%83%BD%E5%8C%85%E5%B9%B6%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 进入src创建ros功能包并添加依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E4%BD%BF%E7%94%A8C-%E5%AE%9E%E7%8E%B0%E8%BE%93%E5%87%BAHello-World"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 使用C++实现输出Hello World</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-ROS%E5%8A%9F%E8%83%BD%E5%8C%85%E5%86%85%E5%AE%B9"><span class="toc-number">2.3.1.</span> <span class="toc-text">2.3.1 ROS功能包内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-%E5%88%9B%E5%BB%BA%E5%92%8C%E7%BC%96%E8%BE%91%E8%8A%82%E7%82%B9%E6%BA%90%E6%96%87%E4%BB%B6"><span class="toc-number">2.3.2.</span> <span class="toc-text">2.3.2 创建和编辑节点源文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-%E7%BC%96%E8%AF%91%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.3.3.</span> <span class="toc-text">2.3.3 编译配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4-%E7%BC%96%E8%AF%91%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="toc-number">2.3.4.</span> <span class="toc-text">2.3.4 编译功能包</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E6%89%A7%E8%A1%8C"><span class="toc-number">3.</span> <span class="toc-text">3. 执行</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T06:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/">【嵌入式Linux应用】移植LVGL到Linux开发板</a>
-	
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+
+
+
+
+
+
+
 
 
           </div>
@@ -392,8 +597,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

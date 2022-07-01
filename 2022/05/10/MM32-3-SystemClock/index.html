@@ -6,19 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>Archives: 2022/6 | 摘星</title>
+  <title>【MM32】第三篇——时钟系统 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
-<meta property="og:type" content="website">
-<meta property="og:title" content="摘星">
-<meta property="og:url" content="http://slhking.github.io/archives/2022/06/index.html">
+  <meta name="description" content="1. 前言​	本文将介绍MM32F3270系处理器的时钟系统，将分别以内部高速时钟HSI、外部高速时钟作为输入时钟源，经锁相环PLL分频和倍频后得到更高的系统时钟，本次代码将会从寄存器层次来配置，而不是使用MindSDK库。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【MM32】第三篇——时钟系统">
+<meta property="og:url" content="http://slhking.github.io/2022/05/10/MM32-3-SystemClock/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
+<meta property="og:description" content="1. 前言​	本文将介绍MM32F3270系处理器的时钟系统，将分别以内部高速时钟HSI、外部高速时钟作为输入时钟源，经锁相环PLL分频和倍频后得到更高的系统时钟，本次代码将会从寄存器层次来配置，而不是使用MindSDK库。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://slhking.github.io/2022/05/10/MM32-3-SystemClock/1_%E6%97%B6%E9%92%9F%E6%A0%91.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/10/MM32-3-SystemClock/2_rcc_ahbenr_flash.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/10/MM32-3-SystemClock/3_flash_latency_note.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/10/MM32-3-SystemClock/4_flash_latency_table.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/10/MM32-3-SystemClock/5_flash_latency_acr.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/05/10/MM32-3-SystemClock/6_pwr_cr1_vos.jpg">
+<meta property="article:published_time" content="2022-05-10T05:56:21.000Z">
+<meta property="article:modified_time" content="2022-07-01T15:19:58.797Z">
 <meta property="article:author" content="摘星星的小朋友">
+<meta property="article:tag" content="mcu">
+<meta property="article:tag" content="MM32">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://slhking.github.io/2022/05/10/MM32-3-SystemClock/1_%E6%97%B6%E9%92%9F%E6%A0%91.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -203,155 +214,434 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-MM32-3-SystemClock" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/28/LinuxApp-SquareLineAndSimulator/" class="archive-article-date">
-        <time datetime="2022-06-28T02:26:43.191Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-28</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/28/LinuxApp-SquareLineAndSimulator/">【嵌入式Linux应用】SquareLine Studio与LVGL模拟器</a>
-	
+    <h1 class="article-title" itemprop="name">
+      【MM32】第三篇——时钟系统
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2022/05/10/MM32-3-SystemClock/" class="archive-article-date">
+        <time datetime="2022-05-10T05:56:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-10</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">4.2k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">17分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>​	本文将介绍MM32F3270系处理器的时钟系统，将分别以内部高速时钟HSI、外部高速时钟作为输入时钟源，经锁相环PLL分频和倍频后得到更高的系统时钟，本次代码将会从寄存器层次来配置，而不是使用MindSDK库。<span id="more"></span></p>
+<h1 id="2-时钟树"><a href="#2-时钟树" class="headerlink" title="2. 时钟树"></a>2. 时钟树</h1><p>​	我们先来认识下MM32F3270的时钟树：</p>
+<p><img src="/2022/05/10/MM32-3-SystemClock/1_%E6%97%B6%E9%92%9F%E6%A0%91.jpg"></p>
+<p>我们将时钟树从【SYSCLK】即【系统时钟】处将这张图一分为二，左侧是时钟输入源以及时钟信号输出到MCO线；右侧是将系统时钟经过分频输出给USB和各总线、外设以及定时器。</p>
+<p>​	我们可以看到，MM32F3270有四个时钟输入源：</p>
+<ul>
+<li>HSI——内部高速时钟；</li>
+<li>HSE——外部高速时钟；</li>
+<li>LSE——外部低速时钟；</li>
+<li>LSI——内部低速时钟；</li>
+</ul>
+<p>这四个输入时钟皆可用于配置系统时钟SYSCLK，其中HSI和HSE还可以用作PLL的输入源，经过分频和倍频得到更高主频的系统时钟。当配置好系统时钟后，就可以分频配置USB、总线和外设的时钟了。</p>
+<h2 id="2-1-HSI配置系统时钟"><a href="#2-1-HSI配置系统时钟" class="headerlink" title="2.1 HSI配置系统时钟"></a>2.1 HSI配置系统时钟</h2><ul>
+<li>如果SYSCLK选择以HSI作为系统时钟，那么，SYSCLK的值就是HSI经1&#x2F;2&#x2F;4&#x2F;8&#x2F;16&#x2F;32&#x2F;64&#x2F;128倍分频后的值，最大只能达到HSI的时钟频率8MHz；</li>
+<li>如果SYSCLK选择以PLL作为系统时钟，且PLL的输入时钟源来自于HSI，可以看到，是HSI经过1分频后输入到锁相环PLL单元的。也就是说，此时PLL的输入时钟就是HSI的8MHz，然后经PLL的倍频器PLLMUL及其分频器PLLDIV设置倍频系数和分频系数输出给SYSCLK；假设PLLMUL&#x3D;30，PLLDIV&#x3D;2，那么SYSCLK&#x3D;PLLSRC&#x2F;PLLDIV*PLLMUL&#x3D;8MHz&#x2F;2*30&#x3D;120MHz;</li>
+</ul>
+<h2 id="2-2-HSE配置系统时钟"><a href="#2-2-HSE配置系统时钟" class="headerlink" title="2.2 HSE配置系统时钟"></a>2.2 HSE配置系统时钟</h2><ul>
+<li>和HSI需经过一个分频器再输出给SYSCLK不同的是，当使用HSE直接作为SYSCLK的时钟源时，中间不需要分频，即HSE的时钟频率就是系统频率；</li>
+<li>如果SYSCLK的时钟源是PLL且PLL的时钟源是HSE，那么HSE会经过一个固定分频系数的分频器2分频后输入给PLL，然后再经由PLL分频和倍频得到更高的系统时钟，假设HSE&#x3D;8MHz，那么这个时候，PLLDIV就可以设置为1，而PLLMUL照样还是30，同样可以得到120MHz的系统时钟；</li>
+</ul>
+<h2 id="2-3-LSI配置系统时钟"><a href="#2-3-LSI配置系统时钟" class="headerlink" title="2.3 LSI配置系统时钟"></a>2.3 LSI配置系统时钟</h2><p>​	可以看到，系统时钟还可以选择LSI作为时钟输入源，得到一个更低频的系统时钟。</p>
+<h2 id="2-4-时钟输出"><a href="#2-4-时钟输出" class="headerlink" title="2.4 时钟输出"></a>2.4 时钟输出</h2><h3 id="2-4-1-USB时钟"><a href="#2-4-1-USB时钟" class="headerlink" title="2.4.1 USB时钟"></a>2.4.1 USB时钟</h3><p>​	从时钟树的分析可以看到，USB的时钟来自于PLL的输出时钟分频之后的时钟，它支持的最高时钟频率是48MHz，所以如果我们的PLL输出时钟被配置为系统时钟支持的最大时钟频率120MHz，那么USB的时钟最大只能是由PLL经过3分频之后的时钟40MHz；而想要USB工作在最大时钟频率，我们只能将PLL的输出时钟配置为96MHz，再经由2分频后输出给USB，这时候系统时钟的频率也只能达到96MHz。</p>
+<h3 id="2-4-2-总线时钟"><a href="#2-4-2-总线时钟" class="headerlink" title="2.4.2 总线时钟"></a>2.4.2 总线时钟</h3><p>​	MM32F3270的总线有以下几条：</p>
+<ul>
+<li>AHB总线：时钟是系统时钟SYSCLK经过AHB预分频器分频后产生的；</li>
+<li>APB1：时钟是AHB总线时钟经APB1预分频器分频后产生的；</li>
+<li>APB2：时钟是AHB总线时钟经APB2预分频器分频后产生的；</li>
+</ul>
+<h3 id="2-4-3-外设和定时器时钟"><a href="#2-4-3-外设和定时器时钟" class="headerlink" title="2.4.3 外设和定时器时钟"></a>2.4.3 外设和定时器时钟</h3><p>​	外设分为：</p>
+<ul>
+<li>AHB总线上的外设：时钟就是AHB总线的时钟；</li>
+<li>APB1总线上的外设：时钟就是APB1总线的时钟；</li>
+<li>ABP2总线上的外设：时钟就是APB2总线的时钟；</li>
+<li>ADC：时钟是APB2总线时钟经ADC预分频器分频后产生的；</li>
+<li>高级定时器1和8：时钟是系统时钟SYSCLK经高级定时器预分频器分频后产生的；</li>
+</ul>
+<p>​	定时器分为：</p>
+<ul>
+<li>滴答定时器：滴答定时器的时钟可以来自于AHB总线时钟8分频后产生，也可以来自其它时钟源，将分为单独的一章节来介绍内核的滴答定时器；</li>
+<li>APB1总线上的定时器：如果APB1的预分频系数是1，那么APB1总线上的定时器的时钟就是APB1不分频后产生的时钟；而如果APB1的预分频系数不为1，那么此时APB1总线上的定时器时钟就是将APB1总线的时钟2倍频之后的时钟；</li>
+<li>APB2总线上的定时器：时钟分析和APB1总线上的定时器时钟类似；</li>
+</ul>
+<h3 id="2-4-4-MCO"><a href="#2-4-4-MCO" class="headerlink" title="2.4.4 MCO"></a>2.4.4 MCO</h3><p>​	MCO：微控制器时钟输出，可以将选择的时钟源输出到MCO引脚上，其来源可以是：</p>
+<ul>
+<li>PLL输出时钟2分频；</li>
+<li>HSI;</li>
+<li>HSE;</li>
+<li>LSE;</li>
+<li>SYSCLK;</li>
+<li>LSI；</li>
+</ul>
+<h3 id="2-4-5-RTC时钟"><a href="#2-4-5-RTC时钟" class="headerlink" title="2.4.5 RTC时钟"></a>2.4.5 RTC时钟</h3><p>​	RTC的时钟来源有2：</p>
+<ul>
+<li>HSE经128分频后的时钟；</li>
+<li>LSE；</li>
+<li>LSI；</li>
+</ul>
+<h3 id="2-4-6-独立看门狗IWDG的时钟"><a href="#2-4-6-独立看门狗IWDG的时钟" class="headerlink" title="2.4.6 独立看门狗IWDG的时钟"></a>2.4.6 独立看门狗IWDG的时钟</h3><p>​	IWDG的时钟只能来源于LSI。</p>
+<h1 id="3-配置系统时钟"><a href="#3-配置系统时钟" class="headerlink" title="3. 配置系统时钟"></a>3. 配置系统时钟</h1><p>​	配置系统时钟除了配置RCC单元之外，还要配合内部FLASH特性和电源管理单元来设置。配合内部FLASH是因为读写内部flash的时候，如果主频过高，就要设置内部flash的预缓冲区和等待周期，目的是为了正常的从flash中读取指令和读写数据；配置电源管理单元则是MM32F3270这个处理器的要求，需要我们去遵从。</p>
+<h2 id="3-1-配置内部Flash的参数"><a href="#3-1-配置内部Flash的参数" class="headerlink" title="3.1 配置内部Flash的参数"></a>3.1 配置内部Flash的参数</h2><ul>
+<li>使能内部Flash时钟</li>
+</ul>
+<p>​	内部Flash是挂载再AHB总线上的，因而需要在AHB总线上使能Flash这个外设的时钟，通过查看RCC的AHB寄存器，可以看到是在RCC的AHB1ENR寄存器中使能内部Flash的时钟的：</p>
+<p><img src="/2022/05/10/MM32-3-SystemClock/2_rcc_ahbenr_flash.jpg"></p>
+<p>我们需要将RCC_AHB1ENR的第13位写1：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RCC-&gt;AHB1ENR |= (<span class="number">1u</span> &lt;&lt; <span class="number">13u</span>);    <span class="comment">// 使能FLASH外设</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置等待周期</li>
+</ul>
+<p>​	在MM32F3270的用户手册中的第【2.3.1】小节有这样一段话：</p>
+<p><img src="/2022/05/10/MM32-3-SystemClock/3_flash_latency_note.jpg"></p>
+<p>这段话是中文就不多做解释了，来看一下官方给的系统时钟和Flash latency值之间的关系表：</p>
+<p><img src="/2022/05/10/MM32-3-SystemClock/4_flash_latency_table.jpg"></p>
+<p>所以从这个表中我们可以得到，如果要系统时钟工作在96MHz或者120MHz，Flash的latency值需要设置成4，而设置Flash的latency值是在Flash的ACR寄存器：</p>
+<p><img src="/2022/05/10/MM32-3-SystemClock/5_flash_latency_acr.jpg"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLASH-&gt;ACR |= (<span class="number">4</span>&lt;&lt;<span class="number">0</span>);           <span class="comment">// 设置Flash的等待周期</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-配置电源管理单元"><a href="#3-2-配置电源管理单元" class="headerlink" title="3.2 配置电源管理单元"></a>3.2 配置电源管理单元</h2><p>​	此经验是阅读MM32F3270的手册，看到3.5.1章节PWR的CR1寄存器发现的：</p>
+<p><img src="/2022/05/10/MM32-3-SystemClock/6_pwr_cr1_vos.jpg"></p>
+<p>所以在配置时钟前，还需要：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PWR-&gt;CR1 &amp;= ~(<span class="number">2</span>&lt;&lt;<span class="number">14</span>);</span><br><span class="line">PWR-&gt;CR1 |= (<span class="number">2</span>&lt;&lt;<span class="number">14</span>);    <span class="comment">// 如果系统时钟需要达到最大频率 120MHz，需要将 VOS 设置为 2’b10 即 1.7V</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-配置HSI用作系统时钟"><a href="#3-3-配置HSI用作系统时钟" class="headerlink" title="3.3 配置HSI用作系统时钟"></a>3.3 配置HSI用作系统时钟</h2><p>​	配置HSI用作系统时钟主要由两个步骤：</p>
+<ul>
+<li><p>使能HSI；</p>
+<ul>
+<li>配置时钟控制寄存器（RCC_CR）中的HSION 位为1，使能HSI；</li>
+<li>等待时钟控制寄存器（RCC_CR）中的 HSIRDY 位被置位为 1，表示 HSI 稳定，可输出有效时<br>钟，此时才可被选择使用作为系统时钟或外设时钟源。</li>
+</ul>
+</li>
+<li><p>系统时钟源选择HSI；</p>
+<ul>
+<li>通过配置时钟配置寄存器（RCC_CFGR）的SW 位来选择系统时钟；</li>
+<li>通过读取时钟配置寄存器（RCC_CFGR）的SWS 位，判断当前系统时钟的时钟源。</li>
+</ul>
+</li>
+<li><p>上电复位后的系统时钟就是HSI</p>
+</li>
+</ul>
+<h2 id="3-4-配置HSE用作系统时钟"><a href="#3-4-配置HSE用作系统时钟" class="headerlink" title="3.4 配置HSE用作系统时钟"></a>3.4 配置HSE用作系统时钟</h2><p>​	配置HSE用作系统时钟主要由两个步骤：</p>
+<ul>
+<li><p>使能HSE；</p>
+<ul>
+<li>配置时钟控制寄存器（RCC_CR）中的HSEON 位为 1，使能 HSE</li>
+<li>等待时钟控制寄存器（RCC_CR）中的HSERDY 位被置位为1，表示 HSE 稳定，会输出有效时<br>钟信号，此时才可被选择使用作为系统时钟或外设时钟源。</li>
+</ul>
+</li>
+<li><p>系统时钟源选择HSI；</p>
+<ul>
+<li>通过配置时钟配置寄存器（RCC_CFGR）的SW 位来选择系统时钟；</li>
+<li>通过读取时钟配置寄存器（RCC_CFGR）的SWS 位，判断当前系统时钟的时钟源。</li>
+</ul>
+</li>
+</ul>
+<p>所以根据前面的内容，得到配置代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">SystemConfigUseHSE</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 使能总线外设时钟 */</span></span><br><span class="line">    RCC-&gt;AHB1ENR |= (<span class="number">1u</span> &lt;&lt; <span class="number">13u</span>);    <span class="comment">// 使能FLASH外设</span></span><br><span class="line">    FLASH-&gt;ACR |= (<span class="number">4</span>&lt;&lt;<span class="number">0</span>);           <span class="comment">// 设置Flash的等待周期</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 使能PWR/DBG */</span></span><br><span class="line">    RCC-&gt;APB1ENR |= (<span class="number">1</span>&lt;&lt;<span class="number">28</span>);</span><br><span class="line">    PWR-&gt;CR1 &amp;= ~(<span class="number">2</span>&lt;&lt;<span class="number">14</span>);</span><br><span class="line">    PWR-&gt;CR1 |= (<span class="number">2</span>&lt;&lt;<span class="number">14</span>);    <span class="comment">// 如果系统时钟需要达到最大频率 120MHz，需要将 VOS 设置为 2’b10 即 1.7V</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 使能HSE */</span></span><br><span class="line">    RCC-&gt;CR |= (<span class="number">1</span>&lt;&lt;<span class="number">16</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">0</span> == (RCC-&gt;CR&amp;(<span class="number">1</span>&lt;&lt;<span class="number">17</span>)));<span class="comment">// 等待HSI稳定</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 选择HSI作为系统时钟源 */</span></span><br><span class="line">    <span class="comment">// 00：选择 HSE 输出用作系统时钟; 01：选择 HSE 输出用作系统时钟; 10：选择 PLL 输出用作系统时钟; 11：选择 LSI 输出用作系统时钟</span></span><br><span class="line">    RCC-&gt;CFGR |= <span class="number">1</span>;     </span><br><span class="line">    <span class="keyword">while</span>(<span class="number">0</span> == (RCC-&gt;CFGR&amp;(<span class="number">1</span>&lt;&lt;<span class="number">1</span>))); <span class="comment">// 等待HSE用作系统时钟变</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-5-配置PLL用作系统时钟"><a href="#3-5-配置PLL用作系统时钟" class="headerlink" title="3.5 配置PLL用作系统时钟"></a>3.5 配置PLL用作系统时钟</h2><h3 id="3-5-1-HSI用作PLL的输入时钟"><a href="#3-5-1-HSI用作PLL的输入时钟" class="headerlink" title="3.5.1 HSI用作PLL的输入时钟"></a>3.5.1 HSI用作PLL的输入时钟</h3><p>将HSI用作PLL输入时钟配置高频的系统时钟，步骤如下：</p>
+<ul>
+<li><p>配置时钟控制寄存器（RCC_CR）中的HSION 位为1，使能HSI； </p>
+</li>
+<li><p>等待时钟控制寄存器（RCC_CR）中的 HSIRDY 位被置位为 1，表示 HSI 稳定，可输出有效时<br>钟，此时才可被选择使用作为系统时钟或外设时钟源；</p>
+</li>
+<li><p>配置PLL 配置寄存器 （RCC_PLLCFGR）中PLLMUL（倍频系数）和PLLDIV（分频系数）控<br>制位； </p>
+</li>
+<li><p>配置时钟控制寄存器（RCC_CR）中的PLLON 位为1，使能PLL； </p>
+</li>
+<li><p>等待时钟控制寄存器（RCC_CR）中的 PLLRDY 位被置位为 1，表示 PLL 稳定，可输出有效时<br>钟，此时才可被选择使用作为系统时钟或外设时钟源。</p>
+</li>
+<li><p>配置RCC_CFGR选择PLL作系统时钟源并等待稳定；</p>
+</li>
+</ul>
+<p>所以根据前面的内容，得到配置代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 配置HSO和PLL */</span></span><br><span class="line">RCC-&gt;CR |= (<span class="number">1</span>&lt;&lt;<span class="number">0</span>);              <span class="comment">// 使能HSI</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">0</span> == ((RCC-&gt;CR)&amp;(<span class="number">1</span>&lt;&lt;<span class="number">1</span>))); <span class="comment">// 等待HSI稳定</span></span><br><span class="line"></span><br><span class="line">RCC-&gt;PLLCFGR |= (<span class="number">0</span>&lt;&lt;<span class="number">0</span>);         <span class="comment">// 配置PLL的时钟源</span></span><br><span class="line">RCC-&gt;PLLCFGR &amp;= ~(<span class="number">0x7F</span>&lt;&lt;<span class="number">16</span>);</span><br><span class="line">RCC-&gt;PLLCFGR |= (<span class="number">29</span>&lt;&lt;<span class="number">16</span>);       <span class="comment">// 配置PLL的倍频系数:30倍</span></span><br><span class="line">RCC-&gt;PLLCFGR &amp;= ~(<span class="number">0x7</span>&lt;&lt;<span class="number">8</span>);</span><br><span class="line">RCC-&gt;PLLCFGR |= (<span class="number">0</span>&lt;&lt;<span class="number">8</span>);         <span class="comment">// 配置PLL的分频系数:1</span></span><br><span class="line">RCC-&gt;CR |= (<span class="number">1</span>&lt;&lt;<span class="number">24</span>);             <span class="comment">// 使能PLL</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">0</span> == (RCC-&gt;CR &amp; (<span class="number">1</span>&lt;&lt;<span class="number">25</span>)));<span class="comment">// 等待PLL时钟稳定</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 配置系统时钟、AHB、APB时钟 */</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">0</span>&lt;&lt;<span class="number">4</span>);            <span class="comment">// AHB不分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">4</span>&lt;&lt;<span class="number">8</span>);            <span class="comment">// APB1 2分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">4</span>&lt;&lt;<span class="number">11</span>);           <span class="comment">// APB2 2分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">2</span>&lt;&lt;<span class="number">22</span>);           <span class="comment">// PLL输出时钟3分频后输出给USB：120MHz/3=40MHz</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">7</span>&lt;&lt;<span class="number">24</span>);           <span class="comment">// PLL输出时钟2分频后输出到MCO</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">2</span>&lt;&lt;<span class="number">0</span>);            <span class="comment">// 选择PLL输出用作系统时钟</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">0</span> == (RCC-&gt;CFGR &amp; (<span class="number">2</span>&lt;&lt;<span class="number">2</span>)));   <span class="comment">// 等待PLL输出用作系统时钟稳定</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-5-2-HSE用作PLL的输入时钟"><a href="#3-5-2-HSE用作PLL的输入时钟" class="headerlink" title="3.5.2 HSE用作PLL的输入时钟"></a>3.5.2 HSE用作PLL的输入时钟</h3><p>将HSE用作PLL输入时钟配置高频的系统时钟，步骤如下：</p>
+<ul>
+<li>配置时钟控制寄存器（RCC_CR）中的HSEON 位为 1，使能HSE； </li>
+<li>等待时钟控制寄存器（RCC_CR）中的HSERDY 位被置位为1，表示 HSE 稳定，可输出有效时钟，此时才可被选择使用作为系统时钟或外设时钟源；</li>
+<li>配置 PLL 配置寄存器（RCC_PLLCFGR）中的 PLLSRC 位为 1，选择 HSE 时钟用作 PLL 输入<br>时钟源； </li>
+<li>配置PLL 配置寄存器（RCC_PLLCFGR）中的PLLXTPRE 位，选择HSE 或者HSE 2 分频时钟<br>为PLL 输入时钟源； </li>
+<li>配置PLL 配置寄存器 （RCC_PLLCFGR）中PLLMUL（倍频系数）和PLLDIV（分频系数）控<br>  制位； </li>
+<li>配置时钟控制寄存器（RCC_CR）中的PLLON 位为1，使能PLL； </li>
+<li>等待时钟控制寄存器（RCC_CR）中的 PLLRDY 位被置位为 1，表示 PLL 稳定，可输出有效时<br>钟，此时才可被选择使用作为系统时钟或外设时钟源。</li>
+<li>配置RCC_CFGR选择PLL作系统时钟源并等待稳定；</li>
+</ul>
+<p>所以根据前面的内容，得到配置代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 配置HSE和PLL */</span></span><br><span class="line">RCC-&gt;CR |= (<span class="number">1</span>&lt;&lt;<span class="number">16</span>);             <span class="comment">// 使能HSE</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">0</span> == ((RCC-&gt;CR)&amp;(<span class="number">1</span>&lt;&lt;<span class="number">17</span>)));<span class="comment">// 等待HSE稳定</span></span><br><span class="line"></span><br><span class="line">RCC-&gt;PLLCFGR |= (<span class="number">1</span>&lt;&lt;<span class="number">0</span>);         <span class="comment">// 配置PLL的时钟源</span></span><br><span class="line">RCC-&gt;PLLCFGR |= (<span class="number">1</span>&lt;&lt;<span class="number">1</span>);         <span class="comment">// 配置PLL的时钟源2分频后再作为时钟输入源</span></span><br><span class="line">RCC-&gt;PLLCFGR &amp;= ~(<span class="number">0x7F</span>&lt;&lt;<span class="number">16</span>);</span><br><span class="line">RCC-&gt;PLLCFGR |= (<span class="number">29</span>&lt;&lt;<span class="number">16</span>);       <span class="comment">// 配置PLL的倍频系数:30倍</span></span><br><span class="line">RCC-&gt;PLLCFGR &amp;= ~(<span class="number">0x7</span>&lt;&lt;<span class="number">8</span>);</span><br><span class="line">RCC-&gt;PLLCFGR |= (<span class="number">0</span>&lt;&lt;<span class="number">8</span>);         <span class="comment">// 配置PLL的分频系数:1</span></span><br><span class="line">RCC-&gt;CR |= (<span class="number">1</span>&lt;&lt;<span class="number">24</span>);             <span class="comment">// 使能PLL</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">0</span> == (RCC-&gt;CR &amp; (<span class="number">1</span>&lt;&lt;<span class="number">25</span>)));<span class="comment">// 等待PLL时钟稳定</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 配置系统时钟、AHB、APB时钟 */</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">0</span>&lt;&lt;<span class="number">4</span>);            <span class="comment">// AHB不分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">4</span>&lt;&lt;<span class="number">8</span>);            <span class="comment">// APB1 2分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">4</span>&lt;&lt;<span class="number">11</span>);           <span class="comment">// APB2 2分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">2</span>&lt;&lt;<span class="number">22</span>);           <span class="comment">// PLL输出时钟3分频后输出给USB：120MHz/3=40MHz</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">7</span>&lt;&lt;<span class="number">24</span>);           <span class="comment">// PLL输出时钟2分频后输出到MCO</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">2</span>&lt;&lt;<span class="number">0</span>);            <span class="comment">// 选择PLL输出用作系统时钟</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">0</span> == (RCC-&gt;CFGR &amp; (<span class="number">2</span>&lt;&lt;<span class="number">2</span>)));   <span class="comment">// 等待PLL输出用作系统时钟稳定</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-6-配置总线时钟"><a href="#3-6-配置总线时钟" class="headerlink" title="3.6 配置总线时钟"></a>3.6 配置总线时钟</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 配置系统时钟、AHB、APB时钟 */</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">0</span>&lt;&lt;<span class="number">4</span>);            <span class="comment">// AHB不分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">4</span>&lt;&lt;<span class="number">8</span>);            <span class="comment">// APB1 2分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">4</span>&lt;&lt;<span class="number">11</span>);           <span class="comment">// APB2 2分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">2</span>&lt;&lt;<span class="number">22</span>);           <span class="comment">// PLL输出时钟3分频后输出给USB：120MHz/3=40MHz</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">7</span>&lt;&lt;<span class="number">24</span>);           <span class="comment">// PLL输出时钟2分频后输出到MCO</span></span><br></pre></td></tr></table></figure>
+
+<p>​	根据RCC_CFGR寄存器以及时钟树的分析来自定义配置。</p>
+<h1 id="3-7-综合代码"><a href="#3-7-综合代码" class="headerlink" title="3.7 综合代码"></a>3.7 综合代码</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> __USE_HSE           (0)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __USE_HSE_PLL       (1)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __USE_HSI_PLL       (0)</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">SystemClockConfig</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 使能总线外设时钟 */</span></span><br><span class="line">    RCC-&gt;AHB1ENR |= (<span class="number">1u</span> &lt;&lt; <span class="number">13u</span>);    <span class="comment">// 使能FLASH外设</span></span><br><span class="line">    FLASH-&gt;ACR |= (<span class="number">4</span>&lt;&lt;<span class="number">0</span>);           <span class="comment">// 设置Flash的等待周期</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 使能PWR/DBG */</span></span><br><span class="line">    RCC-&gt;APB1ENR |= (<span class="number">1</span>&lt;&lt;<span class="number">28</span>);</span><br><span class="line">    PWR-&gt;CR1 &amp;= ~(<span class="number">2</span>&lt;&lt;<span class="number">14</span>);</span><br><span class="line">    PWR-&gt;CR1 |= (<span class="number">2</span>&lt;&lt;<span class="number">14</span>);    <span class="comment">// 如果系统时钟需要达到最大频率 120MHz，需要将 VOS 设置为 2’b10 即 1.7V</span></span><br><span class="line">    </span><br><span class="line">    RCC-&gt;CR &amp;= ~((<span class="number">1</span>&lt;&lt;<span class="number">16</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">24</span>) ); <span class="comment">// 关闭HSE/PLL</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">#<span class="keyword">if</span> __USE_HSE</span></span><br><span class="line">    SystemConfigUseHSE();</span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> __USE_HSI_PLL</span></span><br><span class="line">    RCC-&gt;CR &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">0</span>);             <span class="comment">// 先关闭HSI    /* 配置HSE和PLL */</span></span><br><span class="line">    RCC-&gt;CR |= (<span class="number">1</span>&lt;&lt;<span class="number">0</span>);              <span class="comment">// 使能HSI</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">0</span> == ((RCC-&gt;CR)&amp;(<span class="number">1</span>&lt;&lt;<span class="number">1</span>))); <span class="comment">// 等待HSI稳定</span></span><br><span class="line">    </span><br><span class="line">    RCC-&gt;PLLCFGR &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">0</span>);        <span class="comment">// 配置PLL的时钟源HSI</span></span><br><span class="line">    RCC-&gt;PLLCFGR &amp;= ~(<span class="number">0x7F</span>&lt;&lt;<span class="number">16</span>);</span><br><span class="line">    RCC-&gt;PLLCFGR |= (<span class="number">29</span>&lt;&lt;<span class="number">16</span>);       <span class="comment">// 配置PLL的倍频系数:30倍</span></span><br><span class="line">    RCC-&gt;PLLCFGR &amp;= ~(<span class="number">0x7</span>&lt;&lt;<span class="number">8</span>);</span><br><span class="line">    RCC-&gt;PLLCFGR |= (<span class="number">1</span>&lt;&lt;<span class="number">8</span>);         <span class="comment">// 配置PLL的分频系数:2</span></span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> __USE_HSE_PLL</span></span><br><span class="line">    <span class="comment">/* 配置HSE和PLL */</span></span><br><span class="line">    RCC-&gt;CR |= (<span class="number">1</span>&lt;&lt;<span class="number">16</span>);             <span class="comment">// 使能HSE</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">0</span> == ((RCC-&gt;CR)&amp;(<span class="number">1</span>&lt;&lt;<span class="number">17</span>)));<span class="comment">// 等待HSE稳定</span></span><br><span class="line">    </span><br><span class="line">    RCC-&gt;PLLCFGR |= (<span class="number">1</span>&lt;&lt;<span class="number">0</span>);         <span class="comment">// 配置PLL的时钟源HSE</span></span><br><span class="line">    RCC-&gt;PLLCFGR &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">1</span>);        <span class="comment">// 配置PLL的时钟源HSE不分频后再作为时钟输入源</span></span><br><span class="line">    RCC-&gt;PLLCFGR &amp;= ~(<span class="number">0x7F</span>&lt;&lt;<span class="number">16</span>);</span><br><span class="line">    RCC-&gt;PLLCFGR |= (<span class="number">29</span>&lt;&lt;<span class="number">16</span>);       <span class="comment">// 配置PLL的倍频系数:30倍</span></span><br><span class="line">    RCC-&gt;PLLCFGR &amp;= ~(<span class="number">0x7</span>&lt;&lt;<span class="number">8</span>);</span><br><span class="line">    RCC-&gt;PLLCFGR |= (<span class="number">1</span>&lt;&lt;<span class="number">8</span>);         <span class="comment">// 配置PLL的分频系数:2</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    RCC-&gt;CR |= (<span class="number">1</span>&lt;&lt;<span class="number">24</span>);             <span class="comment">// 使能PLL</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">0</span> == (RCC-&gt;CR &amp; (<span class="number">1</span>&lt;&lt;<span class="number">25</span>)));<span class="comment">// 等待PLL时钟稳定</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 配置系统时钟、AHB、APB时钟 */</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="number">0</span>&lt;&lt;<span class="number">4</span>);            <span class="comment">// AHB不分频</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="number">4</span>&lt;&lt;<span class="number">8</span>);            <span class="comment">// APB1 2分频</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="number">4</span>&lt;&lt;<span class="number">11</span>);           <span class="comment">// APB2 2分频</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="number">2</span>&lt;&lt;<span class="number">22</span>);           <span class="comment">// PLL输出时钟3分频后输出给USB：120MHz/3=40MHz</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="number">7</span>&lt;&lt;<span class="number">24</span>);           <span class="comment">// PLL输出时钟2分频后输出到MCO</span></span><br><span class="line">    RCC-&gt;CFGR |= (<span class="number">2</span>&lt;&lt;<span class="number">0</span>);            <span class="comment">// 选择PLL输出用作系统时钟</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">0</span> == (RCC-&gt;CFGR &amp; (<span class="number">2</span>&lt;&lt;<span class="number">2</span>)));   <span class="comment">// 等待PLL输出用作系统时钟稳定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-获取系统时钟和总线时钟"><a href="#4-获取系统时钟和总线时钟" class="headerlink" title="4. 获取系统时钟和总线时钟"></a>4. 获取系统时钟和总线时钟</h1><p>​	获取系统时钟是根据寄存器的内容，简单的加减乘除后写成程序计算的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> LSI_VALUE           (40000)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> HSI_VALUE           (8000000)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> HSE_VALUE           (8000000)</span></span><br><span class="line"></span><br><span class="line"><span class="type">uint32_t</span> <span class="title function_">Driver_GetSysClockFreq</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint32_t</span> tmpreg = <span class="number">0U</span>, prediv = <span class="number">0U</span>, pllclk = <span class="number">0U</span>, pllmul = <span class="number">0U</span>;</span><br><span class="line">    <span class="type">uint32_t</span> sysclockfreq = <span class="number">0U</span>;</span><br><span class="line">    </span><br><span class="line">    tmpreg = RCC-&gt;CFGR;</span><br><span class="line">    <span class="comment">/* 获取系统时钟源 */</span></span><br><span class="line">    <span class="keyword">switch</span>(tmpreg &amp; RCC_CFGR_SWS_MASK)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> RCC_SYSCLKSOURCE_STATUS_HSI:</span><br><span class="line">        &#123;</span><br><span class="line">            sysclockfreq = HSI_VALUE;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> RCC_SYSCLKSOURCE_STATUS_HSE:</span><br><span class="line">        &#123;</span><br><span class="line">            sysclockfreq = HSE_VALUE;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> RCC_SYSCLKSOURCE_STATUS_LSI:</span><br><span class="line">        &#123;</span><br><span class="line">            sysclockfreq = LSI_VALUE;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> RCC_SYSCLKSOURCE_STATUS_PLLCLK:</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">/* 获取PLL的输入时钟源 */</span></span><br><span class="line">            <span class="keyword">if</span>(RCC-&gt;PLLCFGR&amp;<span class="number">0x01</span>)       <span class="comment">// HSE用作PLL的输入时钟</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(RCC-&gt;PLLCFGR&amp;<span class="number">0x02</span>)   <span class="comment">// HSE二分频后输入给PLL</span></span><br><span class="line">                &#123;</span><br><span class="line">                    pllclk = HSE_VALUE&gt;&gt;<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>                    <span class="comment">// HSE部分变频直接输出给PLL</span></span><br><span class="line">                &#123;</span><br><span class="line">                    pllclk = HSE_VALUE;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>    <span class="comment">// HSI用作PLL的输入时钟</span></span><br><span class="line">            &#123;</span><br><span class="line">                pllclk = HSI_VALUE;</span><br><span class="line">            &#125;</span><br><span class="line">            prediv = (RCC-&gt;PLLCFGR&gt;&gt;<span class="number">8</span>)&amp;<span class="number">0x07</span>;    <span class="comment">// PLL的分频系数：PLLCFGR[10:8]</span></span><br><span class="line">            pllmul = (RCC-&gt;PLLCFGR&gt;&gt;<span class="number">16</span>)&amp;<span class="number">0x7F</span>;   <span class="comment">// PLL的倍频系数: PLLCFGR[22:16]</span></span><br><span class="line">            sysclockfreq = pllclk * (pllmul+<span class="number">1</span>) / (prediv+<span class="number">1</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">default</span>:<span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> sysclockfreq;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-验证"><a href="#5-验证" class="headerlink" title="5. 验证"></a>5. 验证</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;driver_sysclk.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">uint32_t</span> sysfreq = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    SystemClockConfig();</span><br><span class="line">    sysfreq = Driver_GetSysClockFreq();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过调试查看寄存器的值以及变量sysfreq的值是否如预期。</p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          摘星星的小朋友
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://slhking.github.io/2022/05/10/MM32-3-SystemClock/" title="【MM32】第三篇——时钟系统" target="_blank">http://slhking.github.io/2022/05/10/MM32-3-SystemClock/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mcu</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LVGL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MM32</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-PortingMQTTForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T09:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-PortingMQTTForSTM32MP157/">【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="/categories/mcu//" class="article-tag-list-link color4">mcu</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/05/10/MM32-3-SystemClock/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T06:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
 
+
+<nav id="article-nav">
+  
+    <a href="/2022/05/10/MM32-4-TickClock/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          【MM32】第四篇——滴答定时器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/07/MM32-2-LightLED/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【MM32】第二篇——点亮LED</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/">【嵌入式Linux应用】移植LVGL到Linux开发板</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">1. 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%97%B6%E9%92%9F%E6%A0%91"><span class="toc-number">2.</span> <span class="toc-text">2. 时钟树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-HSI%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 HSI配置系统时钟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-HSE%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 HSE配置系统时钟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-LSI%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 LSI配置系统时钟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E6%97%B6%E9%92%9F%E8%BE%93%E5%87%BA"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 时钟输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-USB%E6%97%B6%E9%92%9F"><span class="toc-number">2.4.1.</span> <span class="toc-text">2.4.1 USB时钟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2-%E6%80%BB%E7%BA%BF%E6%97%B6%E9%92%9F"><span class="toc-number">2.4.2.</span> <span class="toc-text">2.4.2 总线时钟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-3-%E5%A4%96%E8%AE%BE%E5%92%8C%E5%AE%9A%E6%97%B6%E5%99%A8%E6%97%B6%E9%92%9F"><span class="toc-number">2.4.3.</span> <span class="toc-text">2.4.3 外设和定时器时钟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-4-MCO"><span class="toc-number">2.4.4.</span> <span class="toc-text">2.4.4 MCO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-5-RTC%E6%97%B6%E9%92%9F"><span class="toc-number">2.4.5.</span> <span class="toc-text">2.4.5 RTC时钟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-6-%E7%8B%AC%E7%AB%8B%E7%9C%8B%E9%97%A8%E7%8B%97IWDG%E7%9A%84%E6%97%B6%E9%92%9F"><span class="toc-number">2.4.6.</span> <span class="toc-text">2.4.6 独立看门狗IWDG的时钟</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F"><span class="toc-number">3.</span> <span class="toc-text">3. 配置系统时钟</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E9%85%8D%E7%BD%AE%E5%86%85%E9%83%A8Flash%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 配置内部Flash的参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E9%85%8D%E7%BD%AE%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E5%8D%95%E5%85%83"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 配置电源管理单元</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E9%85%8D%E7%BD%AEHSI%E7%94%A8%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 配置HSI用作系统时钟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E9%85%8D%E7%BD%AEHSE%E7%94%A8%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 配置HSE用作系统时钟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E9%85%8D%E7%BD%AEPLL%E7%94%A8%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 配置PLL用作系统时钟</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-1-HSI%E7%94%A8%E4%BD%9CPLL%E7%9A%84%E8%BE%93%E5%85%A5%E6%97%B6%E9%92%9F"><span class="toc-number">3.5.1.</span> <span class="toc-text">3.5.1 HSI用作PLL的输入时钟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-2-HSE%E7%94%A8%E4%BD%9CPLL%E7%9A%84%E8%BE%93%E5%85%A5%E6%97%B6%E9%92%9F"><span class="toc-number">3.5.2.</span> <span class="toc-text">3.5.2 HSE用作PLL的输入时钟</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BA%BF%E6%97%B6%E9%92%9F"><span class="toc-number">3.6.</span> <span class="toc-text">3.6 配置总线时钟</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-7-%E7%BB%BC%E5%90%88%E4%BB%A3%E7%A0%81"><span class="toc-number">4.</span> <span class="toc-text">3.7 综合代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F%E5%92%8C%E6%80%BB%E7%BA%BF%E6%97%B6%E9%92%9F"><span class="toc-number">5.</span> <span class="toc-text">4. 获取系统时钟和总线时钟</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E9%AA%8C%E8%AF%81"><span class="toc-number">6.</span> <span class="toc-text">5. 验证</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+        
+    </div>
+</aside>
 
-    
+
+
+
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -392,8 +682,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

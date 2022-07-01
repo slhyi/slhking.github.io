@@ -6,19 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>Archives: 2022/6 | 摘星</title>
+  <title>嵌入式Linux学习疑惑随手记 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
-<meta property="og:type" content="website">
-<meta property="og:title" content="摘星">
-<meta property="og:url" content="http://slhking.github.io/archives/2022/06/index.html">
+  <meta name="description" content="1. 嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="嵌入式Linux学习疑惑随手记">
+<meta property="og:url" content="http://slhking.github.io/2022/04/22/LinuxLearnNote/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
+<meta property="og:description" content="1. 嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://slhking.github.io/2022/04/22/LinuxLearnNote/04/22/LinuxLearnNote/%E6%9F%A5%E7%9C%8B%E8%AE%BE%E5%A4%87.png">
+<meta property="article:published_time" content="2022-04-22T14:52:34.000Z">
+<meta property="article:modified_time" content="2022-04-25T12:53:28.068Z">
 <meta property="article:author" content="摘星星的小朋友">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://slhking.github.io/2022/04/22/LinuxLearnNote/04/22/LinuxLearnNote/%E6%9F%A5%E7%9C%8B%E8%AE%BE%E5%A4%87.png">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -203,155 +209,438 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-LinuxLearnNote" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/28/LinuxApp-SquareLineAndSimulator/" class="archive-article-date">
-        <time datetime="2022-06-28T02:26:43.191Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-28</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/28/LinuxApp-SquareLineAndSimulator/">【嵌入式Linux应用】SquareLine Studio与LVGL模拟器</a>
-	
+    <h1 class="article-title" itemprop="name">
+      嵌入式Linux学习疑惑随手记
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2022/04/22/LinuxLearnNote/" class="archive-article-date">
+        <time datetime="2022-04-22T14:52:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-22</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">1.1k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">5分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1-嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？"><a href="#1-嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？" class="headerlink" title="1. 嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？"></a>1. 嵌入式Linux中App开发人员是如何得知可以操控哪些底层硬件的？<span id="more"></span></h1><ul>
+<li>系统会自动挂载，如果没有自动挂载就需要去手动执行挂载命令；我们怎么直到是否自动挂载呢？在终端执行：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/mounts</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看系统设备：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /dev<span class="comment">/* -l	# 查看所有的设备，包括其主设备号和次设备号</span></span><br></pre></td></tr></table></figure>
+
+<center>
+<div style="width:100%;margin:auto"><img src="/2022/04/22/LinuxLearnNote/04/22/LinuxLearnNote/%E6%9F%A5%E7%9C%8B%E8%AE%BE%E5%A4%87.png" class title="查看设备">
+</div></center>
+
+<p>在Linux内核里面，有两类驱动程序：字符(char)设备驱动程序和块(block)设备驱动程序。</p>
+<p>图中，<strong>c</strong>代表字符设备驱动程序，  <strong>89</strong>就是设备的主设备号，<em><strong>0&#x2F;1&#x2F;2</strong></em>就是设备的次设备号。设备节点对应哪一个设备驱动程序通过主设备号来确定，而次设备号则是决定该设备节点对应的是设备驱动程序中对应的哪一个硬件。</p>
+<h1 id="2-Linux中对文件的操作"><a href="#2-Linux中对文件的操作" class="headerlink" title="2. Linux中对文件的操作"></a>2. Linux中对文件的操作</h1><ul>
+<li>打开文件：open</li>
+</ul>
+<p>需要包含的头文件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>可以调用的API：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">int</span> flags)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">int</span> flags, <span class="type">mode_t</span> mode)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>当成功打开一个文件后，open的返回值会是这个文件的描述符句柄，如果打开失败，那么它的返回值就是-1。</p>
+<p>参数<strong>flags</strong>的范围：</p>
+<table>
+<thead>
+<tr>
+<th align="center">flags</th>
+<th align="center">涵义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">O_RDONLY</td>
+<td align="center">只读</td>
+</tr>
+<tr>
+<td align="center">O_WRONLY</td>
+<td align="center">只写</td>
+</tr>
+<tr>
+<td align="center">O_RDWR</td>
+<td align="center">可读可写</td>
+</tr>
+<tr>
+<td align="center">O_APPEND</td>
+<td align="center">以附件的方式打开文件，在对该文件进行写的时候，会偏移到文件的末尾开始写</td>
+</tr>
+<tr>
+<td align="center">O_ASYNC</td>
+<td align="center">Enable signal-driven I&#x2F;O: generate a signal (SIGIO by default, but this can be changed via fcntl(2)) when input or output becomes possible on this file descriptor.  This feature is available only for terminals, pseudoterminals, sockets, and (since Linux 2.6) pipes and FIFOs.</td>
+</tr>
+<tr>
+<td align="center">O_CLOEXEC</td>
+<td align="center">Enable the close-on-exec flag for the new file descriptor</td>
+</tr>
+<tr>
+<td align="center">O_CREAT</td>
+<td align="center">If pathname does not exist, create it as a regular file.这个Flags会用到mode</td>
+</tr>
+<tr>
+<td align="center">O_DIRECT</td>
+<td align="center">Try to minimize cache effects of the I&#x2F;O to and from this file.</td>
+</tr>
+<tr>
+<td align="center">O_DIRECTORY</td>
+<td align="center">If pathname is not a directory, cause the open to fail</td>
+</tr>
+<tr>
+<td align="center">O_DSYNC</td>
+<td align="center">Write operations on the file will complete according to the requirements of synchronized I&#x2F;O data integrity completion.</td>
+</tr>
+<tr>
+<td align="center">O_EXCL</td>
+<td align="center">Ensure that this call creates the file: if this flag is specified in conjunction with O_CREAT, and pathname already exists, then open() fails with the error EEXIST.</td>
+</tr>
+<tr>
+<td align="center">O_LARGEFILE</td>
+<td align="center">Allow files whose sizes cannot be represented in an off_t (but can be represented in an off64_t) to be opened.</td>
+</tr>
+<tr>
+<td align="center">O_NOATIME</td>
+<td align="center">Do not update the file last access time (st_atime in the inode) when the file is read(2).</td>
+</tr>
+<tr>
+<td align="center">O_NOCTTY</td>
+<td align="center">If pathname refers to a terminal device—see tty(4)—it will not become the process’s controlling terminal even if the process does not have one.</td>
+</tr>
+<tr>
+<td align="center">O_NOFOLLOW</td>
+<td align="center">If  pathname  is a symbolic link, then the open fails, with the error ELOOP.</td>
+</tr>
+<tr>
+<td align="center">O_NONBLOCK&#x2F;O_NDELAY</td>
+<td align="center">When possible, the file is opened in nonblocking mode.</td>
+</tr>
+<tr>
+<td align="center">O_PATH</td>
+<td align="center">Obtain a file descriptor that can be used for two purposes: to indicate a location in the filesystem tree and to perform operations that act purely at the file descriptor level.</td>
+</tr>
+<tr>
+<td align="center">O_SYNC</td>
+<td align="center">Write operations on the file will complete according to the requirements of synchronized I&#x2F;O file integrity completion(by contrast with the synchronized  I&#x2F;O  data  integrity  completion provided by O_DSYNC.)</td>
+</tr>
+<tr>
+<td align="center">O_TMPFILE</td>
+<td align="center">Create an unnamed temporary regular file.</td>
+</tr>
+<tr>
+<td align="center">O_TRUNC</td>
+<td align="center">If  the  file  already  exists  and is a regular file and the access mode allows writing (i.e., is O_RDWR or O_WRONLY) it will be truncated to length 0.  If the file is a FIFO or terminal device file, the O_TRUNC flag is ignored.  Otherwise, the effect of O_TRUNC is unspecified.</td>
+</tr>
+</tbody></table>
+<p>当flags支持O_CREAT时，可以选择的mode有：</p>
+<table>
+<thead>
+<tr>
+<th align="center">mode</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">S_IRWXU</td>
+<td align="center">user (file owner) has read, write, and execute permission</td>
+</tr>
+<tr>
+<td align="center">S_IRUSR</td>
+<td align="center">user has read permission</td>
+</tr>
+<tr>
+<td align="center">S_IWUSR</td>
+<td align="center">user has write permission</td>
+</tr>
+<tr>
+<td align="center">S_IXUSR</td>
+<td align="center">user has execute permission</td>
+</tr>
+<tr>
+<td align="center">S_IRWXG</td>
+<td align="center">group has read, write, and execute permission</td>
+</tr>
+<tr>
+<td align="center">S_IRGRP</td>
+<td align="center">group has read permission</td>
+</tr>
+<tr>
+<td align="center">S_IWGRP</td>
+<td align="center">group has write permission</td>
+</tr>
+<tr>
+<td align="center">S_IXGRP</td>
+<td align="center">group has execute permission</td>
+</tr>
+<tr>
+<td align="center">S_IRWXO</td>
+<td align="center">others have read, write, and execute permission</td>
+</tr>
+<tr>
+<td align="center">S_IROTH</td>
+<td align="center">others have read permission</td>
+</tr>
+<tr>
+<td align="center">S_IWOTH</td>
+<td align="center">others have write permission</td>
+</tr>
+<tr>
+<td align="center">S_IXOTH</td>
+<td align="center">others have execute permission</td>
+</tr>
+<tr>
+<td align="center">S_ISUID</td>
+<td align="center">set-user-ID bit</td>
+</tr>
+<tr>
+<td align="center">S_ISGID</td>
+<td align="center">set-group-ID bit</td>
+</tr>
+<tr>
+<td align="center">S_ISVTX</td>
+<td align="center">sticky bit</td>
+</tr>
+</tbody></table>
+<p>其中，user&#x2F;group&#x2F;others指代的什么？</p>
+<h2 id="示例：打开一个“只读”文件"><a href="#示例：打开一个“只读”文件" class="headerlink" title="示例：打开一个“只读”文件"></a>示例：打开一个“只读”文件</h2><p>测试代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief </span></span><br><span class="line"><span class="comment"> * ./open hello.txt</span></span><br><span class="line"><span class="comment"> * @param argc </span></span><br><span class="line"><span class="comment"> * @param argv </span></span><br><span class="line"><span class="comment"> * @return int </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">1024</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="type">int</span> len = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Open a file by read only.\r\n&quot;</span>);</span><br><span class="line">    <span class="type">int</span> fd = open(argv[<span class="number">1</span>], O_RDONLY);</span><br><span class="line">    <span class="keyword">if</span>(fd == <span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Open file failed.\r\n&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Read file: \r\n&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span>( (len = read(fd, buf, <span class="number">1024</span>)) &gt; <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, buf);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\r\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Try to write: ABCD\r\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    len = write(fd, <span class="string">&quot;ABCD&quot;</span>, <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">if</span>(len == <span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Write to file failed.\r\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    close(fd);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/FileOption$ ./open_ro hello.txt </span><br><span class="line">Open a file by read only.</span><br><span class="line">Read file: </span><br><span class="line">Hello World!</span><br><span class="line"></span><br><span class="line">Try to write: ABCD</span><br><span class="line">Write to file failed.</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          摘星星的小朋友
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://slhking.github.io/2022/04/22/LinuxLearnNote/" title="嵌入式Linux学习疑惑随手记" target="_blank">http://slhking.github.io/2022/04/22/LinuxLearnNote/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LVGL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-PortingMQTTForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T09:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-PortingMQTTForSTM32MP157/">【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/04/22/LinuxLearnNote/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T06:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
 
+
+<nav id="article-nav">
+  
+    <a href="/2022/05/07/MM32-1-CreateMDKProject/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          【MM32】第一篇——新建MDK工程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/22/ROS-2-GetStarted/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【ROS】第二篇——快速体验</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/">【嵌入式Linux应用】移植LVGL到Linux开发板</a>
-	
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+
+
+
+
+
+
+
 
 
           </div>
@@ -392,8 +681,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

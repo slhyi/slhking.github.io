@@ -6,19 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>Archives: 2022/6 | 摘星</title>
+  <title>【MM32】第五篇——串口与printf重定向 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
-<meta property="og:type" content="website">
-<meta property="og:title" content="摘星">
-<meta property="og:url" content="http://slhking.github.io/archives/2022/06/index.html">
+  <meta name="description" content="1. 概述​	本篇主要介绍使用MM32的MindSDK开发串口的驱动程序以及重定向printf函数所需要关心的注意事项，由于是使用库开发，比较简单，过程中会着重讲一些注意点，代码的编写仅以代码展示来表现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【MM32】第五篇——串口与printf重定向">
+<meta property="og:url" content="http://slhking.github.io/2022/05/12/MM32-5-UartAndPrintf/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
+<meta property="og:description" content="1. 概述​	本篇主要介绍使用MM32的MindSDK开发串口的驱动程序以及重定向printf函数所需要关心的注意事项，由于是使用库开发，比较简单，过程中会着重讲一些注意点，代码的编写仅以代码展示来表现。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://slhking.github.io/2022/05/12/MM32-5-UartAndPrintf/2_%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.jpg">
+<meta property="article:published_time" content="2022-05-12T08:06:22.000Z">
+<meta property="article:modified_time" content="2022-07-01T15:23:30.081Z">
 <meta property="article:author" content="摘星星的小朋友">
+<meta property="article:tag" content="mcu">
+<meta property="article:tag" content="MM32">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://slhking.github.io/2022/05/12/MM32-5-UartAndPrintf/2_%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -203,155 +209,292 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-MM32-5-UartAndPrintf" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/28/LinuxApp-SquareLineAndSimulator/" class="archive-article-date">
-        <time datetime="2022-06-28T02:26:43.191Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-28</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/28/LinuxApp-SquareLineAndSimulator/">【嵌入式Linux应用】SquareLine Studio与LVGL模拟器</a>
-	
+    <h1 class="article-title" itemprop="name">
+      【MM32】第五篇——串口与printf重定向
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2022/05/12/MM32-5-UartAndPrintf/" class="archive-article-date">
+        <time datetime="2022-05-12T08:06:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-12</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">849字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">3分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要介绍使用MM32的MindSDK开发串口的驱动程序以及重定向printf函数所需要关心的注意事项，由于是使用库开发，比较简单，过程中会着重讲一些注意点，代码的编写仅以代码展示来表现。<span id="more"></span></p>
+<h1 id="2-初始化UART"><a href="#2-初始化UART" class="headerlink" title="2. 初始化UART"></a>2. 初始化UART</h1><h2 id="2-1-配置GPIO"><a href="#2-1-配置GPIO" class="headerlink" title="2.1 配置GPIO"></a>2.1 配置GPIO</h2><p>​	评估板上使用的是UART1，用到的引脚是PB6和PB7，将这两个引脚配置位复用输出以及浮空输入：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* PB6  -- UART1 TX</span></span><br><span class="line"><span class="comment">   PB7  -- UART1 RX</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UART1_TX_PIN            GPIO_PIN_6</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UART1_RX_PIN            GPIO_PIN_7</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UART1_PORT              GPIOB</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UART1_GPIO_CLK_EN()     RCC_EnableAHB1Periphs(RCC_AHB1_PERIPH_GPIOB, true)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief 初始化串口的GPIO</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">Drv_UART_GPIO_Init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    GPIO_Init_Type gpio_init;</span><br><span class="line">    </span><br><span class="line">    UART1_GPIO_CLK_EN();</span><br><span class="line">    <span class="comment">/* PA9  - UART1_TX. */</span></span><br><span class="line">    <span class="comment">/* PA10 - UART1_RX. */</span></span><br><span class="line">    gpio_init.Pins  = UART1_TX_PIN;</span><br><span class="line">    gpio_init.PinMode  = GPIO_PinMode_AF_PushPull;  <span class="comment">// 复用推挽输出</span></span><br><span class="line">    gpio_init.Speed = GPIO_Speed_50MHz;</span><br><span class="line">    GPIO_Init(UART1_PORT, &amp;gpio_init);</span><br><span class="line">    GPIO_PinAFConf(UART1_PORT, gpio_init.Pins, GPIO_AF_7);</span><br><span class="line">    </span><br><span class="line">    gpio_init.Pins  = UART1_RX_PIN;</span><br><span class="line">    gpio_init.PinMode  = GPIO_PinMode_In_Floating;  <span class="comment">// 浮空输入</span></span><br><span class="line">    gpio_init.Speed = GPIO_Speed_50MHz;</span><br><span class="line">    GPIO_Init(UART1_PORT, &amp;gpio_init);</span><br><span class="line">    GPIO_PinAFConf(UART1_PORT, gpio_init.Pins, GPIO_AF_7);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-配置UART参数"><a href="#2-2-配置UART参数" class="headerlink" title="2.2 配置UART参数"></a>2.2 配置UART参数</h2><p>​	调试串口使用的是UART1，波特率选择115200，数据位8位，1位停止位，没有校验位：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> UART_INSTANCE           UART1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> UART_INSTANCE_CLK_EN()  RCC_EnableAPB2Periphs(RCC_APB2_PERIPH_UART1, true)</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Drv_UART_Init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    UART_Init_Type uart_init;</span><br><span class="line">    </span><br><span class="line">    UART_INSTANCE_CLK_EN();	<span class="comment">// 使能UART1的时钟</span></span><br><span class="line">    Drv_UART_GPIO_Init();	<span class="comment">// 初始化UART1的GPIO</span></span><br><span class="line"></span><br><span class="line">    uart_init.ClockFreqHz   = Drv_GetSysClockFreq()&gt;&gt;<span class="number">1</span>;	<span class="comment">// 时钟</span></span><br><span class="line">    uart_init.BaudRate      = <span class="number">115200</span>;					<span class="comment">// 波特率</span></span><br><span class="line">    uart_init.WordLength    = UART_WordLength_8b;		<span class="comment">// 数据位</span></span><br><span class="line">    uart_init.StopBits      = UART_StopBits_1;			<span class="comment">// 停止位</span></span><br><span class="line">    uart_init.Parity        = UART_Parity_None;			<span class="comment">// 校验位</span></span><br><span class="line">    uart_init.XferMode      = UART_XferMode_RxTx;		<span class="comment">// 传输方向：收发</span></span><br><span class="line">    uart_init.HwFlowControl = UART_HwFlowControl_None;	<span class="comment">// 硬件流控制</span></span><br><span class="line">    UART_Init(UART_INSTANCE, &amp;uart_init);				<span class="comment">// 将参数配置到寄存器进行初始化</span></span><br><span class="line">    UART_Enable(UART_INSTANCE, <span class="literal">true</span>);	<span class="comment">// 使能UART1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>MM32的库还需要配置UART的时钟，一般选择为UART所在总线APB1&#x2F;2的时钟，我的系统里APB总线时钟是系统时钟2分频后输出的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 配置系统时钟、AHB、APB时钟 */</span></span><br><span class="line">RCC-&gt;CFGR &amp;= ~(<span class="number">0xF</span>&lt;&lt;<span class="number">4</span>);         <span class="comment">// AHB不分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">4</span>&lt;&lt;<span class="number">8</span>);            <span class="comment">// APB1 2分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">4</span>&lt;&lt;<span class="number">11</span>);           <span class="comment">// APB2 2分频</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">2</span>&lt;&lt;<span class="number">22</span>);           <span class="comment">// PLL输出时钟3分频后输出给USB：120MHz/3=40MHz</span></span><br><span class="line">RCC-&gt;CFGR |= (<span class="number">7</span>&lt;&lt;<span class="number">24</span>);           <span class="comment">// PLL输出时钟2分频后输出到MCO</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-重定向printf"><a href="#3-重定向printf" class="headerlink" title="3. 重定向printf"></a>3. 重定向printf</h1><h2 id="3-1-重定向-FILE结构体"><a href="#3-1-重定向-FILE结构体" class="headerlink" title="3.1 重定向__FILE结构体"></a>3.1 重定向__FILE结构体</h2><p>​	在ARM的C&#x2F;C++用户手册中提到，要想重定向printf需要重定向__FILE结构体，但是在MDK下，V6版编译器已经内置重定向了，而V5是没有的，所以我们需要根据所选择的编译器版本来决定是否重定向__FILE结构体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">if</span> defined (__ARMCC_VERSION) &amp;&amp; (__ARMCC_VERSION &lt; 6010050)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">FILE</span>&#123;</span></span><br><span class="line">   <span class="type">int</span> handle;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-重定向fputc"><a href="#3-2-重定向fputc" class="headerlink" title="3.2 重定向fputc"></a>3.2 重定向fputc</h2><p>​	在MDK下重定向fputc：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">FILE __stdout;</span><br><span class="line"><span class="type">int</span> <span class="title function_">fputc</span><span class="params">(<span class="type">int</span> ch, FILE *f)</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* Your implementation of fputc(). */</span></span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">0u</span> == (UART_STATUS_TX_EMPTY &amp; UART_GetStatus(UART_INSTANCE)) )</span><br><span class="line">    &#123;&#125;</span><br><span class="line">    UART_PutData(UART_INSTANCE, (<span class="type">uint8_t</span>)(ch));</span><br><span class="line">    <span class="keyword">return</span> ch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>fputc的函数参数、返回值是固定形式的，只需要在函数体内调用UART的发送函数，将参数ch发送出去即可。</p>
+<h1 id="4-使用"><a href="#4-使用" class="headerlink" title="4. 使用"></a>4. 使用</h1><p>​	我们在main函数内初始化UART后，调用printf打印输出：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;drv_led.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;drv_sysclk.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;drv_systick.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;drv_uart.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;hal_common.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief ARM处理器程序入口函数</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * @return int 通常main函数不会有返回值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 定义LED的状态变量，按键按下时取反 */</span></span><br><span class="line">    LED_Status status = off;</span><br><span class="line">    <span class="comment">/* 初始化系统时钟频率为120MHz */</span></span><br><span class="line">    SystemClockConfig();</span><br><span class="line">    <span class="comment">/* 配置滴答定时器的技术周期是1kHz */</span></span><br><span class="line">    Drv_SysTick_Config();</span><br><span class="line">    <span class="comment">/* 初始化用户LED的GPIO和默认状态 */</span></span><br><span class="line">    Drv_LED_Init();</span><br><span class="line">    <span class="comment">/* 初始化串口 */</span></span><br><span class="line">    Drv_UART_Init();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">/* TDO Your Task */</span></span><br><span class="line">        status = !status;</span><br><span class="line">        Drv_LED_Write(user_led, status);    <span class="comment">// 控制LED</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;LED状态:%s\r\n&quot;</span>, (status==on) ? <span class="string">&quot;on&quot;</span> : <span class="string">&quot;off&quot;</span>);</span><br><span class="line">        HAL_Delay(<span class="number">500</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-测试结果："><a href="#5-测试结果：" class="headerlink" title="5. 测试结果："></a>5. 测试结果：</h1><p><img src="/2022/05/12/MM32-5-UartAndPrintf/2_%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.jpg"></p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          摘星星的小朋友
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://slhking.github.io/2022/05/12/MM32-5-UartAndPrintf/" title="【MM32】第五篇——串口与printf重定向" target="_blank">http://slhking.github.io/2022/05/12/MM32-5-UartAndPrintf/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mcu</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LVGL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MM32</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-PortingMQTTForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T09:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-PortingMQTTForSTM32MP157/">【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="/categories/mcu//" class="article-tag-list-link color4">mcu</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/05/12/MM32-5-UartAndPrintf/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T06:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
 
+
+<nav id="article-nav">
+  
+    <a href="/2022/05/12/MM32-6-PortFreeRTOS/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          【MM32】第六篇——移植FreeRTOS
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/10/MM32-4-TickClock/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【MM32】第四篇——滴答定时器</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/">【嵌入式Linux应用】移植LVGL到Linux开发板</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96UART"><span class="toc-number">2.</span> <span class="toc-text">2. 初始化UART</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E9%85%8D%E7%BD%AEGPIO"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 配置GPIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E9%85%8D%E7%BD%AEUART%E5%8F%82%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 配置UART参数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E9%87%8D%E5%AE%9A%E5%90%91printf"><span class="toc-number">3.</span> <span class="toc-text">3. 重定向printf</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E9%87%8D%E5%AE%9A%E5%90%91-FILE%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 重定向__FILE结构体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E9%87%8D%E5%AE%9A%E5%90%91fputc"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 重定向fputc</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">4. 使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">5. 测试结果：</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+        
+    </div>
+</aside>
 
-    
+
+
+
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -392,8 +535,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
