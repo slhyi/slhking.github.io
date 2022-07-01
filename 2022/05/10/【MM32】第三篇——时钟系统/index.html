@@ -17,19 +17,19 @@
 <meta property="og:site_name" content="摘星">
 <meta property="og:description" content="1. 前言​	本文将介绍MM32F3270系处理器的时钟系统，将分别以内部高速时钟HSI、外部高速时钟作为输入时钟源，经锁相环PLL分频和倍频后得到更高的系统时钟，本次代码将会从寄存器层次来配置，而不是使用MindSDK库。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/1_%E6%97%B6%E9%92%9F%E6%A0%91.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/2_rcc_ahbenr_flash.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/3_flash_latency_note.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/4_flash_latency_table.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/5_flash_latency_acr.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/6_pwr_cr1_vos.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/1_%E6%97%B6%E9%92%9F%E6%A0%91.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/2_rcc_ahbenr_flash.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/3_flash_latency_note.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/4_flash_latency_table.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/5_flash_latency_acr.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/6_pwr_cr1_vos.jpg">
 <meta property="article:published_time" content="2022-05-10T05:56:21.000Z">
 <meta property="article:modified_time" content="2022-05-10T14:47:56.537Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="mcu">
 <meta property="article:tag" content="MM32">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/1_%E6%97%B6%E9%92%9F%E6%A0%91.jpg">
+<meta name="twitter:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/1_%E6%97%B6%E9%92%9F%E6%A0%91.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -270,8 +270,8 @@
     <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>​	本文将介绍MM32F3270系处理器的时钟系统，将分别以内部高速时钟HSI、外部高速时钟作为输入时钟源，经锁相环PLL分频和倍频后得到更高的系统时钟，本次代码将会从寄存器层次来配置，而不是使用MindSDK库。<span id="more"></span></p>
 <h1 id="2-时钟树"><a href="#2-时钟树" class="headerlink" title="2. 时钟树"></a>2. 时钟树</h1><p>​	我们先来认识下MM32F3270的时钟树：</p>
 <center>
-<div style="width:50%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/1_%E6%97%B6%E9%92%9F%E6%A0%91.jpg" class="" title="图2-1时钟树">
-</center> 
+<div style="width:50%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/1_%E6%97%B6%E9%92%9F%E6%A0%91.jpg" class title="图2-1时钟树">
+</div></center> 
 
 <p>我们将时钟树从【SYSCLK】即【系统时钟】处将这张图一分为二，左侧是时钟输入源以及时钟信号输出到MCO线；右侧是将系统时钟经过分频输出给USB和各总线、外设以及定时器。</p>
 <p>​	我们可以看到，MM32F3270有四个时钟输入源：</p>
@@ -334,8 +334,8 @@
 </ul>
 <p>​	内部Flash是挂载再AHB总线上的，因而需要在AHB总线上使能Flash这个外设的时钟，通过查看RCC的AHB寄存器，可以看到是在RCC的AHB1ENR寄存器中使能内部Flash的时钟的：</p>
 <center>
-<div style="width:50%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/2_rcc_ahbenr_flash.jpg" class="" title="图3-1 使能FLASH的时钟">
-</center> 
+<div style="width:50%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/2_rcc_ahbenr_flash.jpg" class title="图3-1 使能FLASH的时钟">
+</div></center> 
 
 <p>我们需要将RCC_AHB1ENR的第13位写1：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RCC-&gt;AHB1ENR |= (<span class="number">1u</span> &lt;&lt; <span class="number">13u</span>);    <span class="comment">// 使能FLASH外设</span></span><br></pre></td></tr></table></figure>
@@ -345,25 +345,25 @@
 </ul>
 <p>​	在MM32F3270的用户手册中的第【2.3.1】小节有这样一段话：</p>
 <center>
-<div style="width:80%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/3_flash_latency_note.jpg" class="" title="图3-2 Flash等待周期官方描述">
-</center> 
+<div style="width:80%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/3_flash_latency_note.jpg" class title="图3-2 Flash等待周期官方描述">
+</div></center> 
 
 <p>这段话是中文就不多做解释了，来看一下官方给的系统时钟和Flash latency值之间的关系表：</p>
 <center>
-<div style="width:80%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/4_flash_latency_table.jpg" class="" title="图3-3 Flash等待周期配置表">
-</center> 
+<div style="width:80%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/4_flash_latency_table.jpg" class title="图3-3 Flash等待周期配置表">
+</div></center> 
 
 <p>所以从这个表中我们可以得到，如果要系统时钟工作在96MHz或者120MHz，Flash的latency值需要设置成4，而设置Flash的latency值是在Flash的ACR寄存器：</p>
 <center>
-<div style="width:80%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/5_flash_latency_acr.jpg" class="" title="图3-4 Flash等待周期配置寄存器">
-</center> 
+<div style="width:80%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/5_flash_latency_acr.jpg" class title="图3-4 Flash等待周期配置寄存器">
+</div></center> 
 
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLASH-&gt;ACR |= (<span class="number">4</span>&lt;&lt;<span class="number">0</span>);           <span class="comment">// 设置Flash的等待周期</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="3-2-配置电源管理单元"><a href="#3-2-配置电源管理单元" class="headerlink" title="3.2 配置电源管理单元"></a>3.2 配置电源管理单元</h2><p>​	此经验是阅读MM32F3270的手册，看到3.5.1章节PWR的CR1寄存器发现的：</p>
 <center>
-<div style="width:80%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/6_pwr_cr1_vos.jpg" class="" title="图3-5 配置VOS">
-</center> 
+<div style="width:80%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%B8%89%E7%AF%87%E2%80%94%E2%80%94%E6%97%B6%E9%92%9F%E7%B3%BB%E7%BB%9F/6_pwr_cr1_vos.jpg" class title="图3-5 配置VOS">
+</div></center> 
 
 <p>所以在配置时钟前，还需要：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PWR-&gt;CR1 &amp;= ~(<span class="number">2</span>&lt;&lt;<span class="number">14</span>);</span><br><span class="line">PWR-&gt;CR1 |= (<span class="number">2</span>&lt;&lt;<span class="number">14</span>);    <span class="comment">// 如果系统时钟需要达到最大频率 120MHz，需要将 VOS 设置为 2’b10 即 1.7V</span></span><br></pre></td></tr></table></figure>
@@ -788,6 +788,10 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -812,15 +816,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
+                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -828,7 +828,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
+                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -17,47 +17,47 @@
 <meta property="og:site_name" content="摘星">
 <meta property="og:description" content="1. 概述​	本篇重点是讲LVGL的开发辅助工具，以及利用这些工具将LVGL制作UI之后移植到嵌入式Linux开发板上显示。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/1-%E6%9C%89%E6%95%88%E6%9C%9F.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/2-%E6%A8%A1%E6%8B%9F%E5%99%A8%E7%9B%AE%E5%BD%95.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/3-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%8C%85%E5%90%AB%E7%9B%AE%E5%BD%95.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/4-%E9%80%89%E6%8B%A9ucrt%E5%A4%B4%E6%96%87%E4%BB%B6.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/5-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%BA%93%E7%9B%AE%E5%BD%95.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/6-%E9%80%89%E6%8B%A9ucrt%E5%BA%93%E6%96%87%E4%BB%B6.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/7-%E6%89%A7%E8%A1%8C%E7%A4%BA%E4%BE%8B.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/8-%E9%80%89%E6%8B%A9%E7%A4%BA%E4%BE%8B.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/9-%E7%A4%BA%E4%BE%8B%E7%95%8C%E9%9D%A2.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/10-%E9%80%89%E6%8B%A9%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/11-%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/12-%E8%AE%BE%E7%BD%AE%E5%A5%BD%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/13-%E9%80%89%E6%8B%A9%E5%AF%BC%E5%87%BA%E6%96%87%E4%BB%B6.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/14-%E6%8F%90%E7%A4%BA%E5%AF%BC%E5%87%BA%E6%88%90%E5%8A%9F.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/15-%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/16-%E5%A4%8D%E5%88%B6%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/17-%E9%80%89%E6%8B%A9%E7%B2%98%E8%B4%B4%E6%96%87%E4%BB%B6.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/18-%E7%B2%98%E8%B4%B4%E5%90%8E%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/19-%E7%BB%99UI%E6%96%87%E4%BB%B6%E6%8C%87%E5%AE%9A%E5%8C%85%E5%90%AB%E8%B7%AF%E5%BE%84.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/20-%E7%BC%96%E8%BE%91%E6%A8%A1%E6%8B%9F%E5%99%A8cpp.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/21-%E6%B8%85%E7%90%86%E5%B9%B6%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/22-%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E6%88%90%E5%8A%9F.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/23-%E5%BC%80%E5%A7%8B%E6%89%A7%E8%A1%8Cui.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/24-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%98%BE%E7%A4%BAui.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/25-ssh%E8%BF%9B%E5%85%A5ui%E7%9B%AE%E5%BD%95.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/26-%E6%88%90%E5%8A%9F%E4%B8%8A%E4%BC%A0ui%E6%BA%90%E6%96%87%E4%BB%B61.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/27-ls%E6%9F%A5%E7%9C%8Bui%E6%96%87%E4%BB%B6.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/28-%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/29-%E8%B0%83%E7%94%A8ui_init.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/30-%E5%AE%98%E6%96%B9mk.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/31-%E5%AE%98%E6%96%B9lv_drivers_mk.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/32-ui_mk.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/33-%E6%B7%BB%E5%8A%A0uimk%E5%88%B0%E5%B7%A5%E7%A8%8BMakefile.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/34-%E4%BD%BF%E8%83%BD26%E5%8F%B7%E5%AD%97%E4%BD%93.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/1-%E6%9C%89%E6%95%88%E6%9C%9F.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/2-%E6%A8%A1%E6%8B%9F%E5%99%A8%E7%9B%AE%E5%BD%95.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/3-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%8C%85%E5%90%AB%E7%9B%AE%E5%BD%95.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/4-%E9%80%89%E6%8B%A9ucrt%E5%A4%B4%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/5-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%BA%93%E7%9B%AE%E5%BD%95.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/6-%E9%80%89%E6%8B%A9ucrt%E5%BA%93%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/7-%E6%89%A7%E8%A1%8C%E7%A4%BA%E4%BE%8B.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/8-%E9%80%89%E6%8B%A9%E7%A4%BA%E4%BE%8B.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/9-%E7%A4%BA%E4%BE%8B%E7%95%8C%E9%9D%A2.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/10-%E9%80%89%E6%8B%A9%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/11-%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/12-%E8%AE%BE%E7%BD%AE%E5%A5%BD%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/13-%E9%80%89%E6%8B%A9%E5%AF%BC%E5%87%BA%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/14-%E6%8F%90%E7%A4%BA%E5%AF%BC%E5%87%BA%E6%88%90%E5%8A%9F.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/15-%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/16-%E5%A4%8D%E5%88%B6%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/17-%E9%80%89%E6%8B%A9%E7%B2%98%E8%B4%B4%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/18-%E7%B2%98%E8%B4%B4%E5%90%8E%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/19-%E7%BB%99UI%E6%96%87%E4%BB%B6%E6%8C%87%E5%AE%9A%E5%8C%85%E5%90%AB%E8%B7%AF%E5%BE%84.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/20-%E7%BC%96%E8%BE%91%E6%A8%A1%E6%8B%9F%E5%99%A8cpp.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/21-%E6%B8%85%E7%90%86%E5%B9%B6%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/22-%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E6%88%90%E5%8A%9F.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/23-%E5%BC%80%E5%A7%8B%E6%89%A7%E8%A1%8Cui.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/24-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%98%BE%E7%A4%BAui.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/25-ssh%E8%BF%9B%E5%85%A5ui%E7%9B%AE%E5%BD%95.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/26-%E6%88%90%E5%8A%9F%E4%B8%8A%E4%BC%A0ui%E6%BA%90%E6%96%87%E4%BB%B61.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/27-ls%E6%9F%A5%E7%9C%8Bui%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/28-%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/29-%E8%B0%83%E7%94%A8ui_init.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/30-%E5%AE%98%E6%96%B9mk.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/31-%E5%AE%98%E6%96%B9lv_drivers_mk.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/32-ui_mk.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/33-%E6%B7%BB%E5%8A%A0uimk%E5%88%B0%E5%B7%A5%E7%A8%8BMakefile.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/34-%E4%BD%BF%E8%83%BD26%E5%8F%B7%E5%AD%97%E4%BD%93.jpg">
 <meta property="article:published_time" content="2022-06-28T02:26:43.191Z">
 <meta property="article:modified_time" content="2022-06-28T16:21:50.445Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="LVGL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/1-%E6%9C%89%E6%95%88%E6%9C%9F.jpg">
+<meta name="twitter:image" content="http://slhking.github.io/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/1-%E6%9C%89%E6%95%88%E6%9C%9F.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -324,129 +324,129 @@
 <p><strong>注意1：</strong>lv_port_win_visual_studio的安装一定要根据github下的README进行，不然会缺少内容。</p>
 <p><strong>注意2：</strong>SquareLine Studio个人免费且绑定机器码，一个账号只能在一台机器上使用这个工具；商用是收费的。</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/1-%E6%9C%89%E6%95%88%E6%9C%9F.jpg" class="" title="图1-有效期">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/1-%E6%9C%89%E6%95%88%E6%9C%9F.jpg" class title="图1-有效期">
+</div></center> 
 
 <h1 id="3-visual-studio编译运行模拟器"><a href="#3-visual-studio编译运行模拟器" class="headerlink" title="3. visual studio编译运行模拟器"></a>3. visual studio编译运行模拟器</h1><p>​	当我们使用git将<strong>lv_port_win_visual_studio</strong>克隆到本地之后，在本地的打开visual studio工程：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/2-%E6%A8%A1%E6%8B%9F%E5%99%A8%E7%9B%AE%E5%BD%95.jpg" class="" title="图2-模拟器目录">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/2-%E6%A8%A1%E6%8B%9F%E5%99%A8%E7%9B%AE%E5%BD%95.jpg" class title="图2-模拟器目录">
+</div></center> 
 
 <p>然后就会进入visual studio的开发界面，我们可以先编译一下检查下环境是否有问题。如果你遇到编译后提示找不到<code>stdint.h</code>这些头文件等，去工程属性中的<code>VC++目录</code>中的<strong>包含目录</strong>和<strong>库目录</strong>中将如下图所示的头文件和库文件添加进来：</p>
 <ul>
 <li>包含目录</li>
 </ul>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/3-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%8C%85%E5%90%AB%E7%9B%AE%E5%BD%95.jpg" class="" title="图3-选择编辑包含目录">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/3-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%8C%85%E5%90%AB%E7%9B%AE%E5%BD%95.jpg" class title="图3-选择编辑包含目录">
+</div></center> 
 
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/4-%E9%80%89%E6%8B%A9ucrt%E5%A4%B4%E6%96%87%E4%BB%B6.jpg" class="" title="图4-选择ucrt头文件">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/4-%E9%80%89%E6%8B%A9ucrt%E5%A4%B4%E6%96%87%E4%BB%B6.jpg" class title="图4-选择ucrt头文件">
+</div></center> 
 
 <ul>
 <li>库目录</li>
 </ul>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/5-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%BA%93%E7%9B%AE%E5%BD%95.jpg" class="" title="图5-选择编辑库目录">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/5-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%BA%93%E7%9B%AE%E5%BD%95.jpg" class title="图5-选择编辑库目录">
+</div></center> 
 
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/6-%E9%80%89%E6%8B%A9ucrt%E5%BA%93%E6%96%87%E4%BB%B6.jpg" class="" title="图6-选择ucrt库文件">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/6-%E9%80%89%E6%8B%A9ucrt%E5%BA%93%E6%96%87%E4%BB%B6.jpg" class title="图6-选择ucrt库文件">
+</div></center> 
 
 <p>选好这些后就可以编译通过了，也就是可以成功的生成解决方案了，然后我们点击执行简单看下效果：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/7-%E6%89%A7%E8%A1%8C%E7%A4%BA%E4%BE%8B.jpg" class="" title="图7-执行示例">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/7-%E6%89%A7%E8%A1%8C%E7%A4%BA%E4%BE%8B.jpg" class title="图7-执行示例">
+</div></center> 
 
 <h1 id="4-SquareLine-Studio绘制UI"><a href="#4-SquareLine-Studio绘制UI" class="headerlink" title="4. SquareLine Studio绘制UI"></a>4. SquareLine Studio绘制UI</h1><p>​	这个工具的安装步骤就不多说了，唯一值得注意的就是要自己注册一个账号然后会给你生成和这台机器绑定的License，直接选择它使用就好。</p>
 <h2 id="4-1-绘制ui"><a href="#4-1-绘制ui" class="headerlink" title="4.1 绘制ui"></a>4.1 绘制ui</h2><p>​	当我们运行这个studio的时候，一开始会让我们是选择<strong>创建一个工程</strong>还是打开一个示例，我们就先跑一跑它的示例吧：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/8-%E9%80%89%E6%8B%A9%E7%A4%BA%E4%BE%8B.jpg" class="" title="图8-选择示例">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/8-%E9%80%89%E6%8B%A9%E7%A4%BA%E4%BE%8B.jpg" class title="图8-选择示例">
+</div></center> 
 
 <p>点击<strong>CREATE</strong>后就来到了这样一个界面：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/9-%E7%A4%BA%E4%BE%8B%E7%95%8C%E9%9D%A2.jpg" class="" title="图9-示例界面">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/9-%E7%A4%BA%E4%BE%8B%E7%95%8C%E9%9D%A2.jpg" class title="图9-示例界面">
+</div></center> 
 
 <p>可以看到这个工具可以拖拽很多LVGL内核的控件、导入图片、添加事件等到里面来，用以绘制UI，有点像Qt，这样就方便我们构建我们的UI草图。</p>
 <h2 id="4-2-设置工程属性适配屏幕"><a href="#4-2-设置工程属性适配屏幕" class="headerlink" title="4.2 设置工程属性适配屏幕"></a>4.2 设置工程属性适配屏幕</h2><p>但是要绘制成适合我们屏幕的参数的UI，还要设置<strong>工程属性Project Settings</strong>：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/10-%E9%80%89%E6%8B%A9%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg" class="" title="图10-选择设置工程属性">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/10-%E9%80%89%E6%8B%A9%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg" class title="图10-选择设置工程属性">
+</div></center> 
 
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/11-%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg" class="" title="图11-工程属性">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/11-%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg" class title="图11-工程属性">
+</div></center>
 
 <p>这里主要关心的就两个地方，一个是UI分辨率，要根据自己屏幕的分辨率来设置，后面的颜色深度也是根据自己的屏幕接口是RGB565这样的16bit的颜色还是怎样的，反正都要根据自己的实际情况来修改，比如这里使用的是百问网的7寸屏幕，分辨率是1024*600，颜色是RGB565 16bit的；接着是导出工程的属性，这里支持两种语言，一个是micropython，另一个是C&#x2F;C++，我们是要在C下开发UI的，所以选择C&#x2F;C++，最后是导出工程或者文件的路径，根据自己的实际情况选择就是：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/12-%E8%AE%BE%E7%BD%AE%E5%A5%BD%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg" class="" title="图12-设置好的工程属性">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/12-%E8%AE%BE%E7%BD%AE%E5%A5%BD%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg" class title="图12-设置好的工程属性">
+</div></center>
 
 <p>设置好之后点击<strong>APPLY CHANGES</strong>来应用设置。</p>
 <h2 id="4-3-导出ui的源文件"><a href="#4-3-导出ui的源文件" class="headerlink" title="4.3 导出ui的源文件"></a>4.3 导出ui的源文件</h2><p>​	修改了分辨率之后，示例的ui布局肯定就乱了不好看了，但是现在不重要，我们只是要来熟悉这个工具而已，我们先按快捷键<strong>CTRL+S</strong>保存工程，然后在菜单栏的<strong>EXPORT</strong>选择导出文件：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/13-%E9%80%89%E6%8B%A9%E5%AF%BC%E5%87%BA%E6%96%87%E4%BB%B6.jpg" class="" title="图13-选择导出文件">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/13-%E9%80%89%E6%8B%A9%E5%AF%BC%E5%87%BA%E6%96%87%E4%BB%B6.jpg" class title="图13-选择导出文件">
+</div></center>
 
 <p>如果是导出工程的话，会将lvgl和lv_drivers这两个官方源码一起导出，我们实际上不管是在visual studio还是后面会移植到的Ubuntu，在之前的那片《移植LVGL到Ubuntu和嵌入式Linux开发板》已经将官方源码进行了移植了，所以这里只需要这个工具制作UI后生成的UI的源码即可，所以这里选择的是导出文件，它导出成功后会弹出提示告诉我们导出成功了：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/14-%E6%8F%90%E7%A4%BA%E5%AF%BC%E5%87%BA%E6%88%90%E5%8A%9F.jpg" class="" title="图14-提示导出成功">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/14-%E6%8F%90%E7%A4%BA%E5%AF%BC%E5%87%BA%E6%88%90%E5%8A%9F.jpg" class title="图14-提示导出成功">
+</div></center>
 
 <p>我们就可以去上一步选择的导出路径那里找到导出的文件了：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/15-%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg" class="" title="图15-导出的文件">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/15-%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg" class title="图15-导出的文件">
+</div></center>
 
 <p>我们只需要把这个文件夹下的文件移植到工程里进行调用编译，即可显示我们用SquareLine Studio绘制的UI。</p>
 <h1 id="5-移植UI到visual-studio模拟器"><a href="#5-移植UI到visual-studio模拟器" class="headerlink" title="5. 移植UI到visual studio模拟器"></a>5. 移植UI到visual studio模拟器</h1><h2 id="5-1-复制源文件到模拟器工作区间"><a href="#5-1-复制源文件到模拟器工作区间" class="headerlink" title="5.1 复制源文件到模拟器工作区间"></a>5.1 复制源文件到模拟器工作区间</h2><p>​	我们将刚才导出的文件全选，然后选择复制：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/16-%E5%A4%8D%E5%88%B6%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg" class="" title="图16-复制导出的文件">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/16-%E5%A4%8D%E5%88%B6%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg" class title="图16-复制导出的文件">
+</div></center>
 
 <p>再回到visual studio的模拟器工程，将文件粘贴到工程的编译项：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/17-%E9%80%89%E6%8B%A9%E7%B2%98%E8%B4%B4%E6%96%87%E4%BB%B6.jpg" class="" title="图17-选择粘贴文件">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/17-%E9%80%89%E6%8B%A9%E7%B2%98%E8%B4%B4%E6%96%87%E4%BB%B6.jpg" class title="图17-选择粘贴文件">
+</div></center>
 
 <p>要注意粘贴后的这些文件并不会直接粘贴到模拟器所在的文件夹，只是粘贴到了这个visual studio工作空间：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/18-%E7%B2%98%E8%B4%B4%E5%90%8E%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4.jpg" class="" title="图18-粘贴后的工作空间">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/18-%E7%B2%98%E8%B4%B4%E5%90%8E%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4.jpg" class title="图18-粘贴后的工作空间">
+</div></center>
 
 <h2 id="5-2-指定ui源文件所在目录且编译运行"><a href="#5-2-指定ui源文件所在目录且编译运行" class="headerlink" title="5.2 指定ui源文件所在目录且编译运行"></a>5.2 指定ui源文件所在目录且编译运行</h2><p>​	这时候工作区间由于我们没有指定粘贴过来的这些头文件所在路径，所以编译的话会编译不过，报错提示找不到头文件，所以我们就要将我们刚才在SquareLine Studio指定的导出路径添加到visual studio的包含路径里面去：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/19-%E7%BB%99UI%E6%96%87%E4%BB%B6%E6%8C%87%E5%AE%9A%E5%8C%85%E5%90%AB%E8%B7%AF%E5%BE%84.jpg" class="" title="图19-给UI文件指定包含路径">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/19-%E7%BB%99UI%E6%96%87%E4%BB%B6%E6%8C%87%E5%AE%9A%E5%8C%85%E5%90%AB%E8%B7%AF%E5%BE%84.jpg" class title="图19-给UI文件指定包含路径">
+</div></center>
 
 <p>然后我们编辑<strong>LVGL.Simulator.cpp</strong>，将<em><strong>ui.h</strong></em>这个头文件包含进去，并且注释掉原本的示例，调用<strong>ui.c</strong>里面定义的<strong>ui.h</strong>里面声明的<em><strong>ui_init</strong></em>函数：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/20-%E7%BC%96%E8%BE%91%E6%A8%A1%E6%8B%9F%E5%99%A8cpp.jpg" class="" title="图20-编辑模拟器cpp">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/20-%E7%BC%96%E8%BE%91%E6%A8%A1%E6%8B%9F%E5%99%A8cpp.jpg" class title="图20-编辑模拟器cpp">
+</div></center>
 
 <p>编辑好之后保存，然后清理下解决方案后再重新生成解决方案：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/21-%E6%B8%85%E7%90%86%E5%B9%B6%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.jpg" class="" title="图21-清理并重新生成解决方案">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/21-%E6%B8%85%E7%90%86%E5%B9%B6%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.jpg" class title="图21-清理并重新生成解决方案">
+</div></center>
 
 <p>编译生成没有错误：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/22-%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E6%88%90%E5%8A%9F.jpg" class="" title="图22-重新生成成功">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/22-%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E6%88%90%E5%8A%9F.jpg" class title="图22-重新生成成功">
+</div></center>
 
 <p>然后点击<strong>开始执行</strong>，观察效果：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/23-%E5%BC%80%E5%A7%8B%E6%89%A7%E8%A1%8Cui.jpg" class="" title="图23-开始执行ui">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/23-%E5%BC%80%E5%A7%8B%E6%89%A7%E8%A1%8Cui.jpg" class title="图23-开始执行ui">
+</div></center>
 
 <p>就看到了我们在SquareLine Studio中绘制的UI（这里是示例）在模拟器上显示运行了：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/24-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%98%BE%E7%A4%BAui.jpg" class="" title="图24-模拟器显示ui">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/24-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%98%BE%E7%A4%BAui.jpg" class title="图24-模拟器显示ui">
+</div></center>
 
 <h1 id="6-移植UI到嵌入式Linux开发板"><a href="#6-移植UI到嵌入式Linux开发板" class="headerlink" title="6. 移植UI到嵌入式Linux开发板"></a>6. 移植UI到嵌入式Linux开发板</h1><p>​	在《【嵌入式Linux应用】移植LVGL到Linux开发板》文章中我们已经在虚拟机Ubuntu上创建了一个以LVGL官方示例的嵌入式Linux LVGL工程，我们现在要做的就是将自己在Windows下的SquareLine Studio中绘制的UI移植到这个工程中，然后编译烧写到开发板上来显示。</p>
 <h2 id="6-1-上传导出的ui源文件和头文件"><a href="#6-1-上传导出的ui源文件和头文件" class="headerlink" title="6.1 上传导出的ui源文件和头文件"></a>6.1 上传导出的ui源文件和头文件</h2><p>​	我们可以可以通过很多方式将SquareLine导出的ui源文件和头文件复制或者下载到Ubuntu中的lvgl工程中去，这里的做法就是去工程里新建一个ui文件夹，来存放导出的这些文件：</p>
@@ -454,58 +454,58 @@
 
 <p>然后使用Mobaxterm的ssh登录虚拟机，将文件下载到ui里面去：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/25-ssh%E8%BF%9B%E5%85%A5ui%E7%9B%AE%E5%BD%95.jpg" class="" title="图25-ssh进入ui目录">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/25-ssh%E8%BF%9B%E5%85%A5ui%E7%9B%AE%E5%BD%95.jpg" class title="图25-ssh进入ui目录">
+</div></center>
 
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/26-%E6%88%90%E5%8A%9F%E4%B8%8A%E4%BC%A0ui%E6%BA%90%E6%96%87%E4%BB%B61.jpg" class="" title="图26-成功上传ui源文件1">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/26-%E6%88%90%E5%8A%9F%E4%B8%8A%E4%BC%A0ui%E6%BA%90%E6%96%87%E4%BB%B61.jpg" class title="图26-成功上传ui源文件1">
+</div></center>
 
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/27-ls%E6%9F%A5%E7%9C%8Bui%E6%96%87%E4%BB%B6.jpg" class="" title="图27-ls查看ui文件">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/27-ls%E6%9F%A5%E7%9C%8Bui%E6%96%87%E4%BB%B6.jpg" class title="图27-ls查看ui文件">
+</div></center>
 
 <h2 id="6-2-编辑main-c"><a href="#6-2-编辑main-c" class="headerlink" title="6.2 编辑main.c"></a>6.2 编辑main.c</h2><p>​	调用方法和模拟器里面类似，也是添加头文件然后调用<strong>ui_init</strong>函数，不过差别是ubuntu工程里面要明确头文件所在目录，不然无法找到头文件：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ui/ui.h&quot;</span></span></span><br></pre></td></tr></table></figure>
 
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/28-%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6.jpg" class="" title="图28-包含头文件">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/28-%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6.jpg" class title="图28-包含头文件">
+</div></center>
 
 <p>然后去main函数中调用<strong>ui_init</strong>：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/29-%E8%B0%83%E7%94%A8ui_init.jpg" class="" title="图29-调用ui_init">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/29-%E8%B0%83%E7%94%A8ui_init.jpg" class title="图29-调用ui_init">
+</div></center>
 
 <h2 id="6-3-Makefile"><a href="#6-3-Makefile" class="headerlink" title="6.3 Makefile"></a>6.3 Makefile</h2><p>我们要将ui目录下的源文件和头文件添加到编译中，就要仿照工程目录下的Makefile中添加lvgl官方源码的那样：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/30-%E5%AE%98%E6%96%B9mk.jpg" class="" title="图30-官方mk">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/30-%E5%AE%98%E6%96%B9mk.jpg" class title="图30-官方mk">
+</div></center>
 
 <p>在用到的子目录中创建该子目录的.mk文件，仿照lvgl.mk或者lv_drivers.mk的写法：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/31-%E5%AE%98%E6%96%B9lv_drivers_mk.jpg" class="" title="图31-官方lv_drivers_mk">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/31-%E5%AE%98%E6%96%B9lv_drivers_mk.jpg" class title="图31-官方lv_drivers_mk">
+</div></center>
 
 <p>来写ui子目录的.mk：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ touch ui/ui.mk</span><br></pre></td></tr></table></figure>
 
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/32-ui_mk.jpg" class="" title="图32-ui_mk">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/32-ui_mk.jpg" class title="图32-ui_mk">
+</div></center>
 
 <p>然后将这个ui.mk添加到工程根目录所在的Makefile中：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/33-%E6%B7%BB%E5%8A%A0uimk%E5%88%B0%E5%B7%A5%E7%A8%8BMakefile.jpg" class="" title="图33-添加uimk到工程Makefile">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/33-%E6%B7%BB%E5%8A%A0uimk%E5%88%B0%E5%B7%A5%E7%A8%8BMakefile.jpg" class title="图33-添加uimk到工程Makefile">
+</div></center>
 
 <p>然后执行make：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ make -j8</span><br></pre></td></tr></table></figure>
 
 <p>由于运行的是SquareLine Studio的那个有点复杂的示例，它用到了26号字体，但是我们<strong>lv_conf.h</strong>里面并没有使能使用，所以编译报错了，所以我们需要在<strong>lv_conf.h</strong>里面使能这个字体：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/34-%E4%BD%BF%E8%83%BD26%E5%8F%B7%E5%AD%97%E4%BD%93.jpg" class="" title="图34-使能26号字体">
-</center>
+<div style="width:75%;margin:auto"><img src="/.io//06/28/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BA%94%E7%94%A8%E3%80%91SquareLine%20Studio%E4%B8%8ELVGL%E6%A8%A1%E6%8B%9F%E5%99%A8/34-%E4%BD%BF%E8%83%BD26%E5%8F%B7%E5%AD%97%E4%BD%93.jpg" class title="图34-使能26号字体">
+</div></center>
 
 <p>然后重新执行make就没有报错了。</p>
 <h2 id="6-4-开发板运行示例ui"><a href="#6-4-开发板运行示例ui" class="headerlink" title="6.4 开发板运行示例ui"></a>6.4 开发板运行示例ui</h2><p>​	开发板挂载以及拷贝demo到开发板这个过程就不再多说了：</p>
@@ -842,6 +842,10 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -866,15 +870,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
+                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -882,7 +882,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
+                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
               </li>
              
               <li class="article-tag-list-item">

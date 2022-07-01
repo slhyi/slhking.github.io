@@ -17,20 +17,20 @@
 <meta property="og:site_name" content="摘星">
 <meta property="og:description" content="1. 前言​	滴答定时器是cortex内核中的内置定时器，是一个24bit的向下计数定时器。本篇将会介绍滴答定时器的相关寄存器及其配置，实现一个ms级别的延时，通过LED的闪烁来验证，所以需要将LED的驱动移植到本次的工程中。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/1_syst_csr.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/2_ahb_systick.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/3_syst_rvr.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/4_syst_cvr.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/5_syst_calib.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/6_systick_addr.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/7_systick_reg_addr.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/1_syst_csr.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/2_ahb_systick.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/3_syst_rvr.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/4_syst_cvr.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/5_syst_calib.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/6_systick_addr.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/7_systick_reg_addr.jpg">
 <meta property="article:published_time" content="2022-05-10T15:21:13.000Z">
 <meta property="article:modified_time" content="2022-05-12T08:04:06.591Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="mcu">
 <meta property="article:tag" content="MM32">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/1_syst_csr.jpg">
+<meta name="twitter:image" content="http://slhking.github.io/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/1_syst_csr.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -271,8 +271,8 @@
     <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>​	滴答定时器是cortex内核中的内置定时器，是一个24bit的向下计数定时器。本篇将会介绍滴答定时器的相关寄存器及其配置，实现一个ms级别的延时，通过LED的闪烁来验证，所以需要将LED的驱动移植到本次的工程中。<span id="more"></span></p>
 <h1 id="2-Cortex-M3的滴答定时器"><a href="#2-Cortex-M3的滴答定时器" class="headerlink" title="2. Cortex-M3的滴答定时器"></a>2. Cortex-M3的滴答定时器</h1><p>​	本章节主要介绍cortex-m3内核的滴答定时器的相关寄存器，参考手册《Cortex-M3 Devices Generic User Guide》。</p>
 <h2 id="2-1-控制和状态寄存器SYST-CSR"><a href="#2-1-控制和状态寄存器SYST-CSR" class="headerlink" title="2.1 控制和状态寄存器SYST_CSR"></a>2.1 控制和状态寄存器SYST_CSR</h2><center>
-<div style="width:75%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/1_syst_csr.jpg" class="" title="图2-1 CSR寄存器">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/1_syst_csr.jpg" class title="图2-1 CSR寄存器">
+</div></center> 
 
 <table>
 <thead>
@@ -320,14 +320,14 @@
 <p>​	从寄存器的描述可以看到，滴答定时器有两种时钟源：处理器的时钟或者外部时钟。处理器的时钟没啥好说的，我们将处理器的时钟设置为多少，滴答定时器的时钟就是多少，而外部时钟是什么呢？</p>
 <p>​	滴答定时器的外部时钟是芯片设计厂商，我们来看一下灵动微的MM32F3270给滴答定时器设计的外部时钟是怎样的。在MM32F3270的用户手册时钟树那里前面可以看到：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/2_ahb_systick.jpg" class="" title="图2-2 滴答定时器的外部时钟源">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/2_ahb_systick.jpg" class title="图2-2 滴答定时器的外部时钟源">
+</div></center> 
 
 <p>在MM32F3270处理器中，内核的滴答定时器时钟的外部时钟源还可以是AHB总线时钟8分频后的时钟。</p>
 <p>​	通常我们会将这个寄存器的值初始化的时候设置为0x7，时钟是处理器的时钟，且使能中断，开启计数器。</p>
 <h2 id="2-2-预装载值寄存器SYST-RVR"><a href="#2-2-预装载值寄存器SYST-RVR" class="headerlink" title="2.2 预装载值寄存器SYST_RVR"></a>2.2 预装载值寄存器SYST_RVR</h2><center>
-<div style="width:75%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/3_syst_rvr.jpg" class="" title="图2-3 RVR寄存器">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/3_syst_rvr.jpg" class title="图2-3 RVR寄存器">
+</div></center> 
 
 <table>
 <thead>
@@ -351,8 +351,8 @@
 <p>​	滴答定时器是一个24bit的向下计数器，所以其预装载寄存器可以设置的位数也只有低24bits，最大可以设置的值是0xFFFFFF&#x3D;16777215。</p>
 <p>​	假设我们期望滴答定时器每隔1ms进入一次中断，也就是让滴答定时器在其时钟频率下开始向下计数RELOAD这么多次需要耗费的时间是1ms，设滴答定时器的时钟&#x3D;xMHz，那么reload的值就应该是xMHz&#x2F;1kHz &#x3D;xK。比如MM32F3270处理器的AHB总线时钟是120MHz，那么只需要将reload的值设置为120k就可以让滴答定时器每隔1ms进入一次中断，而120k是小于16777215的，是合法的值。</p>
 <h2 id="2-3-当前计数值寄存器SYST-CVR"><a href="#2-3-当前计数值寄存器SYST-CVR" class="headerlink" title="2.3 当前计数值寄存器SYST_CVR"></a>2.3 当前计数值寄存器SYST_CVR</h2><center>
-<div style="width:75%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/4_syst_cvr.jpg" class="" title="图2-4 CVR寄存器">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/4_syst_cvr.jpg" class title="图2-4 CVR寄存器">
+</div></center> 
 
 <table>
 <thead>
@@ -375,8 +375,8 @@
 </tbody></table>
 <p>​	这个寄存器很简单，就是表明滴答定时器当前的计数值是多少，可读可写。</p>
 <h2 id="2-4-校准值寄存器SYST-CALIB"><a href="#2-4-校准值寄存器SYST-CALIB" class="headerlink" title="2.4 校准值寄存器SYST_CALIB"></a>2.4 校准值寄存器SYST_CALIB</h2><center>
-<div style="width:75%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/5_syst_calib.jpg" class="" title="图2-5 CALIB寄存器">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/5_syst_calib.jpg" class title="图2-5 CALIB寄存器">
+</div></center> 
 
 <table>
 <thead>
@@ -416,13 +416,13 @@
 <p>我们默认将其预装载值设置为系统时钟除以1000，即每隔1ms进入一次滴答定时器的中断。</p>
 <h2 id="3-2-根据寄存器地址映射直接操控寄存器"><a href="#3-2-根据寄存器地址映射直接操控寄存器" class="headerlink" title="3.2 根据寄存器地址映射直接操控寄存器"></a>3.2 根据寄存器地址映射直接操控寄存器</h2><p>​	根据前面介绍的滴答定时器的寄存器，按照自己所需设置寄存器的值即可。滴答定时器在内存中映射的基地址是：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/6_systick_addr.jpg" class="" title="图3-1 寄存器基地址">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/6_systick_addr.jpg" class title="图3-1 寄存器基地址">
+</div></center> 
 
 <p>各寄存器的地址：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/7_systick_reg_addr.jpg" class="" title="图3-1 寄存器地址">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/10/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%9B%9B%E7%AF%87%E2%80%94%E2%80%94%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8/7_systick_reg_addr.jpg" class title="图3-1 寄存器地址">
+</div></center> 
 
 <p>那么我们的程序就可以这样操作：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> SYSTICK_BASE_ADDR   (0xE000E010)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> CSR;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> RVR;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> CVR;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> CALIB;</span><br><span class="line">&#125;SYSTICK_REG;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SYSTICK             ((SYSTICK_REG*)SYSTICK_BASE_ADDR)</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Driver_SysTick_ConfigUseREG</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    SYSTICK-&gt;RVR = Driver_GetSysClockFreq()/<span class="number">1000</span> - <span class="number">1</span>;</span><br><span class="line">    SYSTICK-&gt;CVR = <span class="number">0</span>;</span><br><span class="line">    SYSTICK-&gt;CSR |= (<span class="number">1</span>&lt;&lt;<span class="number">0</span>) |    <span class="comment">// Enable counter</span></span><br><span class="line">                    (<span class="number">1</span>&lt;&lt;<span class="number">1</span>) |    <span class="comment">// Enable Interupt</span></span><br><span class="line">                    (<span class="number">1</span>&lt;&lt;<span class="number">2</span>);     <span class="comment">// Clock:cpu clock</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment">/* Configure the SysTick IRQ priority */</span></span><br><span class="line">    <span class="type">uint32_t</span> prioritygroup = <span class="number">0x00</span>U;</span><br><span class="line">    prioritygroup = NVIC_GetPriorityGrouping();</span><br><span class="line">    NVIC_SetPriority(SysTick_IRQn, NVIC_EncodePriority(prioritygroup, <span class="number">15</span>, <span class="number">0</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -776,6 +776,10 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -800,15 +804,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
+                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -816,7 +816,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
+                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -17,14 +17,14 @@
 <meta property="og:site_name" content="摘星">
 <meta property="og:description" content="1. 概述​	本篇主要介绍使用MM32的MindSDK开发串口的驱动程序以及重定向printf函数所需要关心的注意事项，由于是使用库开发，比较简单，过程中会着重讲一些注意点，代码的编写仅以代码展示来表现。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%BA%94%E7%AF%87%E2%80%94%E2%80%94%E4%B8%B2%E5%8F%A3%E4%B8%8Eprintf%E9%87%8D%E5%AE%9A%E5%90%91/2_%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%BA%94%E7%AF%87%E2%80%94%E2%80%94%E4%B8%B2%E5%8F%A3%E4%B8%8Eprintf%E9%87%8D%E5%AE%9A%E5%90%91/2_%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.jpg">
 <meta property="article:published_time" content="2022-05-12T08:06:22.000Z">
 <meta property="article:modified_time" content="2022-06-21T04:31:06.636Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="mcu">
 <meta property="article:tag" content="MM32">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%BA%94%E7%AF%87%E2%80%94%E2%80%94%E4%B8%B2%E5%8F%A3%E4%B8%8Eprintf%E9%87%8D%E5%AE%9A%E5%90%91/2_%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.jpg">
+<meta name="twitter:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%BA%94%E7%AF%87%E2%80%94%E2%80%94%E4%B8%B2%E5%8F%A3%E4%B8%8Eprintf%E9%87%8D%E5%AE%9A%E5%90%91/2_%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -283,8 +283,8 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;drv_led.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;drv_sysclk.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;drv_systick.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;drv_uart.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;hal_common.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief ARM处理器程序入口函数</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * @return int 通常main函数不会有返回值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 定义LED的状态变量，按键按下时取反 */</span></span><br><span class="line">    LED_Status status = off;</span><br><span class="line">    <span class="comment">/* 初始化系统时钟频率为120MHz */</span></span><br><span class="line">    SystemClockConfig();</span><br><span class="line">    <span class="comment">/* 配置滴答定时器的技术周期是1kHz */</span></span><br><span class="line">    Drv_SysTick_Config();</span><br><span class="line">    <span class="comment">/* 初始化用户LED的GPIO和默认状态 */</span></span><br><span class="line">    Drv_LED_Init();</span><br><span class="line">    <span class="comment">/* 初始化串口 */</span></span><br><span class="line">    Drv_UART_Init();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">/* TDO Your Task */</span></span><br><span class="line">        status = !status;</span><br><span class="line">        Drv_LED_Write(user_led, status);    <span class="comment">// 控制LED</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;LED状态:%s\r\n&quot;</span>, (status==on) ? <span class="string">&quot;on&quot;</span> : <span class="string">&quot;off&quot;</span>);</span><br><span class="line">        HAL_Delay(<span class="number">500</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="5-测试结果："><a href="#5-测试结果：" class="headerlink" title="5. 测试结果："></a>5. 测试结果：</h1><center>
-<div style="width:50%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%BA%94%E7%AF%87%E2%80%94%E2%80%94%E4%B8%B2%E5%8F%A3%E4%B8%8Eprintf%E9%87%8D%E5%AE%9A%E5%90%91/2_%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.jpg" class="" title="图1 2_测试结果">
-</center> 
+<div style="width:50%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E4%BA%94%E7%AF%87%E2%80%94%E2%80%94%E4%B8%B2%E5%8F%A3%E4%B8%8Eprintf%E9%87%8D%E5%AE%9A%E5%90%91/2_%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.jpg" class title="图1 2_测试结果">
+</div></center> 
 
     
 
@@ -625,6 +625,10 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -649,15 +653,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
+                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,7 +665,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
+                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
               </li>
              
               <li class="article-tag-list-item">

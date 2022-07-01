@@ -17,37 +17,37 @@
 <meta property="og:site_name" content="摘星">
 <meta property="og:description" content="​		本篇是记录的是使用STM32CubeIDE新建一个开发VS1053B芯片的工程，包括了对基本外设的配置和FATFS系统以及freeRTOS系统的添加。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E5%B7%A5%E4%BD%9C%E5%8C%BA.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BASTM32%E5%B7%A5%E7%A8%8B.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E8%8A%AF%E7%89%87.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%90%8D%E7%A7%B0%E5%8F%8A%E6%A8%A1%E6%9D%BF.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%88%9D%E5%A7%8B%E5%8C%96%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AEDebug.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESDIO.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEFATFS.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/VS1053B%E9%83%A8%E5%88%86%E5%8E%9F%E7%90%86%E5%9B%BE.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESPI2.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E5%8E%9F%E7%90%86%E5%9B%BE.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E9%85%8D%E7%BD%AE.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEfreeFTOS.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%8F%82%E6%95%B0.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%812.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E7%AA%97%E5%8F%A3%E5%92%8C%E7%BB%93%E6%9E%84.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9F%9F.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%87%8D%E5%AE%9A%E4%BD%8Dprintf.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%8F%9C%E5%8D%95%E6%A0%8F%E7%BC%96%E8%AF%91.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E5%B7%A5%E7%A8%8B%E7%BC%96%E8%AF%91.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%BC%96%E8%AF%91%E7%BB%93%E6%9E%9C.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B0%8F%E7%94%B2%E8%99%AB.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E8%B0%83%E8%AF%95.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/switch.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/stdio.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/printf.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%85%A8%E9%80%9F%E8%BF%90%E8%A1%8C.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%89%93%E5%8D%B0%E7%BB%93%E6%9E%9C.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E5%B7%A5%E4%BD%9C%E5%8C%BA.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BASTM32%E5%B7%A5%E7%A8%8B.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E8%8A%AF%E7%89%87.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%90%8D%E7%A7%B0%E5%8F%8A%E6%A8%A1%E6%9D%BF.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%88%9D%E5%A7%8B%E5%8C%96%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AEDebug.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESDIO.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEFATFS.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/VS1053B%E9%83%A8%E5%88%86%E5%8E%9F%E7%90%86%E5%9B%BE.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESPI2.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E5%8E%9F%E7%90%86%E5%9B%BE.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E9%85%8D%E7%BD%AE.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEfreeFTOS.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%8F%82%E6%95%B0.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%812.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E7%AA%97%E5%8F%A3%E5%92%8C%E7%BB%93%E6%9E%84.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9F%9F.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%87%8D%E5%AE%9A%E4%BD%8Dprintf.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%8F%9C%E5%8D%95%E6%A0%8F%E7%BC%96%E8%AF%91.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E5%B7%A5%E7%A8%8B%E7%BC%96%E8%AF%91.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%BC%96%E8%AF%91%E7%BB%93%E6%9E%9C.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B0%8F%E7%94%B2%E8%99%AB.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E8%B0%83%E8%AF%95.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/switch.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/stdio.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/printf.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%85%A8%E9%80%9F%E8%BF%90%E8%A1%8C.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%89%93%E5%8D%B0%E7%BB%93%E6%9E%9C.jpg">
 <meta property="article:published_time" content="2021-04-11T15:46:42.000Z">
 <meta property="article:modified_time" content="2022-04-19T15:27:06.898Z">
 <meta property="article:author" content="摘星星的小朋友">
@@ -55,7 +55,7 @@
 <meta property="article:tag" content="STM32">
 <meta property="article:tag" content="VS1053">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9.jpg">
+<meta name="twitter:image" content="http://slhking.github.io/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -316,36 +316,36 @@
 <li>使用FATFS；</li>
 </ul>
 <h2 id="4-1-使用STM32CubeIDE创建基础工程"><a href="#4-1-使用STM32CubeIDE创建基础工程" class="headerlink" title="4.1 使用STM32CubeIDE创建基础工程"></a>4.1 使用STM32CubeIDE创建基础工程</h2><ul>
-<li>第一步，创建工程文件夹：在保存项目工程的路径下新建项目文件夹，我的就取名叫<font color=#DC143C size=4 face="微软雅黑">VS1053B_Prj</font>，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9.jpg" class="" title="图4-1 新建项目文件夹">
-</center>  </li>
-<li>第二步，打开STM32CubeIDE，选择工作区路径，我们就选择在项目文件夹下，然后点击<font color=#4B0082 size=4 face="黑体">Launch</font>，如图:  <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E5%B7%A5%E4%BD%9C%E5%8C%BA.jpg" class="" title="图4-2 选择工作区">
-</center>  </li>
+<li>第一步，创建工程文件夹：在保存项目工程的路径下新建项目文件夹，我的就取名叫<font color="#DC143C" size="4" face="微软雅黑">VS1053B_Prj</font>，如图：  <center>
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9.jpg" class title="图4-1 新建项目文件夹">
+</div></center>  </li>
+<li>第二步，打开STM32CubeIDE，选择工作区路径，我们就选择在项目文件夹下，然后点击<font color="#4B0082" size="4" face="黑体">Launch</font>，如图:  <center>
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E5%B7%A5%E4%BD%9C%E5%8C%BA.jpg" class title="图4-2 选择工作区">
+</div></center>  </li>
 <li>第三步，新建STM32工程，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BASTM32%E5%B7%A5%E7%A8%8B.jpg" class="" title="图4-3 新建STM32工程">
-</center>  </li>
-<li>第四步，选择芯片，首先搜索我们使用的芯片，然后根据封装选择具体是哪一个，随后点击<font color=#4B0082 size=4 face="黑体">Next</font>，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E8%8A%AF%E7%89%87.jpg" class="" title="图4-4 选择芯片">
-</center>  </li>
-<li>第五步，设置工程名称及模板，首先给工程取一个名字，我们就和项目名称一样，然后操作条件即工程模板就使用默认参数，随后点击<font color=#4B0082 size=4 face="黑体">Finish</font>，在弹出来的框体中选择<font color=#4B0082 size=4 face="黑体">Yes</font>，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%90%8D%E7%A7%B0%E5%8F%8A%E6%A8%A1%E6%9D%BF.jpg" class="" title="图4-5 设置工程名称及模板">
-</center>  </li>
-<li>第六步，初始化系统时钟，我习惯上先初始化系统时钟，选择外部晶振，随后去配置PLL时钟源来自<font color=#4B0082 size=4 face="黑体">HSE</font>，系统时钟源来自<font color=#4B0082 size=4 face="黑体">PLLCLK</font>，主频设置为72MHz，然后敲击回车让STM32CubeMX自动得到时钟方案，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%88%9D%E5%A7%8B%E5%8C%96%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F.jpg" class="" title="图4-6 初始化系统时钟">
-</center>  </li>
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%96%B0%E5%BB%BASTM32%E5%B7%A5%E7%A8%8B.jpg" class title="图4-3 新建STM32工程">
+</div></center>  </li>
+<li>第四步，选择芯片，首先搜索我们使用的芯片，然后根据封装选择具体是哪一个，随后点击<font color="#4B0082" size="4" face="黑体">Next</font>，如图：  <center>
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%80%89%E6%8B%A9%E8%8A%AF%E7%89%87.jpg" class title="图4-4 选择芯片">
+</div></center>  </li>
+<li>第五步，设置工程名称及模板，首先给工程取一个名字，我们就和项目名称一样，然后操作条件即工程模板就使用默认参数，随后点击<font color="#4B0082" size="4" face="黑体">Finish</font>，在弹出来的框体中选择<font color="#4B0082" size="4" face="黑体">Yes</font>，如图：  <center>
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%90%8D%E7%A7%B0%E5%8F%8A%E6%A8%A1%E6%9D%BF.jpg" class title="图4-5 设置工程名称及模板">
+</div></center>  </li>
+<li>第六步，初始化系统时钟，我习惯上先初始化系统时钟，选择外部晶振，随后去配置PLL时钟源来自<font color="#4B0082" size="4" face="黑体">HSE</font>，系统时钟源来自<font color="#4B0082" size="4" face="黑体">PLLCLK</font>，主频设置为72MHz，然后敲击回车让STM32CubeMX自动得到时钟方案，如图：  <center>
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%88%9D%E5%A7%8B%E5%8C%96%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F.jpg" class title="图4-6 初始化系统时钟">
+</div></center>  </li>
 <li>第七步，设置Debug，默认是不使能Debug功能，但是我们开发过程中肯定会使用到Debug功能的，因而这里随意选择一种都可以，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AEDebug.jpg" class="" title="图4-7 设置Debug">
-</center>  </li>
-<li>第八步，配置SDIO，选择<font color=#4B0082 size=4 face="黑体">SD 4 bits Wide Bus</font>，然后其他参数默认就好，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESDIO.jpg" class="" title="图4-8 配置SDIO">
-</center>  </li>
-<li>第九步，配置FATFS。我们需要FATFS文件系统来读取SD卡内的MP3文件，所以需要添加FATFS。模式选择<font color=#4B0082 size=4 face="黑体">SD Card</font>，参数使用默认参数，如图：  <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEFATFS.jpg" class="" title="图4-9 配置FATFS">
-</center>  </li>
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AEDebug.jpg" class title="图4-7 设置Debug">
+</div></center>  </li>
+<li>第八步，配置SDIO，选择<font color="#4B0082" size="4" face="黑体">SD 4 bits Wide Bus</font>，然后其他参数默认就好，如图：  <center>
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESDIO.jpg" class title="图4-8 配置SDIO">
+</div></center>  </li>
+<li>第九步，配置FATFS。我们需要FATFS文件系统来读取SD卡内的MP3文件，所以需要添加FATFS。模式选择<font color="#4B0082" size="4" face="黑体">SD Card</font>，参数使用默认参数，如图：  <center>
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEFATFS.jpg" class title="图4-9 配置FATFS">
+</div></center>  </li>
 <li>第十步，配置MCU和VS1053B之间通信使用的SPI，我们首先查看原理图，使用的是哪几个引脚以及使用的是哪一个SPI，原理图如图：  <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/VS1053B%E9%83%A8%E5%88%86%E5%8E%9F%E7%90%86%E5%9B%BE.jpg" class="" title="图4-10-1 VS1053B部分原理图">
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/VS1053B%E9%83%A8%E5%88%86%E5%8E%9F%E7%90%86%E5%9B%BE.jpg" class title="图4-10-1 VS1053B部分原理图">
+</div></center>  
 ​		可以看到，使用的是MCU的SPI2，引脚是:</li>
 </ul>
 <table>
@@ -377,41 +377,41 @@
 <td align="left">SPI主机输出从机输入</td>
 </tr>
 </tbody></table>
-<p>所以我们来配置SPI2的参数，首先选择全双工主机模式，然后是硬件片选，随后是分频倍数，因为在上一篇我们知道，在配置VS1053的时候VS1053B的SPI频率在外部晶振是12.288MHz时最大是6MHz，读写RAM的时候最大是9MHz，所以我们在初始化的时候选择8分频。即<font color=#4B0082 size=4 face="黑体">36MHz&#x2F;8&#x3D;4.5MHz</font>，其他的先暂时使用默认值，如图：  </p>
+<p>所以我们来配置SPI2的参数，首先选择全双工主机模式，然后是硬件片选，随后是分频倍数，因为在上一篇我们知道，在配置VS1053的时候VS1053B的SPI频率在外部晶振是12.288MHz时最大是6MHz，读写RAM的时候最大是9MHz，所以我们在初始化的时候选择8分频。即<font color="#4B0082" size="4" face="黑体">36MHz&#x2F;8&#x3D;4.5MHz</font>，其他的先暂时使用默认值，如图：  </p>
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESPI2.jpg" class="" title="图4-10-2 配置SPI2">
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AESPI2.jpg" class title="图4-10-2 配置SPI2">
+</div></center>  
 - 第十一步，配置USART1，原理图上使用的引脚是PA9和PA10，如图：  
 <center>
-<img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E5%8E%9F%E7%90%86%E5%9B%BE.jpg" class="" title="图4-11-1 USART1原理图">
+<img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E5%8E%9F%E7%90%86%E5%9B%BE.jpg" class title="图4-11-1 USART1原理图">
 </center>  
 所以我们在STM32CubeMX里来配置USART1，首先选择USART1，模式选择异步通信，波特率设置为115200，数据位是8bit，没有校验位，1bit的停止位，全双工模式，如图：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E9%85%8D%E7%BD%AE.jpg" class="" title="图4-11-2 USART1配置">
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/USART1%E9%85%8D%E7%BD%AE.jpg" class title="图4-11-2 USART1配置">
+</div></center>  
 - 第十二步，配置freeFTOS，接口那里选择V1或者V2都可以，我选择的是V2（对freeRTOS的了解还不深，解释不了为什么，到后面学习freeRTOS后再来天坑），其他参数使用默认值，如图：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEfreeFTOS.jpg" class="" title="图4-12 配置freeFTOS">
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%85%8D%E7%BD%AEfreeFTOS.jpg" class title="图4-12 配置freeFTOS">
+</div></center>  
 - 第十三步，设置工程参数，主要是设置一个给配置的外设添加对应的.c和.h文件，如图所示：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%8F%82%E6%95%B0.jpg" class="" title="图4-13 设置工程参数">
-</center>  
-- 第十四步，保存STM32CubeMX的配置，键盘按<font color=#4B0082 size=4 face="黑体">Ctrl + S</font>，然后生成代码，然后在过程中弹出来的窗口都选择<font color=#4B0082 size=4 face="黑体">Yes</font>就好了，如图：  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%8F%82%E6%95%B0.jpg" class title="图4-13 设置工程参数">
+</div></center>  
+- 第十四步，保存STM32CubeMX的配置，键盘按<font color="#4B0082" size="4" face="黑体">Ctrl + S</font>，然后生成代码，然后在过程中弹出来的窗口都选择<font color="#4B0082" size="4" face="黑体">Yes</font>就好了，如图：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81.jpg" class="" title="图4-14-1 生成代码弹出窗口1">  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81.jpg" class title="图4-14-1 生成代码弹出窗口1">  
 <div style="width:50%;margin:auto">  
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%812.jpg" class="" title="图4-14-3 生成代码弹出窗口3">
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%812.jpg" class title="图4-14-3 生成代码弹出窗口3">
+</div></div></div></center>  
 
 <h2 id="4-2-观察生成的工程"><a href="#4-2-观察生成的工程" class="headerlink" title="4.2 观察生成的工程"></a>4.2 观察生成的工程</h2><p>​		STM32CubeIDE下使用STM32CubeMX生成的代码，其结构和IDE各窗口如图所示：  </p>
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E7%AA%97%E5%8F%A3%E5%92%8C%E7%BB%93%E6%9E%84.jpg" class="" title="图4-15 工程窗口和结构">  
-</center>  
-因为使用了STM32CubeMX，而且在可见的未来，我们后续还会使用CubeMX来配置某些外设，因而在编辑代码的时候就要遵循一个规则，即在<font color=#4B0082 size=4 face="黑体">USER CODE BEGIN</font>和<font color=#4B0082 size=4 face="黑体">USER CODE END</font>之间添加我们想要添加的代码，这样是为了避免下次使用CubeMX配置别的外设的时候，重新生成代码时，我们在这个区域外添加的代码被覆盖消失掉，如图：  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E7%AA%97%E5%8F%A3%E5%92%8C%E7%BB%93%E6%9E%84.jpg" class title="图4-15 工程窗口和结构">  
+</div></center>  
+因为使用了STM32CubeMX，而且在可见的未来，我们后续还会使用CubeMX来配置某些外设，因而在编辑代码的时候就要遵循一个规则，即在<font color="#4B0082" size="4" face="黑体">USER CODE BEGIN</font>和<font color="#4B0082" size="4" face="黑体">USER CODE END</font>之间添加我们想要添加的代码，这样是为了避免下次使用CubeMX配置别的外设的时候，重新生成代码时，我们在这个区域外添加的代码被覆盖消失掉，如图：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9F%9F.jpg" class="" title="图4-16 添加代码区域">  
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9F%9F.jpg" class title="图4-16 添加代码区域">  
+</div></center>  
 
 <h2 id="4-3-重定位printf-函数"><a href="#4-3-重定位printf-函数" class="headerlink" title="4.3 重定位printf()函数"></a>4.3 重定位printf()函数</h2><p>​		在main.c中的</p>
 <pre>
@@ -434,52 +434,52 @@ PUTCHAR_PROTOTYPE
 </pre>
 <p>如图所示：  </p>
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%87%8D%E5%AE%9A%E4%BD%8Dprintf.jpg" class="" title="图4-17 重定位printf">  
-</center>  
-添加了这段代码之后，就可以调用<font color=#4B0082 size=4 face="黑体">printf()</font>函数进行调试打印了。
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E9%87%8D%E5%AE%9A%E4%BD%8Dprintf.jpg" class title="图4-17 重定位printf">  
+</div></center>  
+添加了这段代码之后，就可以调用<font color="#4B0082" size="4" face="黑体">printf()</font>函数进行调试打印了。
 
 <h2 id="4-4-编译和清理"><a href="#4-4-编译和清理" class="headerlink" title="4.4 编译和清理"></a>4.4 编译和清理</h2><p>&amp;emsp;&amp;emsp;编译可以选择菜单栏的那个锤子图标，如图：  </p>
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%8F%9C%E5%8D%95%E6%A0%8F%E7%BC%96%E8%AF%91.jpg" class="" title="图4-18 菜单栏编译">  
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%8F%9C%E5%8D%95%E6%A0%8F%E7%BC%96%E8%AF%91.jpg" class title="图4-18 菜单栏编译">  
+</div></center>  
 也可以右键工程，选择编译：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E5%B7%A5%E7%A8%8B%E7%BC%96%E8%AF%91.jpg" class="" title="图4-19 右键工程编译">  
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E5%B7%A5%E7%A8%8B%E7%BC%96%E8%AF%91.jpg" class title="图4-19 右键工程编译">  
+</div></center>  
 然后来查看编译结果：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%BC%96%E8%AF%91%E7%BB%93%E6%9E%9C.jpg" class="" title="图4-20 编译结果">  
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E7%BC%96%E8%AF%91%E7%BB%93%E6%9E%9C.jpg" class title="图4-20 编译结果">  
+</div></center>  
 
 <h2 id="4-5-调试"><a href="#4-5-调试" class="headerlink" title="4.5 调试"></a>4.5 调试</h2><p>​		这一步的前提是，ST-Link已经连上了开发板，并且开发板已经上电。</p>
 <h3 id="4-5-1-首先设置调试配置参数"><a href="#4-5-1-首先设置调试配置参数" class="headerlink" title="4.5.1 首先设置调试配置参数"></a>4.5.1 首先设置调试配置参数</h3><p>&amp;emsp;&amp;emsp;可以选择菜单栏上的小甲虫边上的向下箭头选择调试配置，如图：  </p>
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B0%8F%E7%94%B2%E8%99%AB.jpg" class="" title="图4-21 小甲虫">  
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%B0%8F%E7%94%B2%E8%99%AB.jpg" class title="图4-21 小甲虫">  
+</div></center>  
 也可以选择右键工程，选择Debug，然后选择调试配置，如图：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E8%B0%83%E8%AF%95.jpg" class="" title="图4-22 右键调试">  
-</center>  
-然后在弹出的这个窗口进行如下配置之后点击<font color=#4B0082 size=4 face="黑体">Apply</font>和<font color=#4B0082 size=4 face="黑体">OK</font>，然后就开始使用ST-Link连接芯片调试：  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%8F%B3%E9%94%AE%E8%B0%83%E8%AF%95.jpg" class title="图4-22 右键调试">  
+</div></center>  
+然后在弹出的这个窗口进行如下配置之后点击<font color="#4B0082" size="4" face="黑体">Apply</font>和<font color="#4B0082" size="4" face="黑体">OK</font>，然后就开始使用ST-Link连接芯片调试：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE.jpg" class="" title="图4-23 调试配置">  
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE.jpg" class title="图4-23 调试配置">  
+</div></center>  
 在过程中弹出的这个窗口可以这样选择：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/switch.jpg" class="" title="图4-24 switch">  
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/switch.jpg" class title="图4-24 switch">  
+</div></center>  
 这样就开始我们的调试了，至于打断点、单步调试或其他调试手段就不一一介绍了，不会的可以去百度看看。
 ### 4.5.2 初体验
-​		这一步的前提是，在调试的前提下，再把开发板上的USB口使用USB线和电脑连接起来。我们在main()函数中的USART1初始化之后，调用一个printf()看下效果，调用printf()函数还要添加一个头文件<font color=#4B0082 size=4 face="黑体">stdio.h</font>添加代码如图：  
+​		这一步的前提是，在调试的前提下，再把开发板上的USB口使用USB线和电脑连接起来。我们在main()函数中的USART1初始化之后，调用一个printf()看下效果，调用printf()函数还要添加一个头文件<font color="#4B0082" size="4" face="黑体">stdio.h</font>添加代码如图：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/stdio.jpg" class="" title="图4-25 stdio">  
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/printf.jpg" class="" title="图4-26 printf">  
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/stdio.jpg" class title="图4-25 stdio">  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/printf.jpg" class title="图4-26 printf">  
+</div></div></center>  
 然后编译调试，且打开串口调试工具查看：  
 <center>
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%85%A8%E9%80%9F%E8%BF%90%E8%A1%8C.jpg" class="" title="图4-27 全速运行">  
-<div style="width:50%;margin:auto"><img src="/2021/04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%89%93%E5%8D%B0%E7%BB%93%E6%9E%9C.jpg" class="" title="图4-28 打印结果">  
-</center>  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E5%85%A8%E9%80%9F%E8%BF%90%E8%A1%8C.jpg" class title="图4-27 全速运行">  
+<div style="width:50%;margin:auto"><img src="/.io//04/11/VS1053B%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8STM32CubeIDE%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B/%E6%89%93%E5%8D%B0%E7%BB%93%E6%9E%9C.jpg" class title="图4-28 打印结果">  
+</div></div></center>  
 
 <h1 id="5-结尾"><a href="#5-结尾" class="headerlink" title="5. 结尾"></a>5. 结尾</h1><p>​		本篇只是新建了一个工程，还没有正式开始对VS1053B的驱动开发。下面一章就会正式开始编写VS1053B的SPI通信部分了。</p>
 <hr>
@@ -827,6 +827,10 @@ PUTCHAR_PROTOTYPE
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -851,15 +855,11 @@ PUTCHAR_PROTOTYPE
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
+                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -867,7 +867,7 @@ PUTCHAR_PROTOTYPE
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
+                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
               </li>
              
               <li class="article-tag-list-item">

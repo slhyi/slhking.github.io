@@ -17,24 +17,24 @@
 <meta property="og:site_name" content="摘星">
 <meta property="og:description" content="1. 前言​	本篇将会从FreeRTOS官网下载内核源码，移植到MM32F320处理器的工程中，验证方法是创建一个任务，在任务中闪烁LED。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/1_rots_version.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/2_copy_source_file.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/3_root_c_file.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/4_port_c.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/5_port_c_in_prj.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/6_mem_file.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/7_mem_file_in_prj.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/8_freertos_config_h.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/9_freertos_path.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/10_result.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/11_result_2.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/1_rots_version.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/2_copy_source_file.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/3_root_c_file.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/4_port_c.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/5_port_c_in_prj.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/6_mem_file.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/7_mem_file_in_prj.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/8_freertos_config_h.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/9_freertos_path.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/10_result.jpg">
+<meta property="og:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/11_result_2.jpg">
 <meta property="article:published_time" content="2022-05-12T08:06:41.000Z">
 <meta property="article:modified_time" content="2022-05-12T10:30:02.171Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="mcu">
 <meta property="article:tag" content="MM32">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/1_rots_version.jpg">
+<meta name="twitter:image" content="http://slhking.github.io/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/1_rots_version.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -280,63 +280,63 @@
 </li>
 </ul>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/1_rots_version.jpg" class="" title="图2-1 RTOS版本">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/1_rots_version.jpg" class title="图2-1 RTOS版本">
+</div></center> 
 
 <p>选择LTS版本。</p>
 <h2 id="2-2-移植源文件"><a href="#2-2-移植源文件" class="headerlink" title="2.2 移植源文件"></a>2.2 移植源文件</h2><ul>
 <li>将下载下来的源码copy到工程目录的【4_Middleware】文件夹下；</li>
 </ul>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/2_copy_source_file.jpg" class="" title="图2-2 拷贝源码">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/2_copy_source_file.jpg" class title="图2-2 拷贝源码">
+</div></center> 
 
 <ul>
 <li>添加根目录下的源文件到工程：</li>
 </ul>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/3_root_c_file.jpg" class="" title="图2-3 移植根目录文件">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/3_root_c_file.jpg" class title="图2-3 移植根目录文件">
+</div></center> 
 
 <ul>
 <li>添加port的源文件到工程：</li>
 </ul>
 <p>这里需要注意的是，要根据自己的编译环境来选择，比如用的armclang，那么则选择RVDS下的port.c；而如果是gcc，那么则选择GCC下的port.c。我们移植的MM32 MindSDK库，是使用的ARM Compiler 6编译器，用的是GCC下的port.c：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/4_port_c.jpg" class="" title="图2-4 移植port">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/4_port_c.jpg" class title="图2-4 移植port">
+</div></center> 
 
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/5_port_c_in_prj.jpg" class="" title="图2-5 移植port到工程">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/5_port_c_in_prj.jpg" class title="图2-5 移植port到工程">
+</div></center> 
 
 <ul>
 <li>添加内存管理文件</li>
 </ul>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/6_mem_file.jpg" class="" title="图2-6 内存管理">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/6_mem_file.jpg" class title="图2-6 内存管理">
+</div></center> 
 
 <p>我们建议使用heap_4或者heap_5，我们工程中使用的是heap_4：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/7_mem_file_in_prj.jpg" class="" title="图2-7 添加heap4到工程">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/7_mem_file_in_prj.jpg" class title="图2-7 添加heap4到工程">
+</div></center> 
 
 <ul>
 <li>设置FreeRTOS的配置文件FreeRTOSConfig.h:</li>
 </ul>
 <p>这个文件在内核源码中是不存在的，需要我们自己创建保存，我们将其创建保存在【4_Middleware】的根目录下：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/8_freertos_config_h.jpg" class="" title="图2-8 创建配置文件FreeRTOSConfig.h">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/8_freertos_config_h.jpg" class title="图2-8 创建配置文件FreeRTOSConfig.h">
+</div></center> 
 
 <p>这个头文件的内容是根据官方提供的参考，然后再根据自己使用的处理器以及应用场景来配置的，内容如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> __FREERTOSCONFIG_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __FREERTOSCONFIG_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Here is a good place to include header files that are required across your application. */</span> </span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;hal_common.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> vPortSVCHandler 	    SVC_Handler </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> xPortPendSVHandler 	    PendSV_Handler </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> xPortSysTickHandler 	SysTick_Handler </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_PREEMPTION                    1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_PORT_OPTIMISED_TASK_SELECTION 0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_TICKLESS_IDLE                 0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configCPU_CLOCK_HZ                      (72000000) </span></span><br><span class="line"><span class="comment">//#define configSYSTICK_CLOCK_HZ                  (9000000) </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configTICK_RATE_HZ                      (1000) </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configMAX_PRIORITIES                    15 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configMINIMAL_STACK_SIZE                128 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configMAX_TASK_NAME_LEN                 16 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_16_BIT_TICKS                  0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configIDLE_SHOULD_YIELD                 1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_TASK_NOTIFICATIONS            1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configTASK_NOTIFICATION_ARRAY_ENTRIES   3 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_MUTEXES                       1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_RECURSIVE_MUTEXES             0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_COUNTING_SEMAPHORES           0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_ALTERNATIVE_API               0 <span class="comment">/* Deprecated! */</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configQUEUE_REGISTRY_SIZE               10 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_QUEUE_SETS                    0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_TIME_SLICING                  0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_NEWLIB_REENTRANT              0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configENABLE_BACKWARD_COMPATIBILITY     0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configNUM_THREAD_LOCAL_STORAGE_POINTERS 5 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configSTACK_DEPTH_TYPE                  uint16_t </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configMESSAGE_BUFFER_LENGTH_TYPE        size_t </span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Memory allocation related definitions. */</span> </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configSUPPORT_STATIC_ALLOCATION         0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configSUPPORT_DYNAMIC_ALLOCATION        1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configTOTAL_HEAP_SIZE                   (1024*10) </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configAPPLICATION_ALLOCATED_HEAP        0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configSTACK_ALLOCATION_FROM_SEPARATE_HEAP 1 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Hook function related definitions. */</span> </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_IDLE_HOOK                     0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_TICK_HOOK                     0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configCHECK_FOR_STACK_OVERFLOW          0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_MALLOC_FAILED_HOOK            0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_DAEMON_TASK_STARTUP_HOOK      0 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Run time and task stats gathering related definitions. */</span> </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configGENERATE_RUN_TIME_STATS           0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_TRACE_FACILITY                0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_STATS_FORMATTING_FUNCTIONS    0 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Co-routine related definitions. */</span> </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_CO_ROUTINES                   0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configMAX_CO_ROUTINE_PRIORITIES         1 </span></span><br><span class="line"><span class="comment">/* Software timer related definitions. */</span> </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configUSE_TIMERS                        1           </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configTIMER_TASK_PRIORITY               5  </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configTIMER_QUEUE_LENGTH                10 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configTIMER_TASK_STACK_DEPTH            configMINIMAL_STACK_SIZE </span></span><br><span class="line"><span class="comment">/* Interrupt nesting behaviour configuration. */</span> </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configKERNEL_INTERRUPT_PRIORITY         255</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configMAX_SYSCALL_INTERRUPT_PRIORITY    191</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configMAX_API_CALL_INTERRUPT_PRIORITY   191</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Define to trap errors during development. */</span> </span><br><span class="line"><span class="comment">//#define configASSERT( ( x ) ) if( ( x ) == 0 ) vAssertCalled( __FILE__, __LINE__ ) </span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* FreeRTOS MPU specific definitions. */</span> </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS  0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configTOTAL_MPU_REGIONS                                 8 <span class="comment">/* Default value. */</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configTEX_S_C_B_FLASH                                   0x07UL <span class="comment">/* Default value. */</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configTEX_S_C_B_SRAM                                    0x07UL <span class="comment">/* Default value. */</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configENFORCE_SYSTEM_CALLS_FROM_KERNEL_ONLY             1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> configALLOW_UNPRIVILEGED_CRITICAL_SECTIONS              1 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* ARMv8-M secure side port related definitions. */</span> </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> secureconfigMAX_SECURE_CONTEXTS                         5 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Optional functions - most linkers will remove unused functions anyway. */</span> </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_vTaskPrioritySet            1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_uxTaskPriorityGet           1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_vTaskDelete                 1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_vTaskSuspend                1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_xResumeFromISR              1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_vTaskDelayUntil             1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_vTaskDelay                  1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_xTaskGetSchedulerState      1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_xTaskGetCurrentTaskHandle   1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_uxTaskGetStackHighWaterMark 0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_xTaskGetIdleTaskHandle      0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_eTaskGetState               0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_xEventGroupSetBitFromISR    1 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_xTimerPendFunctionCall      0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_xTaskAbortDelay             0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_xTaskGetHandle              0 </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INCLUDE_xTaskResumeFromISR          1 </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* __FREERTOSCONFIG_H */</span></span></span><br></pre></td></tr></table></figure>
 
 <h2 id="2-3-设置编译路径"><a href="#2-3-设置编译路径" class="headerlink" title="2.3 设置编译路径"></a>2.3 设置编译路径</h2><p>要想编译器找到FreeRTOS内核的相关头文件，就需要将这些头文件的所在路径在mdk工程中添加进去：</p>
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/9_freertos_path.jpg" class="" title="图2-9 配置编译路径">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/9_freertos_path.jpg" class title="图2-9 配置编译路径">
+</div></center> 
 
 <p>设置好编译路径后先编译一下，确保编译FreeRTOS的源文件没有问题。</p>
 <h1 id="3-验证"><a href="#3-验证" class="headerlink" title="3. 验证"></a>3. 验证</h1><h2 id="3-1-编写驱动文件"><a href="#3-1-编写驱动文件" class="headerlink" title="3.1 编写驱动文件"></a>3.1 编写驱动文件</h2><p>​	我们需要配置MM32F3270的时钟，然后还需要控制LED来验证移植，所以还需要写一个LED的驱动；我们还添加了一个调试串口的驱动，都放到了源代码中。</p>
@@ -364,12 +364,12 @@
 
 <p>这个代码中【Hello China.】就不会被打印出来。</p>
 <h2 id="3-5-现象"><a href="#3-5-现象" class="headerlink" title="3.5 现象"></a>3.5 现象</h2><center>
-<div style="width:75%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/10_result.jpg" class="" title="图3-1 现象1">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/10_result.jpg" class title="图3-1 现象1">
+</div></center> 
 
 <center>
-<div style="width:75%;margin:auto"><img src="/2022/05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/11_result_2.jpg" class="" title="图3-2 现象3">
-</center> 
+<div style="width:75%;margin:auto"><img src="/.io//05/12/%E3%80%90MM32%E3%80%91%E7%AC%AC%E5%85%AD%E7%AF%87%E2%80%94%E2%80%94%E7%A7%BB%E6%A4%8DFreeRTOS/11_result_2.jpg" class title="图3-2 现象3">
+</div></center> 
 
 <p>​	开发板运行这个例程已经有一天多的时间了，从这个计数值也可以看出来，说明移植FreeRTOS到MM32基本没有问题了。</p>
 
@@ -712,6 +712,10 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -736,15 +740,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">LVGL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
+                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -752,7 +752,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">土豆烧排骨</a>
+                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
               </li>
              
               <li class="article-tag-list-item">
