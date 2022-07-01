@@ -6,36 +6,42 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>【嵌入式Linux应用】温湿度监控系统——绘制温湿度折线图 | 摘星</title>
+  <title>【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1. 概述​	本篇的主要内容是使用SquareLine Studio绘制一个显示温湿度曲线图的表格，将其移植到100ASK STM32MP157开发板上显示，效果图如图所示：">
+  <meta name="description" content="1. 概述​	本篇主要是记录将MQTT移植安装到百问网STM32MP157开发板上，并且是跑一下MQTT的一个例程来验证，要完成本次移植安装，必须要保证电脑和开发板都能上网。。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【嵌入式Linux应用】温湿度监控系统——绘制温湿度折线图">
-<meta property="og:url" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/index.html">
+<meta property="og:title" content="【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板">
+<meta property="og:url" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="1. 概述​	本篇的主要内容是使用SquareLine Studio绘制一个显示温湿度曲线图的表格，将其移植到100ASK STM32MP157开发板上显示，效果图如图所示：">
+<meta property="og:description" content="1. 概述​	本篇主要是记录将MQTT移植安装到百问网STM32MP157开发板上，并且是跑一下MQTT的一个例程来验证，要完成本次移植安装，必须要保证电脑和开发板都能上网。。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/1.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/2.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/3.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/4.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/5.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/6.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/7.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/8.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/9.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/10.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/11.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/12.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/13.jpg">
-<meta property="article:published_time" content="2022-07-01T13:56:02.000Z">
-<meta property="article:modified_time" content="2022-07-01T14:10:32.032Z">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/1-vim%E6%98%BE%E7%A4%BA%E8%A1%8C%E5%8F%B7.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/2-%E5%BA%93%E5%AE%89%E8%A3%85%E6%BA%90%E8%B7%AF%E5%BE%84.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/3-%E6%BA%90%E7%BC%96%E8%AF%91%E5%99%A8.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/4-gcc-make.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/5-gcc-make-install.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/6-gcc-async-subscribe.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/7-gcc-iot-config.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/8-gcc-mqtt%E8%BF%9E%E6%8E%A5%E5%92%8C%E8%AE%A2%E9%98%85.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/9-gcc%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%8B%E5%8F%91%E6%B6%88%E6%81%AF.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/10-gcc%E6%94%B6%E5%88%B0%E8%AE%A2%E9%98%85%E6%B6%88%E6%81%AF.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/11-arm-gcc%E7%BC%96%E8%AF%91%E5%99%A8%E9%AA%8C%E8%AF%81.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/3-%E6%BA%90%E7%BC%96%E8%AF%91%E5%99%A8.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/11-%E4%BF%AE%E6%94%B9Makefile%E7%9A%84CC.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/2-%E5%BA%93%E5%AE%89%E8%A3%85%E6%BA%90%E8%B7%AF%E5%BE%84.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/12-%E4%BF%AE%E6%94%B9Makefile%E7%9A%84%E5%BA%93%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/13-arm-gcc%E7%BC%96%E8%AF%91%E7%9A%84mqtt%E5%BA%93.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/14-%E6%8C%82%E8%BD%BD%E5%BC%80%E5%8F%91%E6%9D%BF.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/15-%E5%AE%89%E8%A3%85%E5%BA%93%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/16-%E5%BC%80%E5%8F%91%E6%9D%BF%E8%BF%90%E8%A1%8Cmqtt%E7%A4%BA%E4%BE%8B.jpg">
+<meta property="article:published_time" content="2022-06-21T09:53:26.000Z">
+<meta property="article:modified_time" content="2022-07-01T15:29:03.746Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/1.jpg">
+<meta name="twitter:image" content="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/1-vim%E6%98%BE%E7%A4%BA%E8%A1%8C%E5%8F%B7.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -220,14 +226,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-LinuxApp-TempHumiChart" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-LinuxApp-2-PortingMQTTForSTM32MP157" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      【嵌入式Linux应用】温湿度监控系统——绘制温湿度折线图
+      【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板
     </h1>
   
 
@@ -239,8 +245,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2022/07/01/LinuxApp-TempHumiChart/" class="archive-article-date">
-        <time datetime="2022-07-01T13:56:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-01</time>
+<a href="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/" class="archive-article-date">
+        <time datetime="2022-06-21T09:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
 </a>
 
   
@@ -253,7 +259,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.9k字</span>
+      <span class="post-count">2k字</span>
     </span>
   </span>
 
@@ -262,7 +268,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
+      <span class="post-count">8分</span>
     </span>
   </span>
 </div>
@@ -273,138 +279,132 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇的主要内容是使用SquareLine Studio绘制一个显示温湿度曲线图的表格，将其移植到100ASK STM32MP157开发板上显示，效果图如图所示：<span id="more"></span></p>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/1.jpg"></p>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/2.jpg"></p>
-<h1 id="2-使用SquareLine-Studio绘制UI"><a href="#2-使用SquareLine-Studio绘制UI" class="headerlink" title="2. 使用SquareLine Studio绘制UI"></a>2. 使用SquareLine Studio绘制UI</h1><p>​	我们先使用SquareLine Studio绘制要显示的UI的草图，首先打开这个工具，点击<code>Create</code>，设置好工程名、分辨率和颜色深度后点击绿色按钮<code>CREATE</code>：</p>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/3.jpg" alt="image-20220701180849818"></p>
-<p>然后就进入了UI绘制界面，我们先将工程到处的路径设置好：</p>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/4.jpg" alt="image-20220701181119979"></p>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/5.jpg" alt="image-20220701181205878"></p>
-<p>设置好之后点击绿色按钮<code>APPLY CHANGES</code>应用设置。</p>
-<h2 id="2-1-基本控件"><a href="#2-1-基本控件" class="headerlink" title="2.1 基本控件"></a>2.1 基本控件</h2><p>​	本篇绘制的界面比较简单，只用到了LVGL的表格Chart和滑动条Slider，表格用来绘制温湿度数值的折线图，滑动条用来显示温湿度数值：</p>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/6.jpg" alt="image-20220701181602719"></p>
-<p>各个窗体的作用描述如下：</p>
-<table>
-<thead>
-<tr>
-<th align="center">序号</th>
-<th align="center">名称</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">①</td>
-<td align="center">Hierarchy-层级；Animations-动画</td>
-<td>层级是用来表示UI中的控件的layout布局；动画则是在添加不同screen切换的动画效果</td>
-</tr>
-<tr>
-<td align="center">②</td>
-<td align="center">Widgets-窗体</td>
-<td>里面是LVGL的基础控件</td>
-</tr>
-<tr>
-<td align="center">③</td>
-<td align="center">Assets-资源；Console-终端</td>
-<td>资源里面表示的是我们导入的外部的资源，比如图片、动画等；终端则是显示的是在这个工具中的操作在终端下的命令</td>
-</tr>
-<tr>
-<td align="center">④</td>
-<td align="center">控件设置窗体</td>
-<td>用来设置选中的空间的参数，比如名称、初始值、颜色这些</td>
-</tr>
-<tr>
-<td align="center">④</td>
-<td align="center">EVENTS-事件窗</td>
-<td>用来添加选中空间需要的事件，比如VALUE_CHANGED这些的事件</td>
-</tr>
-</tbody></table>
-<p>上图中的两个slider和chart的大小、位置就是根据④中的设置来改变调整的。</p>
-<h2 id="2-2-调整chart"><a href="#2-2-调整chart" class="headerlink" title="2.2 调整chart"></a>2.2 调整chart</h2><ul>
-<li>名称：因为目前就一个screen，也只需要一个chart，所以取名就叫chart；</li>
-<li>大小：根据屏幕分辨率，还考虑到后期可能会在边缘加上刻度，所以不能把char的大小设置为和屏幕一样大，我们还是弄小一点，设置成800*400；</li>
-<li>对齐方式：这个地方设置的是控件在屏幕上的对齐方式，是居中显示还是左上显示还是怎样，我们期望我们的表格是屏幕居中显示的，所以就设置为<em><strong>CENTER</strong></em>；</li>
-<li>位置：控件的位置值设置的是控件中心对称点的位置，所以chart要居中显示的话，chart的中心对称点就应该是屏幕的中心对称点，位置(0, 0);</li>
-</ul>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/7.jpg" alt="image-20220701183623691"></p>
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要是记录将MQTT移植安装到百问网STM32MP157开发板上，并且是跑一下MQTT的一个例程来验证，要完成本次移植安装，必须要保证电脑和开发板都能上网。。<span id="more"></span></p>
+<h1 id="2-软件平台"><a href="#2-软件平台" class="headerlink" title="2. 软件平台"></a>2. 软件平台</h1><p>​	本次使用的是Ubuntu18.04，是由百问网提供的，并且是按照他们的手册搭建好了交叉编译环境，花了一点时间将Linux内核编译好之后才进行的LVGL移植，本次移植必须搭建好嵌入式Linux的交叉编译环境且内核也必须编译好，否则无法完成移植。</p>
+<h1 id="3-移植所需要的资源"><a href="#3-移植所需要的资源" class="headerlink" title="3. 移植所需要的资源"></a>3. 移植所需要的资源</h1><p>​	本次实验主要是要将paho mqtt的官方库克隆到本地pc，将其编译后得到链接库，然后安装到本地pc以及开发板上，这样才能运行paho mqtt编译后的可执行文件，paho mqtt的官方仓库地址：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/eclipse/paho.mqtt.c.git</span><br></pre></td></tr></table></figure>
+
+<p>在Ubuntu的<code>/home/book</code>目录下新建一个工作区用来保存工程和开发资料：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /home/book</span><br><span class="line">book@100ask:~$ mkdir workspace &amp;&amp; cd workspace</span><br><span class="line">book@100ask:~/workspace$ mkdir mqtt &amp;&amp; cd mqtt</span><br></pre></td></tr></table></figure>
+
+<p>在<code>/home/book/workspace/mqtt</code>下讲paho mqtt的仓库克隆下来：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt$ git clone https://github.com/eclipse/paho.mqtt.c.git</span><br></pre></td></tr></table></figure>
+
+<p>等待下载完成：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Cloning into &#x27;paho.mqtt.c&#x27;...</span><br><span class="line">remote: Enumerating objects: 11797, done.</span><br><span class="line">remote: Counting objects: 100% (1741/1741), done.</span><br><span class="line">remote: Compressing objects: 100% (485/485), done.</span><br><span class="line">remote: Total 11797 (delta 1272), reused 1628 (delta 1204), pack-reused 10056</span><br><span class="line">Receiving objects: 100% (11797/11797), 9.27 MiB | 6.78 MiB/s, done.</span><br><span class="line">Resolving deltas: 100% (8385/8385), done.</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-安装mqtt到ubuntu"><a href="#4-安装mqtt到ubuntu" class="headerlink" title="4. 安装mqtt到ubuntu"></a>4. 安装mqtt到ubuntu</h1><h2 id="4-1-修改Makefile适配GCC环境"><a href="#4-1-修改Makefile适配GCC环境" class="headerlink" title="4.1 修改Makefile适配GCC环境"></a>4.1 修改Makefile适配GCC环境</h2><p>进入刚才克隆下来的这个仓库<code>paho.mqtt.c</code>，修改Makefile：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt$ cd paho.mqtt.c/</span><br><span class="line">book@100ask:~/workspace/mqtt/paho.mqtt.c$ vim Makefile</span><br></pre></td></tr></table></figure>
+
+<p>进入vim后如果要显示行号首先按下键盘的<code>ESC</code>键，然后键入<code>:set nu</code>就可以显示行号了：</p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/1-vim%E6%98%BE%E7%A4%BA%E8%A1%8C%E5%8F%B7.jpg"></p>
+<p>我们需要关注的有两个地方：</p>
 <ul>
-<li>其它的设置先暂时不弄</li>
+<li>编译器：Makefile的126行</li>
+<li>库安装路径：Makefile的70行</li>
 </ul>
-<h2 id="2-3-调整slider基本属性"><a href="#2-3-调整slider基本属性" class="headerlink" title="2.3 调整slider基本属性"></a>2.3 调整slider基本属性</h2><ul>
-<li>名称：根据我们的项目，我们要显示两个东西，温度和湿度，所以两个slider分别取名叫做<strong>tempSlider</strong>和<strong>humiSlider</strong>；</li>
-<li>大小：根据屏幕和表格大小调整，这里设置的是15*390；</li>
-<li>对齐方式：我们是以chart位中心来设置位置的，所以slider的对齐方式要和chart的一样，设置为<em><strong>CENTER</strong></em>；</li>
-<li>位置：根据表格的宽度和高度设置，这里设置的是(-390， 0)和(390， 0);</li>
-<li>范围：温度的范围设置为[-20, 60]，湿度设置为[0, 100]，这个根据常识设置；</li>
-<li>模式：有普通模式、对称模式和范围模式，这里设置为普通模式即可，其它模式大家可以自己在studio中探索；</li>
-<li>初值：设置为0；</li>
-<li>左值：同样设置为0，只有在范围模式下有用；</li>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/2-%E5%BA%93%E5%AE%89%E8%A3%85%E6%BA%90%E8%B7%AF%E5%BE%84.jpg"></p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/3-%E6%BA%90%E7%BC%96%E8%AF%91%E5%99%A8.jpg"></p>
+<p>如果我们只需要在<code>Ubuntu</code>里面使用<code>paho mqtt</code>的话，这些都不需要改变，直接在<code>/home/book/workspace/mqtt/paho.mqtt.c</code>目录下执行下面两条命令即可：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-编译和安装库文件"><a href="#4-2-编译和安装库文件" class="headerlink" title="4.2 编译和安装库文件"></a>4.2 编译和安装库文件</h2><p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/4-gcc-make.jpg"></p>
+<p>执行<code>make</code>后会在当前目录下创建一个<code>build</code>目录，源码和例程编译出来的可执行文件都在里面，然后再执行<code>sudo make install</code>：</p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/5-gcc-make-install.jpg"></p>
+<p>这条指令会将mqtt程序依赖的库文件安装到<code>/usr/local</code>下的<code>bin</code>、<code>lib</code>、<code>include</code>和<code>share</code>下。</p>
+<h2 id="4-3-体验测试"><a href="#4-3-体验测试" class="headerlink" title="4.3 体验测试"></a>4.3 体验测试</h2><p>​	我们可以将官方的示例代码copy过来，改成我们自己的配置，比如iot的url、客户端ID、用户名和密码这些，改成我们自己的mqtt服务器的信息测试下。</p>
+<p>​	我们去<code>/home/book/workspace</code>目录下新建一个测试工程，取名就叫’mqtt_test’吧：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace$ cd /home/book/workspace</span><br><span class="line">book@100ask:~/workspace$ mkdir mqtt_test</span><br><span class="line">book@100ask:~/workspace$ cd mqtt_test</span><br></pre></td></tr></table></figure>
+
+<p>将<code>paho.mqtt.c</code>下的src和sample里面的随意一个示例代码copy过来：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt_test$ cp -r /home/book/workspace/mqtt/paho.mqtt.c/src ./</span><br><span class="line">book@100ask:~/workspace/mqtt_test$ cp src/samples/MQTTAsync_subscribe.c  ./</span><br></pre></td></tr></table></figure>
+
+<p>我们这里copy的是<code>MQTTAsync</code>开头的例程，其表示的是MQTT的异步通信收发，依赖的库是<code>libpaho-mqtt3a</code>，如果是<code>MQTTClient</code>开头的，依赖的库就是<code>libpaho-mqtt3c</code>，如果自己写代码还会用到<strong>SSL</strong>的话，依赖的库就会变成<code>libpaho-mqt3cs</code>或者<code>ibpaho-mqtt3as</code>。如何确定使用的是Async还是Client呢，根据自己写的代码里面包含的头文件是<code>MQTTAsync.h</code>还是<code>MQTTClient.h</code>，比如我刚才copy的例程<code>MQTTAsync_subscribe.c</code>：</p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/6-gcc-async-subscribe.jpg"></p>
+<p>​	我们现在来修改这个示例代码。首先是头文件<code>MQTTAsync.h</code>，我们需要指定路径，不然在当前目录下是找不到这个头文件的，我们已经将这个头文件所在的官方源文件文件夹<code>src</code>copy过来了，所以只需要改成：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;src/MQTTAsync.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>然后修改url和客户端id这些信息，原来的参数是这样的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">32</span> <span class="meta">#<span class="keyword">define</span> ADDRESS     <span class="string">&quot;tcp://mqtt.eclipseprojects.io:1883&quot;</span></span></span><br><span class="line"><span class="number">33</span> <span class="meta">#<span class="keyword">define</span> CLIENTID    <span class="string">&quot;ExampleClientSub&quot;</span></span></span><br><span class="line"><span class="number">34</span> <span class="meta">#<span class="keyword">define</span> TOPIC       <span class="string">&quot;MQTT Examples&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>我们要修改<code>ADDRESS</code>和<code>CLIENTID</code>以及订阅的<code>TOPIC</code>，还要添加阿里云物联网平台设备的用户名<code>USERNAME</code>和密码<code>PASSWORD</code>：</p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/7-gcc-iot-config.jpg"></p>
+<p>鉴于阿里云物联网平台的要求，我们需要将连接控制包的<code>keepAliveInterval</code>设置位60，并且对控制包的用户名<code>username</code>和密码<code>password</code>赋值为我们宏定义的值：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* void connlost(void *context, char *cause) */</span> </span><br><span class="line">conn_opts.username = USERNAME;</span><br><span class="line">conn_opts.password = PASSWORD;</span><br><span class="line">conn_opts.keepAliveInterval = <span class="number">60</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* int main(int argc, char* argv[]) */</span></span><br><span class="line">conn_opts.username = USERNAME;</span><br><span class="line">conn_opts.password = PASSWORD;</span><br><span class="line">conn_opts.keepAliveInterval = <span class="number">60</span>;</span><br></pre></td></tr></table></figure>
+
+<p>然后保存退出（<code>ESC</code>–&gt;<code>:wq</code>）。</p>
+<p>​	编译修改号之后的<code>MQTTAsync_subscribe.c</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt_test$ gcc MQTTAsync_subscribe.c -lpaho-mqtt3a</span><br><span class="line">book@100ask:~/workspace/mqtt_test$ ls</span><br><span class="line">a.out  MQTTAsync_subscribe.c  src</span><br></pre></td></tr></table></figure>
+
+<p>可以看到生成了一个<code>a.out</code>，我们执行整个文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt_test$ ./a.out </span><br></pre></td></tr></table></figure>
+
+<p>如果连接成功了且订阅也成功了会打印如下信息：</p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/8-gcc-mqtt%E8%BF%9E%E6%8E%A5%E5%92%8C%E8%AE%A2%E9%98%85.jpg"></p>
+<p>这时候我们从阿里云服务器下发一条消息看看：</p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/9-gcc%E9%98%BF%E9%87%8C%E4%BA%91%E4%B8%8B%E5%8F%91%E6%B6%88%E6%81%AF.jpg"></p>
+<p>回到我们的终端看是否有收到消息：</p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/10-gcc%E6%94%B6%E5%88%B0%E8%AE%A2%E9%98%85%E6%B6%88%E6%81%AF.jpg"></p>
+<p>这就说明我们在Ubuntu下已经成功移植了paho mqtt，接下来我们将它移植到Linux开发板上，这里使用的是百问网的<a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18944745104.13.218e2fe0ERsAaE&id=623233533961"><strong>100ASK STM32MP157</strong></a>开发板。</p>
+<h1 id="5-移植mqtt到linux开发板"><a href="#5-移植mqtt到linux开发板" class="headerlink" title="5. 移植mqtt到linux开发板"></a>5. 移植mqtt到linux开发板</h1><h2 id="5-1-查看自己的编译环境"><a href="#5-1-查看自己的编译环境" class="headerlink" title="5.1 查看自己的编译环境"></a>5.1 查看自己的编译环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt$ echo $ARCH</span><br><span class="line">arm</span><br><span class="line">book@100ask:~/workspace/mqtt$ echo $CROSS_COMPILE </span><br><span class="line">arm-buildroot-linux-gnueabihf-</span><br><span class="line">book@100ask:~/workspace/mqtt$ echo $PATH</span><br><span class="line">/home/book/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/book/100ask_imx6ull-sdk/ToolChain/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin:/home/book/100ask_imx6ull-sdk/ToolChain/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin:/home/book/100ask_stm32mp157_pro-sdk/ToolChain/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin</span><br></pre></td></tr></table></figure>
+
+<p>检查下编译器是否生效可用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt$ arm-buildroot-linux-gnueabihf-gcc -v</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/11-arm-gcc%E7%BC%96%E8%AF%91%E5%99%A8%E9%AA%8C%E8%AF%81.jpg" alt="image-20220627161750442"></p>
+<h2 id="5-2-修改Makefile"><a href="#5-2-修改Makefile" class="headerlink" title="5.2 修改Makefile"></a>5.2 修改Makefile</h2><ul>
+<li>修改编译器</li>
 </ul>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/8.jpg" alt="image-20220701184650439"></p>
-<p>这样设置后slider的效果如下图：</p>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/9.jpg" alt="image-20220701184745199"></p>
-<h2 id="2-4-优化slider显示效果"><a href="#2-4-优化slider显示效果" class="headerlink" title="2.4 优化slider显示效果"></a>2.4 优化slider显示效果</h2><ul>
-<li>设置主体背景颜色：主体背景就是整条滑动条的底色，这里设置为白色，RGB(255，255，255):</li>
-</ul>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/10.jpg" alt="image-20220701185009539"></p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/3-%E6%BA%90%E7%BC%96%E8%AF%91%E5%99%A8.jpg"></p>
+<p>改成自己的编译器，比如这里将其改成：<code>CC ?=arm-buildroot-linux-gnueabihf-gcc</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt$ cd /home/book/workspace/mqtt/paho.mqtt.c</span><br></pre></td></tr></table></figure>
+
+<p>再修改之前先将原先用gcc编译的clean清除掉：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt/paho.mqtt.c$ make clean</span><br><span class="line">rm -rf build/output/*</span><br><span class="line">rm -rf build/</span><br></pre></td></tr></table></figure>
+
+<p>然后去修改Makefile：</p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/11-%E4%BF%AE%E6%94%B9Makefile%E7%9A%84CC.jpg"></p>
 <ul>
-<li>设置方向背景颜色：方向背景颜色就是这里增量方向的背景颜色，这里设置为渐变色，温度从白色渐变到红色；湿度从白色渐变到蓝色：</li>
+<li><p>修改库安装路径</p>
+<p>参考gcc下是将库安装到了&#x2F;user里面的，所以我们也要将路径指定到我们自己编译链下的usr中，比如百问网的工具链&#x2F;usr&#x2F;local就是如下所示</p>
+</li>
 </ul>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/11.jpg" alt="image-20220701185507186"></p>
-<ul>
-<li>设置指向标颜色：指向标就是滑动条上的那个实心圆，我们可以用相同的放射将其设置为纯色或者渐变色：</li>
-</ul>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/12.jpg" alt="image-20220701185841611"></p>
-<h2 id="2-4-导出UI源文件"><a href="#2-4-导出UI源文件" class="headerlink" title="2.4 导出UI源文件"></a>2.4 导出UI源文件</h2><p>​	本次项目的效果比较简单，没有用到很复杂的控件设置(复杂的设置SquareLine也设置不了)，也没有用到事件这些，现在九江这个UI的源文件导出去添加到模拟器，因为在模拟器上我们可以轻松快速的编辑UI的详细设置且看到效果，在模拟器上编辑的差不多了再移植到Linux中。</p>
-<p>​	导出和移植到模拟器在上一篇已经讲过了，这里就不再重复讲了。</p>
-<h1 id="3-使用模拟器丰富UI"><a href="#3-使用模拟器丰富UI" class="headerlink" title="3. 使用模拟器丰富UI"></a>3. 使用模拟器丰富UI</h1><p>​	我们的表格现在还只是一张空的表格，我们还希望它能显示两条折线、X轴和Y轴显示刻度值，根据官方的例程和手册，这里将补充用到的LVGL接口函数总结下：</p>
-<table>
-<thead>
-<tr>
-<th align="center">函数名称</th>
-<th>参数</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">lv_chart_set_div_line_count</td>
-<td>lv_obj_t * obj：控件对象；<br>uint8_t hdiv：纵坐标平均点数<br>uint8_t vdiv：横坐标平均点数</td>
-<td>设置表格的横纵坐标显示点数</td>
-</tr>
-<tr>
-<td align="center">lv_chart_set_point_count</td>
-<td>lv_obj_t * obj：控件对象；<br>uint16_t cnt：绘制点数</td>
-<td>设置表格中显示数据的点数，比如设置成20，那么整张表就最多只绘制出20个点出来</td>
-</tr>
-<tr>
-<td align="center">lv_chart_set_range</td>
-<td>lv_obj_t * obj：控件对象；<br>lv_chart_axis_t axis：坐标轴<br>lv_coord_t min&#x2F;max:坐标轴的最大最小值</td>
-<td>设置表格的坐标轴数值范围，坐标轴<br>LV_CHART_AXIS_PRIMARY_Y表示表格左侧Y轴；<br>LV_CHART_AXIS_SECONDARY_Y表示表格右侧Y轴；<br>LV_CHART_AXIS_PRIMARY_X表示表格下方X轴；<br>LV_CHART_AXIS_SECONDARY_X表示表格上方X轴</td>
-</tr>
-<tr>
-<td align="center">lv_chart_add_series</td>
-<td>lv_obj_t * obj：控件对象；<br>lv_color_t color：折线颜色；<br>lv_chart_axis_t axis：折线对齐的坐标轴</td>
-<td>返回一个从属于对象表格的折线对象，可以通过设置折线对象的值来让其显示到对象表格中</td>
-</tr>
-<tr>
-<td align="center">lv_chart_set_axis_tick</td>
-<td>lv_obj_t * obj：控件对象；<br>lv_chart_axis_t axis：坐标轴；<br>lv_coord_t major_len：主刻度长度；<br>lv_coord_t minor_len：副刻度长度;<BR>lv_coord_t major_cnt:主刻度点数；<BR>lv_coord_t minor_cnt：副刻度点数；<BR>bool label_en:是否显示主刻度数值;<BR>lv_coord_t draw_size：刻度尺的大小；</BR></BR></BR></BR></td>
-<td>根据参数设置X&#x2F;Y轴的刻度</td>
-</tr>
-</tbody></table>
-<p>这里设置的是：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局变量:折线对象</span></span><br><span class="line"><span class="type">lv_chart_series_t</span>* temp;</span><br><span class="line"><span class="type">lv_chart_series_t</span>* humi;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 表格的设置</span></span><br><span class="line">lv_chart_set_div_line_count(ui_chart, <span class="number">121</span>, <span class="number">21</span>);</span><br><span class="line">lv_chart_set_point_count(ui_chart, <span class="number">50</span>);</span><br><span class="line">lv_chart_set_range(ui_chart, LV_CHART_AXIS_PRIMARY_Y, <span class="number">-20</span>, <span class="number">60</span>);</span><br><span class="line">lv_chart_set_range(ui_chart, LV_CHART_AXIS_SECONDARY_Y, <span class="number">0</span>, <span class="number">120</span>);</span><br><span class="line">temp = lv_chart_add_series(ui_chart, lv_color_make(<span class="number">0xFF</span>, <span class="number">0x00</span>, <span class="number">0x00</span>), LV_CHART_AXIS_PRIMARY_Y);</span><br><span class="line">humi = lv_chart_add_series(ui_chart, lv_color_make(<span class="number">0x00</span>, <span class="number">0x80</span>, <span class="number">0x00</span>), LV_CHART_AXIS_SECONDARY_Y);</span><br><span class="line">lv_chart_set_axis_tick(ui_chart, LV_CHART_AXIS_PRIMARY_X, <span class="number">10</span>, <span class="number">5</span>, <span class="number">20</span>, <span class="number">1</span>, <span class="literal">true</span>, <span class="number">50</span>);</span><br><span class="line">lv_chart_set_axis_tick(ui_chart, LV_CHART_AXIS_PRIMARY_Y, <span class="number">10</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="literal">true</span>, <span class="number">50</span>);</span><br><span class="line">lv_chart_set_axis_tick(ui_chart, LV_CHART_AXIS_SECONDARY_Y, <span class="number">10</span>, <span class="number">5</span>, <span class="number">12</span>, <span class="number">10</span>, <span class="literal">true</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/book/100ask_imx6ull-sdk/ToolChain/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf</span><br></pre></td></tr></table></figure>
 
-<p>模拟器上的显示：</p>
-<p><img src="/2022/07/01/LinuxApp-TempHumiChart/13.jpg" alt="image-20220701192121756"></p>
-<p>需要注意的是，定义的折现对象全局变量要去ui.h里面声明，后面mqtt获取远程温湿度监测设备的温度的时候需要设置他们来在表格中显示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ui.h</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">lv_chart_series_t</span>* temp;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">lv_chart_series_t</span>* humi;</span><br></pre></td></tr></table></figure>
+<p>所以原本的</p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/2-%E5%BA%93%E5%AE%89%E8%A3%85%E6%BA%90%E8%B7%AF%E5%BE%84.jpg"></p>
+<p>就改成下图所示的这样：</p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/12-%E4%BF%AE%E6%94%B9Makefile%E7%9A%84%E5%BA%93%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84.jpg"></p>
+<p>这里太长没有截图显示全，然后保存退出编辑。</p>
+<h2 id="5-3-编译源文件且安装库文件"><a href="#5-3-编译源文件且安装库文件" class="headerlink" title="5.3 编译源文件且安装库文件"></a>5.3 编译源文件且安装库文件</h2><p>​	在<code>paHo.mqtt.c</code>中再重新执行一遍下面的命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt/paho.mqtt.c$ make</span><br><span class="line">book@100ask:~/workspace/mqtt/paho.mqtt.c$ sudo make install</span><br></pre></td></tr></table></figure>
 
+<h2 id="5-4-安装库文件到开发板"><a href="#5-4-安装库文件到开发板" class="headerlink" title="5.4 安装库文件到开发板"></a>5.4 安装库文件到开发板</h2><p>​	在上一步make之后就生成了arm-gcc编译后的库文件.so文件，保存在<code>paho.mqtt.c/build/output</code>里面</p>
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/13-arm-gcc%E7%BC%96%E8%AF%91%E7%9A%84mqtt%E5%BA%93.jpg" alt="image-20220627171924579"></p>
+<p>我们将其复制到挂载共享目录<code>/home/book/nfs_rootfs</code>里面去，为了方便管理我们需要现在这个目录下创建一个文件夹来存放mqtt的库，取名就叫<code>mqtt_lib</code>吧:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~$ cd nfs_rootfs/</span><br><span class="line">book@100ask:~/nfs_rootfs$ mkdir mqtt_lib</span><br><span class="line">book@100ask:~/nfs_rootfs$ cd mqtt_lib/</span><br></pre></td></tr></table></figure>
 
+<p>我们把mqtt的库文件copy过去：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt/paho.mqtt.c$ sudo cp build/output/libpaho-mqtt3* ~/nfs_rootfs/mqtt_lib</span><br></pre></td></tr></table></figure>
 
-<h1 id="4-移植UI到Linux"><a href="#4-移植UI到Linux" class="headerlink" title="4. 移植UI到Linux"></a>4. 移植UI到Linux</h1><p>​	如何将UI源文件移植到Ubuntu进行交叉编译并且移植到的开发板上显示，前面的文章已经讲过方法了，这里就不多说了。</p>
-<h1 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h1><p>​	利用SquareLine可以很快的绘制比较好看的UI然后利用模拟器来完善，最终移植到Linux开发板上显示，整个过程比价复杂的是在SquareLine设置控件的基本属性，这需要我们慢慢的探索和熟悉这个工具；另外最重要的还是我们对LVGL本身的学习了解，才能在模拟器上丰富和完善UI草图；然后后面的移植操作就比较简单了。</p>
-<p>​	下一步就是将mqtt移植到我们的这个UI工程里面来，通过mqtt获取云端数据然后在屏幕上显示温湿度监控子设备上传的数据。</p>
+<p>接着将开发板的<code>/mnt</code>挂载到虚拟机的<code>nfs_rootfs</code>目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t nfs -o nolock,vers=3 192.168.50.12:/home/book/nfs_rootfs /mnt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/14-%E6%8C%82%E8%BD%BD%E5%BC%80%E5%8F%91%E6%9D%BF.jpg" alt="image-20220627172742387"></p>
+<p>使用<code>install</code>或者<code>mv</code>指令将<code>/mnt/mqtt_lib</code>中的所有mqtt库文件安装到开发板的<code>/lib</code>目录下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install /mnt/mqtt_lib/libpaho-mqtt3* /lib</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/15-%E5%AE%89%E8%A3%85%E5%BA%93%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF.jpg" alt="image-20220627173123347"></p>
+<h2 id="5-5-重新编译测试文件"><a href="#5-5-重新编译测试文件" class="headerlink" title="5.5 重新编译测试文件"></a>5.5 重新编译测试文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~$ cd /home/book/workspace/mqtt_test</span><br><span class="line">book@100ask:~/workspace/mqtt_test$ arm-buildroot-linux-gnueabihf-gcc MQTTAsync_subscribe.c -lpaho-mqtt3a</span><br></pre></td></tr></table></figure>
+
+<p>将重新编译出来的执行文件<code>a.out</code>复制到<code>nfs_rootfs</code>中去：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/mqtt_test$ cp a.out ~/nfs_rootfs/</span><br></pre></td></tr></table></figure>
+
+<p>然后回到开发板，将<code>/mnt</code>目录下的<code>a.out</code>复制到根目录，然后执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">cp</span> /mnt/a.out ./</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">./a.out</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/16-%E5%BC%80%E5%8F%91%E6%9D%BF%E8%BF%90%E8%A1%8Cmqtt%E7%A4%BA%E4%BE%8B.jpg" alt="image-20220627173519732"></p>
+<p>可以看到，开发板也能成功的和阿里云物联网设备通过MQTT协议通信了，最后这里就不再下发数据测试了。</p>
 
     
 
@@ -451,7 +451,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/" title="【嵌入式Linux应用】温湿度监控系统——绘制温湿度折线图" target="_blank">http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/</a>
+          <a href="http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/" title="【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板" target="_blank">http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/</a>
         </li>
         
         <li>
@@ -529,7 +529,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/07/01/LinuxApp-TempHumiChart/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -544,9 +544,18 @@
 
 <nav id="article-nav">
   
+    <a href="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          【嵌入式Linux应用】SquareLine Studio与LVGL模拟器
+        
+      </div>
+    </a>
   
-    <a href="/2022/06/28/LinuxApp-SquareLineAndSimulator/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">【嵌入式Linux应用】SquareLine Studio与LVGL模拟器</div>
+  
+    <a href="/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【嵌入式Linux应用】移植LVGL到Linux开发板</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -565,6 +574,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E8%BD%AF%E4%BB%B6%E5%B9%B3%E5%8F%B0"><span class="toc-number">2.</span> <span class="toc-text">2. 软件平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%A7%BB%E6%A4%8D%E6%89%80%E9%9C%80%E8%A6%81%E7%9A%84%E8%B5%84%E6%BA%90"><span class="toc-number">3.</span> <span class="toc-text">3. 移植所需要的资源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%AE%89%E8%A3%85mqtt%E5%88%B0ubuntu"><span class="toc-number">4.</span> <span class="toc-text">4. 安装mqtt到ubuntu</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E4%BF%AE%E6%94%B9Makefile%E9%80%82%E9%85%8DGCC%E7%8E%AF%E5%A2%83"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 修改Makefile适配GCC环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85%E5%BA%93%E6%96%87%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 编译和安装库文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E4%BD%93%E9%AA%8C%E6%B5%8B%E8%AF%95"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 体验测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E7%A7%BB%E6%A4%8Dmqtt%E5%88%B0linux%E5%BC%80%E5%8F%91%E6%9D%BF"><span class="toc-number">5.</span> <span class="toc-text">5. 移植mqtt到linux开发板</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E6%9F%A5%E7%9C%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 查看自己的编译环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E4%BF%AE%E6%94%B9Makefile"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 修改Makefile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-%E7%BC%96%E8%AF%91%E6%BA%90%E6%96%87%E4%BB%B6%E4%B8%94%E5%AE%89%E8%A3%85%E5%BA%93%E6%96%87%E4%BB%B6"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 编译源文件且安装库文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-%E5%AE%89%E8%A3%85%E5%BA%93%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 安装库文件到开发板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-%E9%87%8D%E6%96%B0%E7%BC%96%E8%AF%91%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6"><span class="toc-number">5.5.</span> <span class="toc-text">5.5 重新编译测试文件</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>

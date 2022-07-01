@@ -6,26 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>【美食】学习做梅菜扣肉 | 摘星</title>
+  <title>【嵌入式Linux应用】移植LVGL到Linux开发板 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="​		本篇是记录梅菜扣肉这道菜第一次学习烹饪的过程以及总结。">
+  <meta name="description" content="1. 概述​	本篇主要是记录将LVGL移植到百问网STM32MP157开发板上，并且仅是跑一下LVGL的一些例程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【美食】学习做梅菜扣肉">
-<meta property="og:url" content="http://slhking.github.io/2021/04/10/DeliciousFood-Preserved%20Vegetable%20&%20Pork/index.html">
+<meta property="og:title" content="【嵌入式Linux应用】移植LVGL到Linux开发板">
+<meta property="og:url" content="http://slhking.github.io/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="​		本篇是记录梅菜扣肉这道菜第一次学习烹饪的过程以及总结。">
+<meta property="og:description" content="1. 概述​	本篇主要是记录将LVGL移植到百问网STM32MP157开发板上，并且仅是跑一下LVGL的一些例程。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/2021/04/10/DeliciousFood-Preserved%20Vegetable%20&%20Pork/咸烧白.jpg">
-<meta property="og:image" content="http://slhking.github.io/2021/04/10/DeliciousFood-Preserved%20Vegetable%20&%20Pork/04/10/DeliciousFood-Preserved%20Vegetable%20&%20Pork/%E5%92%B8%E7%83%A7%E7%99%BD.jpg">
-<meta property="article:published_time" content="2021-04-10T05:25:13.000Z">
-<meta property="article:modified_time" content="2022-07-01T14:58:23.189Z">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/2.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/3.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/4.jpg">
+<meta property="article:published_time" content="2022-06-21T06:23:57.000Z">
+<meta property="article:modified_time" content="2022-07-01T15:28:40.132Z">
 <meta property="article:author" content="摘星星的小朋友">
-<meta property="article:tag" content="美食">
-<meta property="article:tag" content="梅菜扣肉">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/2021/04/10/DeliciousFood-Preserved%20Vegetable%20&%20Pork/咸烧白.jpg">
+<meta name="twitter:image" content="http://slhking.github.io/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/2.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -210,14 +210,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-DeliciousFood-Preserved Vegetable &amp; Pork" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-LinuxApp-1-PortingLVGLForSTM32MP157" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      【美食】学习做梅菜扣肉
+      【嵌入式Linux应用】移植LVGL到Linux开发板
     </h1>
   
 
@@ -229,8 +229,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2021/04/10/DeliciousFood-Preserved%20Vegetable%20&%20Pork/" class="archive-article-date">
-        <time datetime="2021-04-10T05:25:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-10</time>
+<a href="/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/" class="archive-article-date">
+        <time datetime="2022-06-21T06:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
 </a>
 
   
@@ -243,7 +243,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">826字</span>
+      <span class="post-count">2.2k字</span>
     </span>
   </span>
 
@@ -252,7 +252,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">2分</span>
+      <span class="post-count">10分</span>
     </span>
   </span>
 </div>
@@ -263,73 +263,143 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>​		本篇是记录梅菜扣肉这道菜第一次学习烹饪的过程以及总结。<span id="more"></span></p>
-<h2 id="教学老师："><a href="#教学老师：" class="headerlink" title="教学老师："></a>教学老师：</h2><ul>
-<li>哔哩哔哩Up主： <a target="_blank" rel="noopener" href="https://space.bilibili.com/61690678/">黎叔教做菜</a></li>
-<li>视频地址：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vz4y167Kx?from=search&seid=3995567935689833981">【咸烧白】四川名菜咸烧白，你们那叫什么？</a><h2 id="材料"><a href="#材料" class="headerlink" title="材料"></a>材料</h2><table>
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要是记录将LVGL移植到百问网STM32MP157开发板上，并且仅是跑一下LVGL的一些例程。<span id="more"></span></p>
+<h1 id="2-软件平台"><a href="#2-软件平台" class="headerlink" title="2. 软件平台"></a>2. 软件平台</h1><p>​	本次使用的是Ubuntu18.04，是由百问网提供的，并且是按照他们的手册搭建好了交叉编译环境，花了一点时间将Linux内核编译好之后才进行的LVGL移植，本次移植必须搭建好嵌入式Linux的交叉编译环境且内核也必须编译好，否则无法完成移植。</p>
+<h1 id="3-移植所需要的资源"><a href="#3-移植所需要的资源" class="headerlink" title="3. 移植所需要的资源"></a>3. 移植所需要的资源</h1><p>​	本次实验是从LVGL的官方仓库，移植了三个仓库：</p>
+<table>
 <thead>
 <tr>
-<th align="left">序号</th>
-<th align="left">名称</th>
-<th align="left">数量</th>
+<th>名称</th>
+<th>仓库地址</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">1</td>
-<td align="left">瘦一点的五花肉</td>
-<td align="left">800克</td>
+<td>lvgl</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/lvgl/lvgl.git">https://github.com/lvgl/lvgl.git</a></td>
+<td>包含了LVGL图形界面控件的源码以及少量例程</td>
 </tr>
 <tr>
-<td align="left">2</td>
-<td align="left">芽菜</td>
-<td align="left">根据肉量定</td>
+<td>lv_drivers</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/lvgl/lv_drivers.git">https://github.com/lvgl/lv_drivers.git</a></td>
+<td>包含了驱动LVGL图形界面的驱动接口源代码</td>
 </tr>
 <tr>
-<td align="left">3</td>
-<td align="left">豆豉</td>
-<td align="left">一勺</td>
+<td>lv_demos</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/lvgl/lv_demos.git">https://github.com/lvgl/lv_demos.git</a></td>
+<td>LVGL的例程</td>
 </tr>
 <tr>
-<td align="left">4</td>
-<td align="left">姜</td>
-<td align="left">三四片</td>
-</tr>
-<tr>
-<td align="left">5</td>
-<td align="left">葱</td>
-<td align="left">一根</td>
+<td>lv_port_linux_frame_buffer</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/lvgl/lv_port_linux_frame_buffer.git">https://github.com/lvgl/lv_port_linux_frame_buffer.git</a></td>
+<td>适配有frame buffer的linux系统的接口</td>
 </tr>
 </tbody></table>
-<h2 id="耗时"><a href="#耗时" class="headerlink" title="耗时"></a>耗时</h2></li>
-<li>煮五花肉：30分钟；</li>
-<li>静置、烧开水、炸皮、泡皮、刮皮洗净：20分钟</li>
-<li>准备芽菜：5分钟</li>
-<li>蒸：60分钟</li>
-<li>总共耗时：约2小时<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2></li>
-<li>第一步，锅中接入冷水，五花肉肉朝下，皮朝上，放入水中煮，水煮开之后，把浮沫捞走，放入葱姜，继续煮20分钟左右；</li>
-<li>第二步，20分钟后，把肉捞出来，放在那种可以漏水的盆里，把皮上煮出来的油刮掉，然后使用老抽趁热上色，最主要的是要上色均匀。上好色之后静置，放冷；在这个过程中可以同时烧一点开水备用；</li>
-<li>第三步，锅中倒入油，热油到7、8成的时候，把五花肉的皮向下炸，炸到起皱纹的时候捞出来，一般这个过程挺快的，注意看；</li>
-<li>第四步，捞出来后，放到一个大碗里面，用准备好的开水泡，这样是为了让皮的焦味变小，泡的时候皮要向下，泡10分钟左右；</li>
-<li>第五步，10分钟后，把皮的皱纹刮掉，刮出金黄色，然后把五花肉清洗干净；</li>
-<li>第六步，芽菜用清水清洗2-3次，然后热锅，锅中不需要加入油，把芽菜放到锅里面一直翻炒，直到把芽菜翻炒成一颗一颗可以散开的状态；</li>
-<li>第七步，把炒好的芽菜盛到一个碗里面，然后加入切好的泡椒，一勺豆豉，一勺生抽，一勺料酒，7、8颗花椒，搅拌均匀；</li>
-<li>第八步，切肉；把五花肉四边修一下，然后顺着五花肉的筋络切，厚度按照筷子的直径比较合适；通常切10片，八片摆在碗的中间，2片分别摆在两边；</li>
-<li>第九步，把搅拌好的芽菜添加到摆好的五花肉上，把肉全部覆盖，堆叠成一个尖堆堆，然后压紧一点；</li>
-<li>第十步，蒸；蒸锅中加入足够的水，因为要大火蒸一个小时左右；把五花肉放到蒸格上，大火蒸一个小时；</li>
-<li>第十一步，成型；一小时后，把五花肉倒扣到另一个碗里面，梅菜扣肉出锅；<h2 id="我的成果"><a href="#我的成果" class="headerlink" title="我的成果"></a>我的成果</h2></li>
+<h1 id="4-移植步骤"><a href="#4-移植步骤" class="headerlink" title="4. 移植步骤"></a>4. 移植步骤</h1><h2 id="4-1-移植文件"><a href="#4-1-移植文件" class="headerlink" title="4.1 移植文件"></a>4.1 移植文件</h2><p>​	首先在根目录创建一个文件夹用以存放官方的源码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~$ mkdir lvgl</span><br><span class="line">book@100ask:~$ cd lvgl</span><br></pre></td></tr></table></figure>
+
+<p>然后使用git命令，将前面提到的仓库克隆到本地：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/lvgl$ git clone https://github.com/lvgl/lvgl.git</span><br><span class="line">book@100ask:~/lvgl$ git clone https://github.com/lvgl/lv_drivers.git</span><br><span class="line">book@100ask:~/lvgl$ git clone https://github.com/lvgl/lv_demos.git</span><br><span class="line">book@100ask:~/lvgl$ git clone https://github.com/lvgl/lv_port_linux_frame_buffer.git</span><br></pre></td></tr></table></figure>
+
+<p>因为仓库是在github上的，克隆可能会失败，多尝试几次。如果几个仓库都克隆成功了，那么在lvgl下用<strong>ls</strong>命令检查就能看到如下结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/lvgl$ ls</span><br><span class="line">lv_demos  lv_drivers  lvgl  lv_port_linux_frame_buffer</span><br></pre></td></tr></table></figure>
+
+<p>然后再去根目录下创建一个工作空间，在工作空间内创建一个lvgl的工程，我将其取名叫做lvgl_demo：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/lvgl$ cd</span><br><span class="line">book@100ask:~$ mkdir workspace</span><br><span class="line">book@100ask:~$ cd workspace</span><br><span class="line">book@100ask:~/workspace$ mkdir lvgl_demo</span><br><span class="line">book@100ask:~/workspace$ cd lvgl_demo</span><br></pre></td></tr></table></figure>
+
+<p>将根目录下的lvgl文件夹中的lvgl、lv_drivers和lv_port_linux_frame_buffer中的main.c与Makefile复制到lvgl_demo中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ cp -r ~/lvgl/lvgl ./</span><br><span class="line">book@100ask:~/workspace/lvgl_demo$ cp -r ~/lvgl/lv_drivers ./</span><br><span class="line">book@100ask:~/workspace/lvgl_demo$ cp ~/lvgl/lv_port_linux_frame_buffer/main.c ./</span><br><span class="line">book@100ask:~/workspace/lvgl_demo$ cp ~/lvgl/lv_port_linux_frame_buffer/Makefile ./</span><br><span class="line">book@100ask:~/workspace/lvgl_demo$ ls -l</span><br><span class="line">total 16</span><br><span class="line">drwxrwxr-x 11 book book 4096 Jun 21 03:07 lv_drivers</span><br><span class="line">drwxrwxr-x 11 book book 4096 Jun 21 03:07 lvgl</span><br><span class="line">-rw-rw-r--  1 book book 2350 Jun 21 03:07 main.c</span><br><span class="line">-rw-rw-r--  1 book book 1812 Jun 21 03:07 Makefile</span><br></pre></td></tr></table></figure>
+
+<p>将lvgl中的lv_conf_template.h复制出来并且改名位lv_conf.h：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ cp lvgl/lv_conf_template.h lv_conf.h</span><br></pre></td></tr></table></figure>
+
+<p>将lv_drivers中的lv_drv_conf_template.h复制出来并且改名为lv_drv_conf.h：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ cp lv_drivers/lv_drv_conf_template.h lv_drv_conf.h</span><br></pre></td></tr></table></figure>
+
+<p>这样，我们的lvgl_demo的工程目录有如下的文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ ls -l</span><br><span class="line">total 60</span><br><span class="line">-rw-rw-r--  1 book book 24733 Jun 21 03:08 lv_conf.h</span><br><span class="line">drwxrwxr-x 11 book book  4096 Jun 21 03:07 lv_drivers</span><br><span class="line">-rw-rw-r--  1 book book 14940 Jun 21 03:10 lv_drv_conf.h</span><br><span class="line">drwxrwxr-x 11 book book  4096 Jun 21 03:07 lvgl</span><br><span class="line">-rw-rw-r--  1 book book  2350 Jun 21 03:07 main.c</span><br><span class="line">-rw-rw-r--  1 book book  1812 Jun 21 03:07 Makefile</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-修改配置文件"><a href="#4-2-修改配置文件" class="headerlink" title="4.2 修改配置文件"></a>4.2 修改配置文件</h2><ul>
+<li>修改lv_drv_conf.h</li>
 </ul>
-<img src="/2021/04/10/DeliciousFood-Preserved%20Vegetable%20&%20Pork/咸烧白.jpg" style="zoom:50%;">
+<p>​	修改这个文件的目的主要是为了使用linux下的frame buffer输出显示以及触控输入，需要将第11行的#if 0改成#if 1:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ vim lv_drv_conf.h</span><br></pre></td></tr></table></figure>
 
-<center>
-<img src="/2021/04/10/DeliciousFood-Preserved%20Vegetable%20&%20Pork/04/10/DeliciousFood-Preserved%20Vegetable%20&%20Pork/%E5%92%B8%E7%83%A7%E7%99%BD.jpg" class title="咸烧白">
-</center>
+<p>如果在vim中显示文本的行数，只需要按下键盘上的ESC键，然后输入<code>:set nu</code>就能显示行数了，先讲第11行的改成<code>#if 1</code>，要编辑需要进入编辑模式，如果当前不是编辑模式，就按键盘上的<code>i</code>键进入编辑模式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> <span class="comment">/* clang-format off */</span></span><br><span class="line"><span class="number">11</span> <span class="meta">#<span class="keyword">if</span> 1 <span class="comment">/*Set it to &quot;1&quot; to enable the content*/</span></span></span><br></pre></td></tr></table></figure>
 
-<h2 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h2><p>​		这是我第一次做烧白，就成果而言是不合格的。总结了下以下几点没有做好的地方：</p>
+<p>然后318~324行，将<code>USE_FBDEV</code>的值改为1，使能frame buffer设备：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">315</span> <span class="comment">/*-----------------------------------------</span></span><br><span class="line"><span class="comment">316  *  Linux frame buffer device (/dev/fbx)</span></span><br><span class="line"><span class="comment">317  *-----------------------------------------*/</span></span><br><span class="line"><span class="number">318</span> <span class="meta">#<span class="keyword">ifndef</span> USE_FBDEV</span></span><br><span class="line"><span class="number">319</span> <span class="meta">#  <span class="keyword">define</span> USE_FBDEV           1</span></span><br><span class="line"><span class="number">320</span> <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="number">321</span></span><br><span class="line"><span class="number">322</span> <span class="meta">#<span class="keyword">if</span> USE_FBDEV</span></span><br><span class="line"><span class="number">323</span> <span class="meta">#  <span class="keyword">define</span> FBDEV_PATH          <span class="string">&quot;/dev/fb0&quot;</span></span></span><br><span class="line"><span class="number">324</span> <span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>接着是441~461行，将<code>USE_EVDEV</code>使能，并且触控输入设备的名称要根据自己的板子实际情况更改：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">438</span> <span class="comment">/*-------------------------------------------------</span></span><br><span class="line"><span class="comment">439  * Mouse or touchpad as evdev interface (for Linux based systems)</span></span><br><span class="line"><span class="comment">440  *------------------------------------------------*/</span></span><br><span class="line"><span class="number">441</span> <span class="meta">#<span class="keyword">ifndef</span> USE_EVDEV</span></span><br><span class="line"><span class="number">442</span> <span class="meta">#  <span class="keyword">define</span> USE_EVDEV           1</span></span><br><span class="line"><span class="number">443</span> <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="number">444</span></span><br><span class="line"><span class="number">445</span> <span class="meta">#<span class="keyword">ifndef</span> USE_BSD_EVDEV</span></span><br><span class="line"><span class="number">446</span> <span class="meta">#  <span class="keyword">define</span> USE_BSD_EVDEV       0</span></span><br><span class="line"><span class="number">447</span> <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="number">448</span></span><br><span class="line"><span class="number">449</span> <span class="meta">#<span class="keyword">if</span> USE_EVDEV || USE_BSD_EVDEV</span></span><br><span class="line"><span class="number">450</span> <span class="meta">#  <span class="keyword">define</span> EVDEV_NAME   <span class="string">&quot;/dev/input/event0&quot;</span>        <span class="comment">/*You can use the &quot;evtest&quot; Linux tool to get the list of devices and test them*/</span></span></span><br><span class="line"><span class="number">451</span> <span class="meta">#  <span class="keyword">define</span> EVDEV_SWAP_AXES         0               <span class="comment">/*Swap the x and y axes of the touchscreen*/</span></span></span><br><span class="line"><span class="number">452</span></span><br><span class="line"><span class="number">453</span> <span class="meta">#  <span class="keyword">define</span> EVDEV_CALIBRATE         0               <span class="comment">/*Scale and offset the touchscreen coordinates by using maximum and minimum values for each axis*/</span></span></span><br><span class="line"><span class="number">454</span></span><br><span class="line"><span class="number">455</span> <span class="meta">#  <span class="keyword">if</span> EVDEV_CALIBRATE</span></span><br><span class="line"><span class="number">456</span> <span class="meta">#    <span class="keyword">define</span> EVDEV_HOR_MIN         0               <span class="comment">/*to invert axis swap EVDEV_XXX_MIN by EVDEV_XXX_MAX*/</span></span></span><br><span class="line"><span class="number">457</span> <span class="meta">#    <span class="keyword">define</span> EVDEV_HOR_MAX      4096               <span class="comment">/*&quot;evtest&quot; Linux tool can help to get the correct calibraion values&gt;*/</span></span></span><br><span class="line"><span class="number">458</span> <span class="meta">#    <span class="keyword">define</span> EVDEV_VER_MIN         0</span></span><br><span class="line"><span class="number">459</span> <span class="meta">#    <span class="keyword">define</span> EVDEV_VER_MAX      4096</span></span><br><span class="line"><span class="number">460</span> <span class="meta">#  <span class="keyword">endif</span>  <span class="comment">/*EVDEV_CALIBRATE*/</span></span></span><br><span class="line"><span class="number">461</span> <span class="meta">#<span class="keyword">endif</span>  <span class="comment">/*USE_EVDEV*/</span></span></span><br></pre></td></tr></table></figure>
+
+<p>其它的地方暂时不用修改，然后按ESC退出编辑模式，输入<code>:wq</code>保存退出。</p>
 <ul>
-<li>五花肉买肥了，导致烧白吃着很闷，容易腻；</li>
-<li>切肉的时候切厚了，导致本就肥的烧白吃起来更腻了；</li>
-<li>上色上的薄了，这个原因不太好确定，因为我在上色的时候用老抽上了好几次，但是结果还是颜色没黎叔那样好看；有可能是炸皮的时候火候大了或者炸久了，导致后面刮的时候刮掉了太多；</li>
+<li>修改lv_conf.h</li>
 </ul>
+<p>和<code>lv_drv_conf.h</code>一样需要将一开始的<code>#if 0</code>改成<code>#if 1</code>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">14</span> <span class="comment">/* clang-format off */</span></span><br><span class="line"><span class="number">15</span> <span class="meta">#<span class="keyword">if</span> 1 <span class="comment">/*Set it to &quot;1&quot; to enable content*/</span></span></span><br></pre></td></tr></table></figure>
+
+<p>接着是49~67行修改显存大小，可以使能<code>LV_MEM_CUSTOM</code>自己分配也可以自动分配，我选择的是自己分配显存：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">48</span> <span class="comment">/*1: use custom malloc/free, 0: use the built-in `lv_mem_alloc()` and `lv_mem_free()`*/</span></span><br><span class="line"><span class="number">49</span> <span class="meta">#<span class="keyword">define</span> LV_MEM_CUSTOM 1</span></span><br><span class="line"><span class="number">50</span> <span class="meta">#<span class="keyword">if</span> LV_MEM_CUSTOM == 0</span></span><br><span class="line"><span class="number">51</span>     <span class="comment">/*Size of the memory available for `lv_mem_alloc()` in bytes (&gt;= 2kB)*/</span></span><br><span class="line"><span class="number">52</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_SIZE (10 * 1024U * 1024U)          <span class="comment">/*[bytes]*/</span></span></span><br><span class="line"><span class="number">53</span></span><br><span class="line"><span class="number">54</span>     <span class="comment">/*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/</span></span><br><span class="line"><span class="number">55</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_ADR 0     <span class="comment">/*0: unused*/</span></span></span><br><span class="line"><span class="number">56</span>     <span class="comment">/*Instead of an address give a memory allocator that will be called to get a memory pool for LVGL. E.g. my_malloc*/</span></span><br><span class="line"><span class="number">57</span>     <span class="meta">#<span class="keyword">if</span> LV_MEM_ADR == 0</span></span><br><span class="line"><span class="number">58</span>         <span class="meta">#<span class="keyword">undef</span> LV_MEM_POOL_INCLUDE</span></span><br><span class="line"><span class="number">59</span>         <span class="meta">#<span class="keyword">undef</span> LV_MEM_POOL_ALLOC</span></span><br><span class="line"><span class="number">60</span>     <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="number">61</span></span><br><span class="line"><span class="number">62</span> <span class="meta">#<span class="keyword">else</span>       <span class="comment">/*LV_MEM_CUSTOM*/</span></span></span><br><span class="line"><span class="number">63</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_CUSTOM_INCLUDE <span class="string">&lt;stdlib.h&gt;</span>   <span class="comment">/*Header for the dynamic memory function*/</span></span></span><br><span class="line"><span class="number">64</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_CUSTOM_ALLOC   malloc</span></span><br><span class="line"><span class="number">65</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_CUSTOM_FREE    free</span></span><br><span class="line"><span class="number">66</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_CUSTOM_REALLOC realloc</span></span><br><span class="line"><span class="number">67</span> <span class="meta">#<span class="keyword">endif</span>     <span class="comment">/*LV_MEM_CUSTOM*/</span></span></span><br></pre></td></tr></table></figure>
+
+<p>随后是刷新时间，鉴于处理器的运算能力可以自己调整，像我这原本是30ms，都被我调整成了10ms：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">80</span> <span class="comment">/*Default display refresh period. LVG will redraw changed areas with this period time*/</span></span><br><span class="line"><span class="number">81</span> <span class="meta">#<span class="keyword">define</span> LV_DISP_DEF_REFR_PERIOD 10      <span class="comment">/*[ms]*/</span></span></span><br><span class="line"><span class="number">82</span></span><br><span class="line"><span class="number">83</span> <span class="comment">/*Input device read period in milliseconds*/</span></span><br><span class="line"><span class="number">84</span> <span class="meta">#<span class="keyword">define</span> LV_INDEV_DEF_READ_PERIOD 10     <span class="comment">/*[ms]*/</span></span></span><br></pre></td></tr></table></figure>
+
+<p>最后是比较关键的一个设置，TICK的配置，我们选择自己定义一个Tick定时器配置函数，在自己的应用程序中实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 原本的 */</span></span><br><span class="line"><span class="number">86</span> <span class="comment">/*Use a custom tick source that tells the elapsed time in milliseconds. 87  *It removes the need to manually update the tick with `lv_tick_inc()`)*/</span></span><br><span class="line"><span class="number">88</span> <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM 0</span></span><br><span class="line"><span class="number">89</span> <span class="meta">#<span class="keyword">if</span> LV_TICK_CUSTOM</span></span><br><span class="line"><span class="number">90</span>     <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM_INCLUDE <span class="string">&quot;Arduino.h&quot;</span>         <span class="comment">/*Header for the system time function*/</span></span></span><br><span class="line"><span class="number">91</span>     <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM_SYS_TIME_EXPR (millis())    <span class="comment">/*Expression evaluating to current system time in ms*/</span></span></span><br><span class="line"><span class="number">92</span> <span class="meta">#<span class="keyword">endif</span>   <span class="comment">/*LV_TICK_CUSTOM*/</span></span></span><br><span class="line">    </span><br><span class="line"><span class="comment">/* 改为 */</span></span><br><span class="line"><span class="number">86</span> <span class="comment">/*Use a custom tick source that tells the elapsed time in milliseconds.</span></span><br><span class="line"><span class="comment">87  *It removes the need to manually update the tick with `lv_tick_inc()`)*/</span></span><br><span class="line"><span class="number">88</span> <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM 1</span></span><br><span class="line"><span class="number">89</span> <span class="meta">#<span class="keyword">if</span> LV_TICK_CUSTOM</span></span><br><span class="line"><span class="number">90</span>     <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM_INCLUDE <span class="string">&lt;stdint.h&gt;</span>         <span class="comment">/*Header for the system time function*/</span></span></span><br><span class="line"><span class="number">91</span>     <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM_SYS_TIME_EXPR (custom_tick_get())    <span class="comment">/*Expression evaluating to current system time in ms*/</span></span></span><br><span class="line"><span class="number">92</span> <span class="meta">#<span class="keyword">endif</span>   <span class="comment">/*LV_TICK_CUSTOM*/</span></span></span><br></pre></td></tr></table></figure>
+
+<p>我们现在是移植lvgl官方的模板，所以直接跑一下他们的例程，去706行将widget例程使能：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">705</span> <span class="comment">/*Show some widget. It might be required to increase `LV_MEM_SIZE` */</span></span><br><span class="line"><span class="number">706</span> <span class="meta">#<span class="keyword">define</span> LV_USE_DEMO_WIDGETS 1</span></span><br><span class="line"><span class="number">707</span> <span class="meta">#<span class="keyword">if</span> LV_USE_DEMO_WIDGETS</span></span><br><span class="line"><span class="number">708</span> <span class="meta">#<span class="keyword">define</span> LV_DEMO_WIDGETS_SLIDESHOW 0</span></span><br><span class="line"><span class="number">709</span> <span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>然后保存退出。</p>
+<h2 id="4-3-修改main-c"><a href="#4-3-修改main-c" class="headerlink" title="4.3 修改main.c"></a>4.3 修改main.c</h2><p>​	我们没有将lvgl的demos移植到工程文件中，所以需要将第2行的demos头文件注释掉：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> <span class="comment">// #include &quot;lvgl/demos/lv_demos.h&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们还需要根据自己使用的屏幕修改分辨率：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">32</span>     disp_drv.hor_res    = <span class="number">1024</span>;	<span class="comment">// 原来是800</span></span><br><span class="line"><span class="number">33</span>     disp_drv.ver_res    = <span class="number">600</span>;	<span class="comment">// 原来是480</span></span><br></pre></td></tr></table></figure>
+
+<p>另外我们也没有移植原本的鼠标样式，所以也需要注释掉：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">46</span>     <span class="comment">/*Set a cursor for the mouse*/</span></span><br><span class="line"><span class="number">47</span> <span class="comment">//    LV_IMG_DECLARE(mouse_cursor_icon);</span></span><br><span class="line"><span class="number">48</span> <span class="comment">//    lv_obj_t * cursor_obj = lv_img_create(lv_scr_act()); /*Create an image object for the cursor */</span></span><br><span class="line"><span class="number">49</span> <span class="comment">//    lv_img_set_src(cursor_obj, &amp;mouse_cursor_icon);           /*Set the image source*/</span></span><br><span class="line"><span class="number">50</span> <span class="comment">//    lv_indev_set_cursor(mouse_indev, cursor_obj);             /*Connect the image  object to the driver*/</span></span><br></pre></td></tr></table></figure>
+
+<p>然后保存退出。</p>
+<h2 id="4-4-修改Makefile"><a href="#4-4-修改Makefile" class="headerlink" title="4.4 修改Makefile"></a>4.4 修改Makefile</h2><p>​	在Makefile中需要指定编译器，如果不知道自己的交叉编译是什么，可以在命令行输入<code>echo $CROSS_COMPILE</code>查看：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ echo $CROSS_COMPILE</span><br><span class="line">arm-buildroot-linux-gnueabihf-</span><br></pre></td></tr></table></figure>
+
+<p>可以看到我当前环境使用的是<code>arm-buildroot-linux-gnueabihf-gcc</code>，如果你没有得到这个结果，说明你的交叉编译环境没有设置好，需要去看百问网的手册学习如何构建好交叉编译环境。</p>
+<p>​	我们将Makefile中的<code>CC ?= gcc</code>修改成我们自己的编译链：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4 <span class="comment">#CC ?= gcc</span></span><br><span class="line">5 CC = arm-buildroot-linux-gnueabihf-gcc</span><br></pre></td></tr></table></figure>
+
+<p>因为我们没有移植鼠标样式，所以需要将鼠标样式的连接源文件注释掉：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">19 <span class="comment">#CSRCS +=$(LVGL_DIR)/mouse_cursor_icon.c</span></span><br></pre></td></tr></table></figure>
+
+<p>然后保存退出。</p>
+<h2 id="4-5-编译和运行"><a href="#4-5-编译和运行" class="headerlink" title="4.5 编译和运行"></a>4.5 编译和运行</h2><p>​	在命令行输入<code>make</code>编译工程，如果有报错信息，仔细看提示，不明白的可以百度或者留言交流。</p>
+<p>​	编译完成后，会在工程目录生成一个可执行文件<code>demo</code>，我们需要将这个文件copy到开发板上，我使用的是网络挂载方式（不明白的可以去看百问网的完全开发手册V4.0版本）。在开发板上将开发板的<code>mnt</code>目录挂载到虚拟机的<code>nfs_rootfs</code>目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@100ask:~]# mount -t nfs -o nolock,vers=3 192.168.3.14:/home/book/nfs_rootfs /mnt</span><br></pre></td></tr></table></figure>
+
+<p>然后去虚拟机那边将<code>demo</code>复制到虚拟机的<code>nfs_rootfs</code>目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ cp demo ~/nfs_rootfs/</span><br></pre></td></tr></table></figure>
+
+<p>这样在开发板的<code>mnt</code>目录也会有这个文件了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@100ask:~]# ls /mnt</span><br><span class="line">demo                            lib                             stm32mp157c-100ask-512d-v1.dtb  uImage</span><br></pre></td></tr></table></figure>
+
+<p>我们将<code>mnt</code>目录下的<code>demo</code>文件复制到本地：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@100ask:~]# cp /mnt/demo ./</span><br><span class="line">[root@100ask:~]# ls</span><br><span class="line">demo</span><br></pre></td></tr></table></figure>
+
+<p>然后执行这个文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@100ask:~]# ./demo</span><br></pre></td></tr></table></figure>
+
+<p>就可以看到在开发板上的屏幕显示了LVGL的widget例程：</p>
+<img src="/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/2.jpg" style="zoom: 25%;">
+
+<img src="/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/3.jpg" alt="3" style="zoom:25%;">
+
+<img src="/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/4.jpg" alt="4" style="zoom:25%;">
+
+
+<p>至此LVGL在嵌入式开发板上的简单移植应用就完成了。</p>
 
     
 
@@ -376,7 +446,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://slhking.github.io/2021/04/10/DeliciousFood-Preserved Vegetable & Pork/" title="【美食】学习做梅菜扣肉" target="_blank">http://slhking.github.io/2021/04/10/DeliciousFood-Preserved Vegetable & Pork/</a>
+          <a href="http://slhking.github.io/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/" title="【嵌入式Linux应用】移植LVGL到Linux开发板" target="_blank">http://slhking.github.io/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/</a>
         </li>
         
         <li>
@@ -398,28 +468,13 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">美食</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">梅菜扣肉</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
 	</div>
 
     
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/美食//" class="article-tag-list-link color3">美食</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
     
 
@@ -469,7 +524,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2021/04/10/DeliciousFood-Preserved%20Vegetable%20&%20Pork/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -484,18 +539,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2021/04/10/DeliciousFood-PotatoRibs/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          【美食】土豆烧排骨
+          【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板
         
       </div>
     </a>
   
   
-    <a href="/2021/04/04/Hexo%E6%8C%87%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hexo指令</div>
+    <a href="/2022/05/12/MM32-6-PortFreeRTOS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【MM32】第六篇——移植FreeRTOS</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -522,7 +577,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%99%E5%AD%A6%E8%80%81%E5%B8%88%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">教学老师：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%90%E6%96%99"><span class="toc-number">2.</span> <span class="toc-text">材料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%97%E6%97%B6"><span class="toc-number">3.</span> <span class="toc-text">耗时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E6%88%90%E6%9E%9C"><span class="toc-number">5.</span> <span class="toc-text">我的成果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C"><span class="toc-number">6.</span> <span class="toc-text">经验</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E8%BD%AF%E4%BB%B6%E5%B9%B3%E5%8F%B0"><span class="toc-number">2.</span> <span class="toc-text">2. 软件平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%A7%BB%E6%A4%8D%E6%89%80%E9%9C%80%E8%A6%81%E7%9A%84%E8%B5%84%E6%BA%90"><span class="toc-number">3.</span> <span class="toc-text">3. 移植所需要的资源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%A7%BB%E6%A4%8D%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">4. 移植步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E7%A7%BB%E6%A4%8D%E6%96%87%E4%BB%B6"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 移植文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 修改配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E4%BF%AE%E6%94%B9main-c"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 修改main.c</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E4%BF%AE%E6%94%B9Makefile"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 修改Makefile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-%E7%BC%96%E8%AF%91%E5%92%8C%E8%BF%90%E8%A1%8C"><span class="toc-number">4.5.</span> <span class="toc-text">4.5 编译和运行</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

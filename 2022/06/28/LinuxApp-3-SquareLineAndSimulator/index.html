@@ -6,26 +6,58 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>【嵌入式Linux应用】移植LVGL到Linux开发板 | 摘星</title>
+  <title>【嵌入式Linux应用】SquareLine Studio与LVGL模拟器 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1. 概述​	本篇主要是记录将LVGL移植到百问网STM32MP157开发板上，并且仅是跑一下LVGL的一些例程。">
+  <meta name="description" content="1. 概述​	本篇重点是讲LVGL的开发辅助工具，以及利用这些工具将LVGL制作UI之后移植到嵌入式Linux开发板上显示。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【嵌入式Linux应用】移植LVGL到Linux开发板">
-<meta property="og:url" content="http://slhking.github.io/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/index.html">
+<meta property="og:title" content="【嵌入式Linux应用】SquareLine Studio与LVGL模拟器">
+<meta property="og:url" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="1. 概述​	本篇主要是记录将LVGL移植到百问网STM32MP157开发板上，并且仅是跑一下LVGL的一些例程。">
+<meta property="og:description" content="1. 概述​	本篇重点是讲LVGL的开发辅助工具，以及利用这些工具将LVGL制作UI之后移植到嵌入式Linux开发板上显示。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/2.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/3.jpg">
-<meta property="og:image" content="http://slhking.github.io/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/4.jpg">
-<meta property="article:published_time" content="2022-06-21T06:23:57.000Z">
-<meta property="article:modified_time" content="2022-07-01T14:39:38.898Z">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/1-%E6%9C%89%E6%95%88%E6%9C%9F.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/2-%E6%A8%A1%E6%8B%9F%E5%99%A8%E7%9B%AE%E5%BD%95.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/3-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%8C%85%E5%90%AB%E7%9B%AE%E5%BD%95.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/4-%E9%80%89%E6%8B%A9ucrt%E5%A4%B4%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/5-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%BA%93%E7%9B%AE%E5%BD%95.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/6-%E9%80%89%E6%8B%A9ucrt%E5%BA%93%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/7-%E6%89%A7%E8%A1%8C%E7%A4%BA%E4%BE%8B.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/8-选择示例.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/9-示例界面.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/10-%E9%80%89%E6%8B%A9%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/11-%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/12-%E8%AE%BE%E7%BD%AE%E5%A5%BD%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/13-%E9%80%89%E6%8B%A9%E5%AF%BC%E5%87%BA%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/14-%E6%8F%90%E7%A4%BA%E5%AF%BC%E5%87%BA%E6%88%90%E5%8A%9F.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/15-%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/16-%E5%A4%8D%E5%88%B6%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/17-%E9%80%89%E6%8B%A9%E7%B2%98%E8%B4%B4%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/18-%E7%B2%98%E8%B4%B4%E5%90%8E%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/19-%E7%BB%99UI%E6%96%87%E4%BB%B6%E6%8C%87%E5%AE%9A%E5%8C%85%E5%90%AB%E8%B7%AF%E5%BE%84.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/20-%E7%BC%96%E8%BE%91%E6%A8%A1%E6%8B%9F%E5%99%A8cpp.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/21-%E6%B8%85%E7%90%86%E5%B9%B6%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/22-%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E6%88%90%E5%8A%9F.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/23-%E5%BC%80%E5%A7%8B%E6%89%A7%E8%A1%8Cui.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/24-模拟器显示ui.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/25-ssh%E8%BF%9B%E5%85%A5ui%E7%9B%AE%E5%BD%95.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/26-%E6%88%90%E5%8A%9F%E4%B8%8A%E4%BC%A0ui%E6%BA%90%E6%96%87%E4%BB%B61.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/27-ls%E6%9F%A5%E7%9C%8Bui%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/28-%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/29-%E8%B0%83%E7%94%A8ui_init.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/30-%E5%AE%98%E6%96%B9mk.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/31-%E5%AE%98%E6%96%B9lv_drivers_mk.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/32-ui_mk.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/33-%E6%B7%BB%E5%8A%A0uimk%E5%88%B0%E5%B7%A5%E7%A8%8BMakefile.jpg">
+<meta property="og:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/34-%E4%BD%BF%E8%83%BD26%E5%8F%B7%E5%AD%97%E4%BD%93.jpg">
+<meta property="article:published_time" content="2022-06-28T02:26:43.191Z">
+<meta property="article:modified_time" content="2022-07-01T15:29:22.298Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="Linux">
+<meta property="article:tag" content="LVGL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/2.jpg">
+<meta name="twitter:image" content="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/1-%E6%9C%89%E6%95%88%E6%9C%9F.jpg">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -210,14 +242,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-LinuxApp-PortingLVGLForSTM32MP157" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-LinuxApp-3-SquareLineAndSimulator" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      【嵌入式Linux应用】移植LVGL到Linux开发板
+      【嵌入式Linux应用】SquareLine Studio与LVGL模拟器
     </h1>
   
 
@@ -229,8 +261,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T06:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
+<a href="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/" class="archive-article-date">
+        <time datetime="2022-06-28T02:26:43.191Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-28</time>
 </a>
 
   
@@ -252,7 +284,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">10分</span>
+      <span class="post-count">7分</span>
     </span>
   </span>
 </div>
@@ -263,143 +295,127 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要是记录将LVGL移植到百问网STM32MP157开发板上，并且仅是跑一下LVGL的一些例程。<span id="more"></span></p>
-<h1 id="2-软件平台"><a href="#2-软件平台" class="headerlink" title="2. 软件平台"></a>2. 软件平台</h1><p>​	本次使用的是Ubuntu18.04，是由百问网提供的，并且是按照他们的手册搭建好了交叉编译环境，花了一点时间将Linux内核编译好之后才进行的LVGL移植，本次移植必须搭建好嵌入式Linux的交叉编译环境且内核也必须编译好，否则无法完成移植。</p>
-<h1 id="3-移植所需要的资源"><a href="#3-移植所需要的资源" class="headerlink" title="3. 移植所需要的资源"></a>3. 移植所需要的资源</h1><p>​	本次实验是从LVGL的官方仓库，移植了三个仓库：</p>
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇重点是讲LVGL的开发辅助工具，以及利用这些工具将LVGL制作UI之后移植到嵌入式Linux开发板上显示。<span id="more"></span></p>
+<h1 id="2-软硬件平台"><a href="#2-软硬件平台" class="headerlink" title="2. 软硬件平台"></a>2. 软硬件平台</h1><p>​	本次开发是在Windows10和Ubuntu下联合进行的，使用的嵌入式Linux开发板是百问网的STM32MP157开发板，LVGL的开发辅助工具如下：</p>
 <table>
 <thead>
 <tr>
 <th>名称</th>
-<th>仓库地址</th>
-<th>描述</th>
+<th>作用</th>
+<th>链接</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>lvgl</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/lvgl/lvgl.git">https://github.com/lvgl/lvgl.git</a></td>
-<td>包含了LVGL图形界面控件的源码以及少量例程</td>
+<td>lv_port_win_visual_studio</td>
+<td>Windows下的visual studio工程，是lvgl在Windows下的模拟器，可以运行模拟显示例程UI或者自己制作的UI</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/lvgl/lv_port_win_visual_studio">github地址</a></td>
 </tr>
 <tr>
-<td>lv_drivers</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/lvgl/lv_drivers.git">https://github.com/lvgl/lv_drivers.git</a></td>
-<td>包含了驱动LVGL图形界面的驱动接口源代码</td>
+<td>SquareLine Studio</td>
+<td>Windows下的LVGL布局工具以及代码生成器，可以生成python格式或者C&#x2F;C++格式的代码，IDE是eclipse，我们不需要下载eclipse，直接移植到ubuntu编译就好；</td>
+<td><a target="_blank" rel="noopener" href="https://squareline.io/">SquareLine Studio</a></td>
 </tr>
 <tr>
-<td>lv_demos</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/lvgl/lv_demos.git">https://github.com/lvgl/lv_demos.git</a></td>
-<td>LVGL的例程</td>
-</tr>
-<tr>
-<td>lv_port_linux_frame_buffer</td>
-<td><a target="_blank" rel="noopener" href="https://github.com/lvgl/lv_port_linux_frame_buffer.git">https://github.com/lvgl/lv_port_linux_frame_buffer.git</a></td>
-<td>适配有frame buffer的linux系统的接口</td>
+<td>visual studio</td>
+<td>Windows下的微软开发的C&#x2F;C++、C#等语言的开发IDE</td>
+<td><a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/">vs</a></td>
 </tr>
 </tbody></table>
-<h1 id="4-移植步骤"><a href="#4-移植步骤" class="headerlink" title="4. 移植步骤"></a>4. 移植步骤</h1><h2 id="4-1-移植文件"><a href="#4-1-移植文件" class="headerlink" title="4.1 移植文件"></a>4.1 移植文件</h2><p>​	首先在根目录创建一个文件夹用以存放官方的源码：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~$ mkdir lvgl</span><br><span class="line">book@100ask:~$ cd lvgl</span><br></pre></td></tr></table></figure>
-
-<p>然后使用git命令，将前面提到的仓库克隆到本地：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/lvgl$ git clone https://github.com/lvgl/lvgl.git</span><br><span class="line">book@100ask:~/lvgl$ git clone https://github.com/lvgl/lv_drivers.git</span><br><span class="line">book@100ask:~/lvgl$ git clone https://github.com/lvgl/lv_demos.git</span><br><span class="line">book@100ask:~/lvgl$ git clone https://github.com/lvgl/lv_port_linux_frame_buffer.git</span><br></pre></td></tr></table></figure>
-
-<p>因为仓库是在github上的，克隆可能会失败，多尝试几次。如果几个仓库都克隆成功了，那么在lvgl下用<strong>ls</strong>命令检查就能看到如下结果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/lvgl$ ls</span><br><span class="line">lv_demos  lv_drivers  lvgl  lv_port_linux_frame_buffer</span><br></pre></td></tr></table></figure>
-
-<p>然后再去根目录下创建一个工作空间，在工作空间内创建一个lvgl的工程，我将其取名叫做lvgl_demo：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/lvgl$ cd</span><br><span class="line">book@100ask:~$ mkdir workspace</span><br><span class="line">book@100ask:~$ cd workspace</span><br><span class="line">book@100ask:~/workspace$ mkdir lvgl_demo</span><br><span class="line">book@100ask:~/workspace$ cd lvgl_demo</span><br></pre></td></tr></table></figure>
-
-<p>将根目录下的lvgl文件夹中的lvgl、lv_drivers和lv_port_linux_frame_buffer中的main.c与Makefile复制到lvgl_demo中：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ cp -r ~/lvgl/lvgl ./</span><br><span class="line">book@100ask:~/workspace/lvgl_demo$ cp -r ~/lvgl/lv_drivers ./</span><br><span class="line">book@100ask:~/workspace/lvgl_demo$ cp ~/lvgl/lv_port_linux_frame_buffer/main.c ./</span><br><span class="line">book@100ask:~/workspace/lvgl_demo$ cp ~/lvgl/lv_port_linux_frame_buffer/Makefile ./</span><br><span class="line">book@100ask:~/workspace/lvgl_demo$ ls -l</span><br><span class="line">total 16</span><br><span class="line">drwxrwxr-x 11 book book 4096 Jun 21 03:07 lv_drivers</span><br><span class="line">drwxrwxr-x 11 book book 4096 Jun 21 03:07 lvgl</span><br><span class="line">-rw-rw-r--  1 book book 2350 Jun 21 03:07 main.c</span><br><span class="line">-rw-rw-r--  1 book book 1812 Jun 21 03:07 Makefile</span><br></pre></td></tr></table></figure>
-
-<p>将lvgl中的lv_conf_template.h复制出来并且改名位lv_conf.h：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ cp lvgl/lv_conf_template.h lv_conf.h</span><br></pre></td></tr></table></figure>
-
-<p>将lv_drivers中的lv_drv_conf_template.h复制出来并且改名为lv_drv_conf.h：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ cp lv_drivers/lv_drv_conf_template.h lv_drv_conf.h</span><br></pre></td></tr></table></figure>
-
-<p>这样，我们的lvgl_demo的工程目录有如下的文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ ls -l</span><br><span class="line">total 60</span><br><span class="line">-rw-rw-r--  1 book book 24733 Jun 21 03:08 lv_conf.h</span><br><span class="line">drwxrwxr-x 11 book book  4096 Jun 21 03:07 lv_drivers</span><br><span class="line">-rw-rw-r--  1 book book 14940 Jun 21 03:10 lv_drv_conf.h</span><br><span class="line">drwxrwxr-x 11 book book  4096 Jun 21 03:07 lvgl</span><br><span class="line">-rw-rw-r--  1 book book  2350 Jun 21 03:07 main.c</span><br><span class="line">-rw-rw-r--  1 book book  1812 Jun 21 03:07 Makefile</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-2-修改配置文件"><a href="#4-2-修改配置文件" class="headerlink" title="4.2 修改配置文件"></a>4.2 修改配置文件</h2><ul>
-<li>修改lv_drv_conf.h</li>
-</ul>
-<p>​	修改这个文件的目的主要是为了使用linux下的frame buffer输出显示以及触控输入，需要将第11行的#if 0改成#if 1:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ vim lv_drv_conf.h</span><br></pre></td></tr></table></figure>
-
-<p>如果在vim中显示文本的行数，只需要按下键盘上的ESC键，然后输入<code>:set nu</code>就能显示行数了，先讲第11行的改成<code>#if 1</code>，要编辑需要进入编辑模式，如果当前不是编辑模式，就按键盘上的<code>i</code>键进入编辑模式：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> <span class="comment">/* clang-format off */</span></span><br><span class="line"><span class="number">11</span> <span class="meta">#<span class="keyword">if</span> 1 <span class="comment">/*Set it to &quot;1&quot; to enable the content*/</span></span></span><br></pre></td></tr></table></figure>
-
-<p>然后318~324行，将<code>USE_FBDEV</code>的值改为1，使能frame buffer设备：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">315</span> <span class="comment">/*-----------------------------------------</span></span><br><span class="line"><span class="comment">316  *  Linux frame buffer device (/dev/fbx)</span></span><br><span class="line"><span class="comment">317  *-----------------------------------------*/</span></span><br><span class="line"><span class="number">318</span> <span class="meta">#<span class="keyword">ifndef</span> USE_FBDEV</span></span><br><span class="line"><span class="number">319</span> <span class="meta">#  <span class="keyword">define</span> USE_FBDEV           1</span></span><br><span class="line"><span class="number">320</span> <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="number">321</span></span><br><span class="line"><span class="number">322</span> <span class="meta">#<span class="keyword">if</span> USE_FBDEV</span></span><br><span class="line"><span class="number">323</span> <span class="meta">#  <span class="keyword">define</span> FBDEV_PATH          <span class="string">&quot;/dev/fb0&quot;</span></span></span><br><span class="line"><span class="number">324</span> <span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<p>接着是441~461行，将<code>USE_EVDEV</code>使能，并且触控输入设备的名称要根据自己的板子实际情况更改：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">438</span> <span class="comment">/*-------------------------------------------------</span></span><br><span class="line"><span class="comment">439  * Mouse or touchpad as evdev interface (for Linux based systems)</span></span><br><span class="line"><span class="comment">440  *------------------------------------------------*/</span></span><br><span class="line"><span class="number">441</span> <span class="meta">#<span class="keyword">ifndef</span> USE_EVDEV</span></span><br><span class="line"><span class="number">442</span> <span class="meta">#  <span class="keyword">define</span> USE_EVDEV           1</span></span><br><span class="line"><span class="number">443</span> <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="number">444</span></span><br><span class="line"><span class="number">445</span> <span class="meta">#<span class="keyword">ifndef</span> USE_BSD_EVDEV</span></span><br><span class="line"><span class="number">446</span> <span class="meta">#  <span class="keyword">define</span> USE_BSD_EVDEV       0</span></span><br><span class="line"><span class="number">447</span> <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="number">448</span></span><br><span class="line"><span class="number">449</span> <span class="meta">#<span class="keyword">if</span> USE_EVDEV || USE_BSD_EVDEV</span></span><br><span class="line"><span class="number">450</span> <span class="meta">#  <span class="keyword">define</span> EVDEV_NAME   <span class="string">&quot;/dev/input/event0&quot;</span>        <span class="comment">/*You can use the &quot;evtest&quot; Linux tool to get the list of devices and test them*/</span></span></span><br><span class="line"><span class="number">451</span> <span class="meta">#  <span class="keyword">define</span> EVDEV_SWAP_AXES         0               <span class="comment">/*Swap the x and y axes of the touchscreen*/</span></span></span><br><span class="line"><span class="number">452</span></span><br><span class="line"><span class="number">453</span> <span class="meta">#  <span class="keyword">define</span> EVDEV_CALIBRATE         0               <span class="comment">/*Scale and offset the touchscreen coordinates by using maximum and minimum values for each axis*/</span></span></span><br><span class="line"><span class="number">454</span></span><br><span class="line"><span class="number">455</span> <span class="meta">#  <span class="keyword">if</span> EVDEV_CALIBRATE</span></span><br><span class="line"><span class="number">456</span> <span class="meta">#    <span class="keyword">define</span> EVDEV_HOR_MIN         0               <span class="comment">/*to invert axis swap EVDEV_XXX_MIN by EVDEV_XXX_MAX*/</span></span></span><br><span class="line"><span class="number">457</span> <span class="meta">#    <span class="keyword">define</span> EVDEV_HOR_MAX      4096               <span class="comment">/*&quot;evtest&quot; Linux tool can help to get the correct calibraion values&gt;*/</span></span></span><br><span class="line"><span class="number">458</span> <span class="meta">#    <span class="keyword">define</span> EVDEV_VER_MIN         0</span></span><br><span class="line"><span class="number">459</span> <span class="meta">#    <span class="keyword">define</span> EVDEV_VER_MAX      4096</span></span><br><span class="line"><span class="number">460</span> <span class="meta">#  <span class="keyword">endif</span>  <span class="comment">/*EVDEV_CALIBRATE*/</span></span></span><br><span class="line"><span class="number">461</span> <span class="meta">#<span class="keyword">endif</span>  <span class="comment">/*USE_EVDEV*/</span></span></span><br></pre></td></tr></table></figure>
-
-<p>其它的地方暂时不用修改，然后按ESC退出编辑模式，输入<code>:wq</code>保存退出。</p>
+<p><strong>注意1：</strong>lv_port_win_visual_studio的安装一定要根据github下的README进行，不然会缺少内容。</p>
+<p><strong>注意2：</strong>SquareLine Studio个人免费且绑定机器码，一个账号只能在一台机器上使用这个工具；商用是收费的。</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/1-%E6%9C%89%E6%95%88%E6%9C%9F.jpg"></p>
+<h1 id="3-visual-studio编译运行模拟器"><a href="#3-visual-studio编译运行模拟器" class="headerlink" title="3. visual studio编译运行模拟器"></a>3. visual studio编译运行模拟器</h1><p>​	当我们使用git将<strong>lv_port_win_visual_studio</strong>克隆到本地之后，在本地的打开visual studio工程：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/2-%E6%A8%A1%E6%8B%9F%E5%99%A8%E7%9B%AE%E5%BD%95.jpg"></p>
+<p>然后就会进入visual studio的开发界面，我们可以先编译一下检查下环境是否有问题。如果你遇到编译后提示找不到<code>stdint.h</code>这些头文件等，去工程属性中的<code>VC++目录</code>中的<strong>包含目录</strong>和<strong>库目录</strong>中将如下图所示的头文件和库文件添加进来：</p>
 <ul>
-<li>修改lv_conf.h</li>
+<li>包含目录</li>
 </ul>
-<p>和<code>lv_drv_conf.h</code>一样需要将一开始的<code>#if 0</code>改成<code>#if 1</code>：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">14</span> <span class="comment">/* clang-format off */</span></span><br><span class="line"><span class="number">15</span> <span class="meta">#<span class="keyword">if</span> 1 <span class="comment">/*Set it to &quot;1&quot; to enable content*/</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/3-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%8C%85%E5%90%AB%E7%9B%AE%E5%BD%95.jpg"></p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/4-%E9%80%89%E6%8B%A9ucrt%E5%A4%B4%E6%96%87%E4%BB%B6.jpg"></p>
+<ul>
+<li>库目录</li>
+</ul>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/5-%E9%80%89%E6%8B%A9%E7%BC%96%E8%BE%91%E5%BA%93%E7%9B%AE%E5%BD%95.jpg"></p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/6-%E9%80%89%E6%8B%A9ucrt%E5%BA%93%E6%96%87%E4%BB%B6.jpg"></p>
+<p>选好这些后就可以编译通过了，也就是可以成功的生成解决方案了，然后我们点击执行简单看下效果：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/7-%E6%89%A7%E8%A1%8C%E7%A4%BA%E4%BE%8B.jpg"></p>
+<h1 id="4-SquareLine-Studio绘制UI"><a href="#4-SquareLine-Studio绘制UI" class="headerlink" title="4. SquareLine Studio绘制UI"></a>4. SquareLine Studio绘制UI</h1><p>​	这个工具的安装步骤就不多说了，唯一值得注意的就是要自己注册一个账号然后会给你生成和这台机器绑定的License，直接选择它使用就好。</p>
+<h2 id="4-1-绘制ui"><a href="#4-1-绘制ui" class="headerlink" title="4.1 绘制ui"></a>4.1 绘制ui</h2><p>​	当我们运行这个studio的时候，一开始会让我们是选择<strong>创建一个工程</strong>还是打开一个示例，我们就先跑一跑它的示例吧：</p>
+<img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/8-选择示例.jpg" style="zoom:55%;">
 
-<p>接着是49~67行修改显存大小，可以使能<code>LV_MEM_CUSTOM</code>自己分配也可以自动分配，我选择的是自己分配显存：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">48</span> <span class="comment">/*1: use custom malloc/free, 0: use the built-in `lv_mem_alloc()` and `lv_mem_free()`*/</span></span><br><span class="line"><span class="number">49</span> <span class="meta">#<span class="keyword">define</span> LV_MEM_CUSTOM 1</span></span><br><span class="line"><span class="number">50</span> <span class="meta">#<span class="keyword">if</span> LV_MEM_CUSTOM == 0</span></span><br><span class="line"><span class="number">51</span>     <span class="comment">/*Size of the memory available for `lv_mem_alloc()` in bytes (&gt;= 2kB)*/</span></span><br><span class="line"><span class="number">52</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_SIZE (10 * 1024U * 1024U)          <span class="comment">/*[bytes]*/</span></span></span><br><span class="line"><span class="number">53</span></span><br><span class="line"><span class="number">54</span>     <span class="comment">/*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/</span></span><br><span class="line"><span class="number">55</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_ADR 0     <span class="comment">/*0: unused*/</span></span></span><br><span class="line"><span class="number">56</span>     <span class="comment">/*Instead of an address give a memory allocator that will be called to get a memory pool for LVGL. E.g. my_malloc*/</span></span><br><span class="line"><span class="number">57</span>     <span class="meta">#<span class="keyword">if</span> LV_MEM_ADR == 0</span></span><br><span class="line"><span class="number">58</span>         <span class="meta">#<span class="keyword">undef</span> LV_MEM_POOL_INCLUDE</span></span><br><span class="line"><span class="number">59</span>         <span class="meta">#<span class="keyword">undef</span> LV_MEM_POOL_ALLOC</span></span><br><span class="line"><span class="number">60</span>     <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="number">61</span></span><br><span class="line"><span class="number">62</span> <span class="meta">#<span class="keyword">else</span>       <span class="comment">/*LV_MEM_CUSTOM*/</span></span></span><br><span class="line"><span class="number">63</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_CUSTOM_INCLUDE <span class="string">&lt;stdlib.h&gt;</span>   <span class="comment">/*Header for the dynamic memory function*/</span></span></span><br><span class="line"><span class="number">64</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_CUSTOM_ALLOC   malloc</span></span><br><span class="line"><span class="number">65</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_CUSTOM_FREE    free</span></span><br><span class="line"><span class="number">66</span>     <span class="meta">#<span class="keyword">define</span> LV_MEM_CUSTOM_REALLOC realloc</span></span><br><span class="line"><span class="number">67</span> <span class="meta">#<span class="keyword">endif</span>     <span class="comment">/*LV_MEM_CUSTOM*/</span></span></span><br></pre></td></tr></table></figure>
-
-<p>随后是刷新时间，鉴于处理器的运算能力可以自己调整，像我这原本是30ms，都被我调整成了10ms：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">80</span> <span class="comment">/*Default display refresh period. LVG will redraw changed areas with this period time*/</span></span><br><span class="line"><span class="number">81</span> <span class="meta">#<span class="keyword">define</span> LV_DISP_DEF_REFR_PERIOD 10      <span class="comment">/*[ms]*/</span></span></span><br><span class="line"><span class="number">82</span></span><br><span class="line"><span class="number">83</span> <span class="comment">/*Input device read period in milliseconds*/</span></span><br><span class="line"><span class="number">84</span> <span class="meta">#<span class="keyword">define</span> LV_INDEV_DEF_READ_PERIOD 10     <span class="comment">/*[ms]*/</span></span></span><br></pre></td></tr></table></figure>
-
-<p>最后是比较关键的一个设置，TICK的配置，我们选择自己定义一个Tick定时器配置函数，在自己的应用程序中实现：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 原本的 */</span></span><br><span class="line"><span class="number">86</span> <span class="comment">/*Use a custom tick source that tells the elapsed time in milliseconds. 87  *It removes the need to manually update the tick with `lv_tick_inc()`)*/</span></span><br><span class="line"><span class="number">88</span> <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM 0</span></span><br><span class="line"><span class="number">89</span> <span class="meta">#<span class="keyword">if</span> LV_TICK_CUSTOM</span></span><br><span class="line"><span class="number">90</span>     <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM_INCLUDE <span class="string">&quot;Arduino.h&quot;</span>         <span class="comment">/*Header for the system time function*/</span></span></span><br><span class="line"><span class="number">91</span>     <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM_SYS_TIME_EXPR (millis())    <span class="comment">/*Expression evaluating to current system time in ms*/</span></span></span><br><span class="line"><span class="number">92</span> <span class="meta">#<span class="keyword">endif</span>   <span class="comment">/*LV_TICK_CUSTOM*/</span></span></span><br><span class="line">    </span><br><span class="line"><span class="comment">/* 改为 */</span></span><br><span class="line"><span class="number">86</span> <span class="comment">/*Use a custom tick source that tells the elapsed time in milliseconds.</span></span><br><span class="line"><span class="comment">87  *It removes the need to manually update the tick with `lv_tick_inc()`)*/</span></span><br><span class="line"><span class="number">88</span> <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM 1</span></span><br><span class="line"><span class="number">89</span> <span class="meta">#<span class="keyword">if</span> LV_TICK_CUSTOM</span></span><br><span class="line"><span class="number">90</span>     <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM_INCLUDE <span class="string">&lt;stdint.h&gt;</span>         <span class="comment">/*Header for the system time function*/</span></span></span><br><span class="line"><span class="number">91</span>     <span class="meta">#<span class="keyword">define</span> LV_TICK_CUSTOM_SYS_TIME_EXPR (custom_tick_get())    <span class="comment">/*Expression evaluating to current system time in ms*/</span></span></span><br><span class="line"><span class="number">92</span> <span class="meta">#<span class="keyword">endif</span>   <span class="comment">/*LV_TICK_CUSTOM*/</span></span></span><br></pre></td></tr></table></figure>
-
-<p>我们现在是移植lvgl官方的模板，所以直接跑一下他们的例程，去706行将widget例程使能：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">705</span> <span class="comment">/*Show some widget. It might be required to increase `LV_MEM_SIZE` */</span></span><br><span class="line"><span class="number">706</span> <span class="meta">#<span class="keyword">define</span> LV_USE_DEMO_WIDGETS 1</span></span><br><span class="line"><span class="number">707</span> <span class="meta">#<span class="keyword">if</span> LV_USE_DEMO_WIDGETS</span></span><br><span class="line"><span class="number">708</span> <span class="meta">#<span class="keyword">define</span> LV_DEMO_WIDGETS_SLIDESHOW 0</span></span><br><span class="line"><span class="number">709</span> <span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<p>然后保存退出。</p>
-<h2 id="4-3-修改main-c"><a href="#4-3-修改main-c" class="headerlink" title="4.3 修改main.c"></a>4.3 修改main.c</h2><p>​	我们没有将lvgl的demos移植到工程文件中，所以需要将第2行的demos头文件注释掉：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> <span class="comment">// #include &quot;lvgl/demos/lv_demos.h&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>我们还需要根据自己使用的屏幕修改分辨率：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">32</span>     disp_drv.hor_res    = <span class="number">1024</span>;	<span class="comment">// 原来是800</span></span><br><span class="line"><span class="number">33</span>     disp_drv.ver_res    = <span class="number">600</span>;	<span class="comment">// 原来是480</span></span><br></pre></td></tr></table></figure>
-
-<p>另外我们也没有移植原本的鼠标样式，所以也需要注释掉：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">46</span>     <span class="comment">/*Set a cursor for the mouse*/</span></span><br><span class="line"><span class="number">47</span> <span class="comment">//    LV_IMG_DECLARE(mouse_cursor_icon);</span></span><br><span class="line"><span class="number">48</span> <span class="comment">//    lv_obj_t * cursor_obj = lv_img_create(lv_scr_act()); /*Create an image object for the cursor */</span></span><br><span class="line"><span class="number">49</span> <span class="comment">//    lv_img_set_src(cursor_obj, &amp;mouse_cursor_icon);           /*Set the image source*/</span></span><br><span class="line"><span class="number">50</span> <span class="comment">//    lv_indev_set_cursor(mouse_indev, cursor_obj);             /*Connect the image  object to the driver*/</span></span><br></pre></td></tr></table></figure>
-
-<p>然后保存退出。</p>
-<h2 id="4-4-修改Makefile"><a href="#4-4-修改Makefile" class="headerlink" title="4.4 修改Makefile"></a>4.4 修改Makefile</h2><p>​	在Makefile中需要指定编译器，如果不知道自己的交叉编译是什么，可以在命令行输入<code>echo $CROSS_COMPILE</code>查看：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ echo $CROSS_COMPILE</span><br><span class="line">arm-buildroot-linux-gnueabihf-</span><br></pre></td></tr></table></figure>
-
-<p>可以看到我当前环境使用的是<code>arm-buildroot-linux-gnueabihf-gcc</code>，如果你没有得到这个结果，说明你的交叉编译环境没有设置好，需要去看百问网的手册学习如何构建好交叉编译环境。</p>
-<p>​	我们将Makefile中的<code>CC ?= gcc</code>修改成我们自己的编译链：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4 <span class="comment">#CC ?= gcc</span></span><br><span class="line">5 CC = arm-buildroot-linux-gnueabihf-gcc</span><br></pre></td></tr></table></figure>
-
-<p>因为我们没有移植鼠标样式，所以需要将鼠标样式的连接源文件注释掉：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">19 <span class="comment">#CSRCS +=$(LVGL_DIR)/mouse_cursor_icon.c</span></span><br></pre></td></tr></table></figure>
-
-<p>然后保存退出。</p>
-<h2 id="4-5-编译和运行"><a href="#4-5-编译和运行" class="headerlink" title="4.5 编译和运行"></a>4.5 编译和运行</h2><p>​	在命令行输入<code>make</code>编译工程，如果有报错信息，仔细看提示，不明白的可以百度或者留言交流。</p>
-<p>​	编译完成后，会在工程目录生成一个可执行文件<code>demo</code>，我们需要将这个文件copy到开发板上，我使用的是网络挂载方式（不明白的可以去看百问网的完全开发手册V4.0版本）。在开发板上将开发板的<code>mnt</code>目录挂载到虚拟机的<code>nfs_rootfs</code>目录：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@100ask:~]# mount -t nfs -o nolock,vers=3 192.168.3.14:/home/book/nfs_rootfs /mnt</span><br></pre></td></tr></table></figure>
-
-<p>然后去虚拟机那边将<code>demo</code>复制到虚拟机的<code>nfs_rootfs</code>目录：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ cp demo ~/nfs_rootfs/</span><br></pre></td></tr></table></figure>
-
-<p>这样在开发板的<code>mnt</code>目录也会有这个文件了：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@100ask:~]# ls /mnt</span><br><span class="line">demo                            lib                             stm32mp157c-100ask-512d-v1.dtb  uImage</span><br></pre></td></tr></table></figure>
-
-<p>我们将<code>mnt</code>目录下的<code>demo</code>文件复制到本地：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@100ask:~]# cp /mnt/demo ./</span><br><span class="line">[root@100ask:~]# ls</span><br><span class="line">demo</span><br></pre></td></tr></table></figure>
-
-<p>然后执行这个文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@100ask:~]# ./demo</span><br></pre></td></tr></table></figure>
-
-<p>就可以看到在开发板上的屏幕显示了LVGL的widget例程：</p>
-<img src="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/2.jpg" style="zoom: 25%;">
-
-<img src="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/3.jpg" alt="3" style="zoom:25%;">
-
-<img src="/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/4.jpg" alt="4" style="zoom:25%;">
+<p>点击<strong>CREATE</strong>后就来到了这样一个界面：</p>
+<img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/9-示例界面.jpg" style="zoom:50%;">
 
 
-<p>至此LVGL在嵌入式开发板上的简单移植应用就完成了。</p>
+<p>可以看到这个工具可以拖拽很多LVGL内核的控件、导入图片、添加事件等到里面来，用以绘制UI，有点像Qt，这样就方便我们构建我们的UI草图。</p>
+<h2 id="4-2-设置工程属性适配屏幕"><a href="#4-2-设置工程属性适配屏幕" class="headerlink" title="4.2 设置工程属性适配屏幕"></a>4.2 设置工程属性适配屏幕</h2><p>但是要绘制成适合我们屏幕的参数的UI，还要设置<strong>工程属性Project Settings</strong>：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/10-%E9%80%89%E6%8B%A9%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg"></p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/11-%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg"></p>
+<p>这里主要关心的就两个地方，一个是UI分辨率，要根据自己屏幕的分辨率来设置，后面的颜色深度也是根据自己的屏幕接口是RGB565这样的16bit的颜色还是怎样的，反正都要根据自己的实际情况来修改，比如这里使用的是百问网的7寸屏幕，分辨率是1024*600，颜色是RGB565 16bit的；接着是导出工程的属性，这里支持两种语言，一个是micropython，另一个是C&#x2F;C++，我们是要在C下开发UI的，所以选择C&#x2F;C++，最后是导出工程或者文件的路径，根据自己的实际情况选择就是：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/12-%E8%AE%BE%E7%BD%AE%E5%A5%BD%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7.jpg"></p>
+<p>设置好之后点击<strong>APPLY CHANGES</strong>来应用设置。</p>
+<h2 id="4-3-导出ui的源文件"><a href="#4-3-导出ui的源文件" class="headerlink" title="4.3 导出ui的源文件"></a>4.3 导出ui的源文件</h2><p>​	修改了分辨率之后，示例的ui布局肯定就乱了不好看了，但是现在不重要，我们只是要来熟悉这个工具而已，我们先按快捷键<strong>CTRL+S</strong>保存工程，然后在菜单栏的<strong>EXPORT</strong>选择导出文件：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/13-%E9%80%89%E6%8B%A9%E5%AF%BC%E5%87%BA%E6%96%87%E4%BB%B6.jpg"></p>
+<p>如果是导出工程的话，会将lvgl和lv_drivers这两个官方源码一起导出，我们实际上不管是在visual studio还是后面会移植到的Ubuntu，在之前的那片《移植LVGL到Ubuntu和嵌入式Linux开发板》已经将官方源码进行了移植了，所以这里只需要这个工具制作UI后生成的UI的源码即可，所以这里选择的是导出文件，它导出成功后会弹出提示告诉我们导出成功了：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/14-%E6%8F%90%E7%A4%BA%E5%AF%BC%E5%87%BA%E6%88%90%E5%8A%9F.jpg"></p>
+<p>我们就可以去上一步选择的导出路径那里找到导出的文件了：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/15-%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg"></p>
+<p>我们只需要把这个文件夹下的文件移植到工程里进行调用编译，即可显示我们用SquareLine Studio绘制的UI。</p>
+<h1 id="5-移植UI到visual-studio模拟器"><a href="#5-移植UI到visual-studio模拟器" class="headerlink" title="5. 移植UI到visual studio模拟器"></a>5. 移植UI到visual studio模拟器</h1><h2 id="5-1-复制源文件到模拟器工作区间"><a href="#5-1-复制源文件到模拟器工作区间" class="headerlink" title="5.1 复制源文件到模拟器工作区间"></a>5.1 复制源文件到模拟器工作区间</h2><p>​	我们将刚才导出的文件全选，然后选择复制：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/16-%E5%A4%8D%E5%88%B6%E5%AF%BC%E5%87%BA%E7%9A%84%E6%96%87%E4%BB%B6.jpg"></p>
+<p>再回到visual studio的模拟器工程，将文件粘贴到工程的编译项：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/17-%E9%80%89%E6%8B%A9%E7%B2%98%E8%B4%B4%E6%96%87%E4%BB%B6.jpg"></p>
+<p>要注意粘贴后的这些文件并不会直接粘贴到模拟器所在的文件夹，只是粘贴到了这个visual studio工作空间：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/18-%E7%B2%98%E8%B4%B4%E5%90%8E%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4.jpg"></p>
+<h2 id="5-2-指定ui源文件所在目录且编译运行"><a href="#5-2-指定ui源文件所在目录且编译运行" class="headerlink" title="5.2 指定ui源文件所在目录且编译运行"></a>5.2 指定ui源文件所在目录且编译运行</h2><p>​	这时候工作区间由于我们没有指定粘贴过来的这些头文件所在路径，所以编译的话会编译不过，报错提示找不到头文件，所以我们就要将我们刚才在SquareLine Studio指定的导出路径添加到visual studio的包含路径里面去：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/19-%E7%BB%99UI%E6%96%87%E4%BB%B6%E6%8C%87%E5%AE%9A%E5%8C%85%E5%90%AB%E8%B7%AF%E5%BE%84.jpg"></p>
+<p>然后我们编辑<strong>LVGL.Simulator.cpp</strong>，将<em><strong>ui.h</strong></em>这个头文件包含进去，并且注释掉原本的示例，调用<strong>ui.c</strong>里面定义的<strong>ui.h</strong>里面声明的<em><strong>ui_init</strong></em>函数：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/20-%E7%BC%96%E8%BE%91%E6%A8%A1%E6%8B%9F%E5%99%A8cpp.jpg"></p>
+<p>编辑好之后保存，然后清理下解决方案后再重新生成解决方案：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/21-%E6%B8%85%E7%90%86%E5%B9%B6%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.jpg"></p>
+<p>编译生成没有错误：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/22-%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E6%88%90%E5%8A%9F.jpg"></p>
+<p>然后点击<strong>开始执行</strong>，观察效果：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/23-%E5%BC%80%E5%A7%8B%E6%89%A7%E8%A1%8Cui.jpg"></p>
+<p>就看到了我们在SquareLine Studio中绘制的UI（这里是示例）在模拟器上显示运行了：</p>
+<img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/24-模拟器显示ui.jpg" style="zoom:50%;">
+
+
+<h1 id="6-移植UI到嵌入式Linux开发板"><a href="#6-移植UI到嵌入式Linux开发板" class="headerlink" title="6. 移植UI到嵌入式Linux开发板"></a>6. 移植UI到嵌入式Linux开发板</h1><p>​	在《【嵌入式Linux应用】移植LVGL到Linux开发板》文章中我们已经在虚拟机Ubuntu上创建了一个以LVGL官方示例的嵌入式Linux LVGL工程，我们现在要做的就是将自己在Windows下的SquareLine Studio中绘制的UI移植到这个工程中，然后编译烧写到开发板上来显示。</p>
+<h2 id="6-1-上传导出的ui源文件和头文件"><a href="#6-1-上传导出的ui源文件和头文件" class="headerlink" title="6.1 上传导出的ui源文件和头文件"></a>6.1 上传导出的ui源文件和头文件</h2><p>​	我们可以可以通过很多方式将SquareLine导出的ui源文件和头文件复制或者下载到Ubuntu中的lvgl工程中去，这里的做法就是去工程里新建一个ui文件夹，来存放导出的这些文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~$ cd /home/book/workspace/lvgl_demo</span><br><span class="line">book@100ask:~/workspace/lvgl_demo$ mkdir ui</span><br></pre></td></tr></table></figure>
+
+<p>然后使用Mobaxterm的ssh登录虚拟机，将文件下载到ui里面去：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/25-ssh%E8%BF%9B%E5%85%A5ui%E7%9B%AE%E5%BD%95.jpg"></p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/26-%E6%88%90%E5%8A%9F%E4%B8%8A%E4%BC%A0ui%E6%BA%90%E6%96%87%E4%BB%B61.jpg" alt="26-成功上传ui源文件1"></p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/27-ls%E6%9F%A5%E7%9C%8Bui%E6%96%87%E4%BB%B6.jpg" alt="27-ls查看ui文件"></p>
+<h2 id="6-2-编辑main-c"><a href="#6-2-编辑main-c" class="headerlink" title="6.2 编辑main.c"></a>6.2 编辑main.c</h2><p>​	调用方法和模拟器里面类似，也是添加头文件然后调用<strong>ui_init</strong>函数，不过差别是ubuntu工程里面要明确头文件所在目录，不然无法找到头文件：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ui/ui.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/28-%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6.jpg"></p>
+<p>然后去main函数中调用<strong>ui_init</strong>：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/29-%E8%B0%83%E7%94%A8ui_init.jpg"></p>
+<h2 id="6-3-Makefile"><a href="#6-3-Makefile" class="headerlink" title="6.3 Makefile"></a>6.3 Makefile</h2><p>我们要将ui目录下的源文件和头文件添加到编译中，就要仿照工程目录下的Makefile中添加lvgl官方源码的那样：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/30-%E5%AE%98%E6%96%B9mk.jpg"></p>
+<p>在用到的子目录中创建该子目录的.mk文件，仿照lvgl.mk或者lv_drivers.mk的写法：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/31-%E5%AE%98%E6%96%B9lv_drivers_mk.jpg"></p>
+<p>来写ui子目录的.mk：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ touch ui/ui.mk</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/32-ui_mk.jpg"></p>
+<p>然后将这个ui.mk添加到工程根目录所在的Makefile中：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/33-%E6%B7%BB%E5%8A%A0uimk%E5%88%B0%E5%B7%A5%E7%A8%8BMakefile.jpg"></p>
+<p>然后执行make：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace/lvgl_demo$ make -j8</span><br></pre></td></tr></table></figure>
+
+<p>由于运行的是SquareLine Studio的那个有点复杂的示例，它用到了26号字体，但是我们<strong>lv_conf.h</strong>里面并没有使能使用，所以编译报错了，所以我们需要在<strong>lv_conf.h</strong>里面使能这个字体：</p>
+<p><img src="/2022/06/28/LinuxApp-3-SquareLineAndSimulator/34-%E4%BD%BF%E8%83%BD26%E5%8F%B7%E5%AD%97%E4%BD%93.jpg"></p>
+<p>然后重新执行make就没有报错了。</p>
+<h2 id="6-4-开发板运行示例ui"><a href="#6-4-开发板运行示例ui" class="headerlink" title="6.4 开发板运行示例ui"></a>6.4 开发板运行示例ui</h2><p>​	开发板挂载以及拷贝demo到开发板这个过程就不再多说了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">开发板先挂载</span></span><br><span class="line">[root@100ask:~]# mount -t nfs -o nolock,vers=3 192.168.3.14:/home/book/nfs_rootfs /mnt</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">虚拟机将编译出来的可执行文件copy到共享目录</span></span><br><span class="line">book@100ask:~/workspace/lvgl_demo$ cp demo ~/nfs_rootfs</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">开发板将demo从共享目录copy到本地</span></span><br><span class="line">[root@100ask:~]# cp /mnt/demo ./</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">开发板运行demo</span></span><br><span class="line">[root@100ask:~]# ./demo</span><br></pre></td></tr></table></figure>
+
+<p>就可以看到示例ui也在开发板上的屏幕显示出来了。</p>
+<h1 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h1><p>​	从本篇的快速体验这些LVGL开发辅助工具，大家应该能够体会到SquareLine Studio和模拟器给我们使用LVGL开发自己的显示产品有多大的助益了，不过这个软件商用收费挺高的，期望国内会有大牛公司能早点做出类似效果的工具。</p>
 
     
 
@@ -446,7 +462,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://slhking.github.io/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/" title="【嵌入式Linux应用】移植LVGL到Linux开发板" target="_blank">http://slhking.github.io/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/</a>
+          <a href="http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/" title="【嵌入式Linux应用】SquareLine Studio与LVGL模拟器" target="_blank">http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/</a>
         </li>
         
         <li>
@@ -469,6 +485,10 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LVGL</a>
         		</li>
       		
 		</ul>
@@ -524,7 +544,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/06/21/LinuxApp-PortingLVGLForSTM32MP157/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/06/28/LinuxApp-3-SquareLineAndSimulator/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -539,18 +559,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/06/21/LinuxApp-PortingMQTTForSTM32MP157/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/07/01/LinuxApp-4-TempHumiChart/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板
+          【嵌入式Linux应用】温湿度监控系统——绘制温湿度折线图
         
       </div>
     </a>
   
   
-    <a href="/2022/05/12/MM32-6-PortFreeRTOS/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">【MM32】第六篇——移植FreeRTOS</div>
+    <a href="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【嵌入式Linux应用】初步移植MQTT到Ubuntu和Linux开发板</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -577,7 +597,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E8%BD%AF%E4%BB%B6%E5%B9%B3%E5%8F%B0"><span class="toc-number">2.</span> <span class="toc-text">2. 软件平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%A7%BB%E6%A4%8D%E6%89%80%E9%9C%80%E8%A6%81%E7%9A%84%E8%B5%84%E6%BA%90"><span class="toc-number">3.</span> <span class="toc-text">3. 移植所需要的资源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%A7%BB%E6%A4%8D%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">4. 移植步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E7%A7%BB%E6%A4%8D%E6%96%87%E4%BB%B6"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 移植文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 修改配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E4%BF%AE%E6%94%B9main-c"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 修改main.c</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E4%BF%AE%E6%94%B9Makefile"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 修改Makefile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-%E7%BC%96%E8%AF%91%E5%92%8C%E8%BF%90%E8%A1%8C"><span class="toc-number">4.5.</span> <span class="toc-text">4.5 编译和运行</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E8%BD%AF%E7%A1%AC%E4%BB%B6%E5%B9%B3%E5%8F%B0"><span class="toc-number">2.</span> <span class="toc-text">2. 软硬件平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-visual-studio%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">3. visual studio编译运行模拟器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-SquareLine-Studio%E7%BB%98%E5%88%B6UI"><span class="toc-number">4.</span> <span class="toc-text">4. SquareLine Studio绘制UI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E7%BB%98%E5%88%B6ui"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 绘制ui</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E8%AE%BE%E7%BD%AE%E5%B7%A5%E7%A8%8B%E5%B1%9E%E6%80%A7%E9%80%82%E9%85%8D%E5%B1%8F%E5%B9%95"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 设置工程属性适配屏幕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E5%AF%BC%E5%87%BAui%E7%9A%84%E6%BA%90%E6%96%87%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 导出ui的源文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E7%A7%BB%E6%A4%8DUI%E5%88%B0visual-studio%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">5. 移植UI到visual studio模拟器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E5%A4%8D%E5%88%B6%E6%BA%90%E6%96%87%E4%BB%B6%E5%88%B0%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8C%BA%E9%97%B4"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 复制源文件到模拟器工作区间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E6%8C%87%E5%AE%9Aui%E6%BA%90%E6%96%87%E4%BB%B6%E6%89%80%E5%9C%A8%E7%9B%AE%E5%BD%95%E4%B8%94%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 指定ui源文件所在目录且编译运行</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E7%A7%BB%E6%A4%8DUI%E5%88%B0%E5%B5%8C%E5%85%A5%E5%BC%8FLinux%E5%BC%80%E5%8F%91%E6%9D%BF"><span class="toc-number">6.</span> <span class="toc-text">6. 移植UI到嵌入式Linux开发板</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-%E4%B8%8A%E4%BC%A0%E5%AF%BC%E5%87%BA%E7%9A%84ui%E6%BA%90%E6%96%87%E4%BB%B6%E5%92%8C%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 上传导出的ui源文件和头文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-%E7%BC%96%E8%BE%91main-c"><span class="toc-number">6.2.</span> <span class="toc-text">6.2 编辑main.c</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-Makefile"><span class="toc-number">6.3.</span> <span class="toc-text">6.3 Makefile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-%E5%BC%80%E5%8F%91%E6%9D%BF%E8%BF%90%E8%A1%8C%E7%A4%BA%E4%BE%8Bui"><span class="toc-number">6.4.</span> <span class="toc-text">6.4 开发板运行示例ui</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">7. 总结</span></a></li></ol>
                     </div>
                 </span>
             </div>
