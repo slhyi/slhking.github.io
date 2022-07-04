@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1. 概述​	本篇的重点是解析paho mqtt官方例程，学习它的一些结构体、API和回调的处理，然后再学习下Linux中的线程和线程间数据通信，掌握相关API的使用，最后综合起来，使用多线程publish或处理subscribe的主题的消息，将订阅的温湿度消息解析出来在LVGL的表格中用折线图的方式显示出来。 2. paho mqtt基本操作​	我们使用mqtt有如下几个操作：  创建&amp;#x2F">
+  <meta name="description" content="1. 概述​	本篇的重点是解析paho mqtt官方例程，学习它的一些结构体、API和回调的处理，然后再学习下Linux中的线程和线程间数据通信，掌握相关API的使用，最后综合起来，使用多线程publish或处理subscribe的主题的消息，将订阅的温湿度消息解析出来在LVGL的表格中用折线图的方式显示出来。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【嵌入式Linux应用】温湿度监控系统——学习paho mqtt的基本操作">
 <meta property="og:url" content="http://slhking.github.io/2022/07/04/LinuxApp-5-MultiThreadAndShowTemp/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="1. 概述​	本篇的重点是解析paho mqtt官方例程，学习它的一些结构体、API和回调的处理，然后再学习下Linux中的线程和线程间数据通信，掌握相关API的使用，最后综合起来，使用多线程publish或处理subscribe的主题的消息，将订阅的温湿度消息解析出来在LVGL的表格中用折线图的方式显示出来。 2. paho mqtt基本操作​	我们使用mqtt有如下几个操作：  创建&amp;#x2F">
+<meta property="og:description" content="1. 概述​	本篇的重点是解析paho mqtt官方例程，学习它的一些结构体、API和回调的处理，然后再学习下Linux中的线程和线程间数据通信，掌握相关API的使用，最后综合起来，使用多线程publish或处理subscribe的主题的消息，将订阅的温湿度消息解析出来在LVGL的表格中用折线图的方式显示出来。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-04T07:51:53.526Z">
-<meta property="article:modified_time" content="2022-07-04T07:51:53.526Z">
+<meta property="article:modified_time" content="2022-07-04T07:58:48.785Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -259,7 +259,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇的重点是解析paho mqtt官方例程，学习它的一些结构体、API和回调的处理，然后再学习下Linux中的线程和线程间数据通信，掌握相关API的使用，最后综合起来，使用多线程publish或处理subscribe的主题的消息，将订阅的温湿度消息解析出来在LVGL的表格中用折线图的方式显示出来。</p>
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇的重点是解析paho mqtt官方例程，学习它的一些结构体、API和回调的处理，然后再学习下Linux中的线程和线程间数据通信，掌握相关API的使用，最后综合起来，使用多线程publish或处理subscribe的主题的消息，将订阅的温湿度消息解析出来在LVGL的表格中用折线图的方式显示出来。<span id="more"></span></p>
 <h1 id="2-paho-mqtt基本操作"><a href="#2-paho-mqtt基本操作" class="headerlink" title="2. paho mqtt基本操作"></a>2. paho mqtt基本操作</h1><p>​	我们使用mqtt有如下几个操作：</p>
 <ul>
 <li>创建&#x2F;销毁客户端</li>
