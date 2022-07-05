@@ -13,33 +13,33 @@
   <meta name="description" content="1. 概述​	在前几篇的文章中，我们已经学习了LVGL界面绘制以及paho mqtt的同步客户端和异步客户端的操作，那么本篇就会综合前面的知识，加上Linux系统的多线程以及线程间通信的知识，将LVGL、MQTT、多线程、消息队列这些知识使用起来，形成我们最终的产品。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示">
-<meta property="og:url" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/index.html">
+<meta property="og:url" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/index.html">
 <meta property="og:site_name" content="摘星">
 <meta property="og:description" content="1. 概述​	在前几篇的文章中，我们已经学习了LVGL界面绘制以及paho mqtt的同步客户端和异步客户端的操作，那么本篇就会综合前面的知识，加上Linux系统的多线程以及线程间通信的知识，将LVGL、MQTT、多线程、消息队列这些知识使用起来，形成我们最终的产品。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220704164719069.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220704165220997.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220704170954476.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220704171610795.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220704171125935.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220704172748831.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220704173015403.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220704174520751.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220704174945062.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220704175623737.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220705104348821.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220705174622434.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220705182333806.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220705182435483.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220705182456527.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220705182516513.png">
-<meta property="og:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220705182554348.png">
-<meta property="article:published_time" content="2022-07-02T08:10:02.000Z">
-<meta property="article:modified_time" content="2022-07-05T10:59:36.350Z">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220704164719069.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220704165220997.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220704170954476.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220704171610795.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220704171125935.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220704172748831.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220704173015403.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220704174520751.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220704174945062.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220704175623737.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220705104348821.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220705174622434.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220705182333806.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220705182435483.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220705182456527.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220705182516513.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220705182554348.png">
+<meta property="article:published_time" content="2022-07-05T08:10:02.000Z">
+<meta property="article:modified_time" content="2022-07-05T11:06:41.248Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/image-20220704164719069.png">
+<meta name="twitter:image" content="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/image-20220704164719069.png">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -243,8 +243,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2022/07/02/LinuxApp-6-finishproducts/" class="archive-article-date">
-        <time datetime="2022-07-02T08:10:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-02</time>
+<a href="/2022/07/05/LinuxApp-6-finishproducts/" class="archive-article-date">
+        <time datetime="2022-07-05T08:10:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-05</time>
 </a>
 
   
@@ -279,12 +279,12 @@
     
     <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	在前几篇的文章中，我们已经学习了LVGL界面绘制以及paho mqtt的同步客户端和异步客户端的操作，那么本篇就会综合前面的知识，加上Linux系统的多线程以及线程间通信的知识，将LVGL、MQTT、多线程、消息队列这些知识使用起来，形成我们最终的产品。<span id="more"></span></p>
 <h2 id="温湿度监控系统应用开发所有文章"><a href="#温湿度监控系统应用开发所有文章" class="headerlink" title="温湿度监控系统应用开发所有文章"></a>温湿度监控系统应用开发所有文章</h2><ol>
-<li><a href>【嵌入式Linux应用开发】移植LVGL到Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】初步移植MQTT到Ubuntu和Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】SquareLine Studio与LVGL模拟器</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——绘制温湿度折线图</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示</a></li>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/">【嵌入式Linux应用开发】移植LVGL到Linux开发板</a></li>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/">【嵌入式Linux应用开发】初步移植MQTT到Ubuntu和Linux开发板</a></li>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/07/05/LinuxApp-3-SquareLineAndSimulator/">【嵌入式Linux应用开发】SquareLine Studio与LVGL模拟器</a></li>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/07/01/LinuxApp-4-TempHumiChart/">【嵌入式Linux应用开发】温湿度监控系统——绘制温湿度折线图</a></li>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/07/04/LinuxApp-5-MultiThreadAndShowTemp/">【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作</a></li>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/07/02/LinuxApp-6-finishproducts/">【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示</a></li>
 </ol>
 <h2 id="适用开发板"><a href="#适用开发板" class="headerlink" title="适用开发板"></a>适用开发板</h2><p>​	适用于百问网的STM32MP157开发板和IMX6ULL开发板及其对应的屏幕，需要注意的是编译链要对应更改。</p>
 <ul>
@@ -293,9 +293,9 @@
 </ul>
 <h1 id="2-Linux的多线程编程"><a href="#2-Linux的多线程编程" class="headerlink" title="2. Linux的多线程编程"></a>2. Linux的多线程编程</h1><p>​	Linux的多线程编程如果要深入使用的话，会涉及到很多的知识，在一个庞大的嵌入式产品中，需要开发者对多线程进行精细化设计，来优化代码提高CPU的执行效率，但是在本次的温湿度监控系统中，我们只需要掌握多线程的创建和退出就好。</p>
 <p>​	我们在Ubuntu的终端输入指令<code>man pthread</code>然后按<code>TAB</code>键自动补齐，可以看到很多关于线程的函数：</p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220704164719069.png" alt="image-20220704164719069"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220704164719069.png" alt="image-20220704164719069"></p>
 <p>比如我们对创建线程的api感兴趣，想知道它的信息，就可以在终端输入指令<code>man pthread_create</code>，然后就看到如下信息：</p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220704165220997.png" alt="image-20220704165220997"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220704165220997.png" alt="image-20220704165220997"></p>
 <p>这里会告诉我们要使用这个函数需要包含什么头文件，函数的每个参数是什么意思，返回值有哪些信息等，我们就可以通过这个说明来学习这个函数的使用，然后再去网上参考别人的使用经验，总结成为自己的学习经验。</p>
 <h2 id="2-1-创建线程"><a href="#2-1-创建线程" class="headerlink" title="2.1 创建线程"></a>2.1 创建线程</h2><p>​	前面已经通过man指令查看了<code>pthread_create</code>的用法，我们现在直接写代码来学习。首先在前面创建的工作区间新建一个C源文件<code>pthread_1.c</code>：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~/workspace$ cd /home/book/workspace</span><br><span class="line">book@100ask:~/workspace$ touch pthread_1.c</span><br></pre></td></tr></table></figure>
@@ -329,15 +329,15 @@
 <ul>
 <li>sleep：延时x秒</li>
 </ul>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220704170954476.png" alt="image-20220704170954476"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220704170954476.png" alt="image-20220704170954476"></p>
 <p>如果我们要使用sleep函数的话这里看不到我们需要哪些头文件，这时候我们就可以用man指令指定章节查看：<code>man 1/2/3 sleep</code>，下图是<code>man 3 sleep</code>的结果：</p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220704171610795.png" alt="image-20220704171610795"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220704171610795.png" alt="image-20220704171610795"></p>
 <ul>
 <li>usleep：延时x微妙</li>
 </ul>
 </li>
 </ul>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220704171125935.png" alt="image-20220704171125935"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220704171125935.png" alt="image-20220704171125935"></p>
 <p>所以我们需要在C源文件中包含头文件：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br></pre></td></tr></table></figure>
 
@@ -364,29 +364,29 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o pthread_1 pthread_1.c -lpthread</span><br></pre></td></tr></table></figure>
 
 <p>这样就得到了可执行输出文件<code>pthread_1</code>，我们<code>./pthread_1</code>执行后的效果：</p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220704172748831.png" alt="image-20220704172748831"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220704172748831.png" alt="image-20220704172748831"></p>
 <p>可以按<code>CTRL+C</code>退出程序。</p>
 </li>
 </ul>
 <h2 id="2-2-退出线程"><a href="#2-2-退出线程" class="headerlink" title="2.2 退出线程"></a>2.2 退出线程</h2><p>​	我们使用<code>man</code>指令学习下如何使用线程退出函数：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man pthread_exit</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220704173015403.png" alt="image-20220704173015403"><br>从描述那里可以看到这个函数可以终止调用该函数的线程，即如果我在<code>thread1</code>里面调用了<code>pthread_exit</code>，那么<code>thread1</code>就会被终止，而其它线程继续运行：</p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220704173015403.png" alt="image-20220704173015403"><br>从描述那里可以看到这个函数可以终止调用该函数的线程，即如果我在<code>thread1</code>里面调用了<code>pthread_exit</code>，那么<code>thread1</code>就会被终止，而其它线程继续运行：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">void</span> *<span class="title function_">thread1</span><span class="params">(<span class="type">void</span> *paramater)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> retval;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Thread 1 running: %d\n&quot;</span>, count++);</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(count==<span class="number">5</span>) pthread_exit(&amp;retval);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> *<span class="title function_">thread2</span><span class="params">(<span class="type">void</span> *paramater)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> retval;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Thread 2 running: %d\n&quot;</span>, count++);</span><br><span class="line">        sleep(<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span>(count==<span class="number">3</span>) pthread_exit(&amp;retval);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在main函数的主循环中加个打印</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">char</span> argc, <span class="type">char</span>** argv)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ret = pthread_create(&amp;<span class="type">thread1_t</span>, <span class="literal">NULL</span>, thread1, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>(ret != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Failed to create thread1.\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ret = pthread_create(&amp;<span class="type">thread2_t</span>, <span class="literal">NULL</span>, thread2, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>(ret != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Failed to create thread2.\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Main&gt;&gt;&gt;\r\n&quot;</span>);</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>我们这样修改后重新编译执行看下效果：</p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220704174520751.png" alt="image-20220704174520751"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220704174520751.png" alt="image-20220704174520751"></p>
 <p>可以看到线程1执行5此后就没再打印了，线程2打印了3次后就没打印了。</p>
 <h1 id="3-Linux的消息队列"><a href="#3-Linux的消息队列" class="headerlink" title="3. Linux的消息队列"></a>3. Linux的消息队列</h1><p>​	对于消息队列的学习我们还是使用<code>man</code>来查询学习，先使用<code>man msg</code>+<code>TAB</code>键自动补齐，看一下有哪些函数：</p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220704174945062.png" alt="image-20220704174945062"></p>
-<h2 id="3-1-获得一个消息队列"><a href="#3-1-获得一个消息队列" class="headerlink" title="3.1 获得一个消息队列"></a>3.1 获得一个消息队列</h2><p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220704175623737.png" alt="image-20220704175623737"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220704174945062.png" alt="image-20220704174945062"></p>
+<h2 id="3-1-获得一个消息队列"><a href="#3-1-获得一个消息队列" class="headerlink" title="3.1 获得一个消息队列"></a>3.1 获得一个消息队列</h2><p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220704175623737.png" alt="image-20220704175623737"></p>
 <p>​	获取一个新的消息需要传入key关键字还要设置一个新建的标志msgflg，如果<code>msgflag</code>设置<code>IPC_CREAT</code>，那么不管<code>key</code>值有没有被其它的消息队列占用，都能成功的获取到消息队列，返回该消息队列的ID，如果该消息队列是已创建的则是打开一个已存在的消息队列；如果<code>msgflag</code>设置为<code>ICP_CREAT | IPC_EXCL</code>，那么如果<code>key</code>已经被其他的队列占用的话，是无法获取到该关键字对应的新的消息队列的，返回错误码-1，例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> msg_id = msgget(<span class="number">1234</span>, IPC_PRIVATE | IPC_CREAT);</span><br><span class="line"><span class="type">int</span> msg_id1 = msgget(<span class="number">2345</span>, IPC_CREAT | IPC_EXCL);</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-2-发送消息"><a href="#3-2-发送消息" class="headerlink" title="3.2 发送消息"></a>3.2 发送消息</h2><p>​	发送消息队列的API是<code>msgsnd</code>：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">msgsnd</span><span class="params">(<span class="type">int</span> msqid, <span class="type">const</span> <span class="type">void</span> *msgp, <span class="type">size_t</span> msgsz, <span class="type">int</span> msgflg)</span>;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220705104348821.png" alt="image-20220705104348821"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220705104348821.png" alt="image-20220705104348821"></p>
 <p>可以看到在手册中<code>msgsnd</code>和<code>msgrcv</code>是一起解释的，对于发送函数<code>msgsnd</code>，需要传入4个参数：</p>
 <ul>
 <li><p>消息队列的ID<code>msgid</code>；</p>
@@ -492,7 +492,7 @@
 
 <h1 id="4-显示温湿度"><a href="#4-显示温湿度" class="headerlink" title="4. 显示温湿度"></a>4. 显示温湿度</h1><p>​	我们在前面已经学习了MQTT的一些基本操作，以及LVGL中表格chart和滑动条slider的一些基本操作，刚才又学习了线程通信的消息队列，现在就可以综合起来实现我们的目标了。</p>
 <p>​	我们想要完成的是将Linux开发板变成一个MQTT客户端，和阿里云服务器建立连接，然后订阅一个主题获得温湿度数据，开发板在接收到了订阅的主题的消息后，处理数据，然后发送消息队列给ui，去设置chart和slider更新显示：</p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220705174622434.png" alt="image-20220705174622434"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220705174622434.png" alt="image-20220705174622434"></p>
 <p>所以我们的开发板其实只需要完成MQTT的订阅任务然后去处理再发送消息给LVGL即可。</p>
 <h2 id="4-1-更新chart和slider"><a href="#4-1-更新chart和slider" class="headerlink" title="4.1 更新chart和slider"></a>4.1 更新chart和slider</h2><p>​	我们可以将更新chart和slider数值和显示的函数放到main.c里面去实现：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book@100ask:~$ cd /home/book/workspace/lvgl_demo</span><br><span class="line">book@100ask:~/workspace/lvgl_demo$ vim main.c</span><br></pre></td></tr></table></figure>
@@ -530,13 +530,13 @@
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[root@100ask:~]# mount -t nfs -o nolock,vers=3 192.168.50.12:/home/book/nfs_rootfs /mnt</span></span><br><span class="line"><span class="section">[root@100ask:~]# cp /mnt/demo ./</span></span><br><span class="line"><span class="section">[root@100ask:~]# ./demo</span></span><br></pre></td></tr></table></figure>
 
 <p>这样界面运行起来了，且也能看到设置的mqtt打印信息：</p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220705182333806.png" alt="image-20220705182333806"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220705182333806.png" alt="image-20220705182333806"></p>
 <h2 id="4-5-阿里云模拟下发消息验证"><a href="#4-5-阿里云模拟下发消息验证" class="headerlink" title="4.5 阿里云模拟下发消息验证"></a>4.5 阿里云模拟下发消息验证</h2><p>​	开发板已经将程序运行起来了，我们就去阿里云下发模拟消息看一下：</p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220705182435483.png" alt="image-20220705182435483"></p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220705182456527.png" alt="image-20220705182456527"></p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220705182516513.png" alt="image-20220705182516513"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220705182435483.png" alt="image-20220705182435483"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220705182456527.png" alt="image-20220705182456527"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220705182516513.png" alt="image-20220705182516513"></p>
 <p>然后看下开发板的屏幕以及终端：</p>
-<p><img src="/2022/07/02/LinuxApp-6-finishproducts/image-20220705182554348.png" alt="image-20220705182554348"></p>
+<p><img src="/2022/07/05/LinuxApp-6-finishproducts/image-20220705182554348.png" alt="image-20220705182554348"></p>
 <p>可以看到接收到了消息，屏幕就不拍照了，实际上屏幕的滑动条数值也变了，表格也出来了点。</p>
 <p>​	至此，一个温湿度监控系统就完成了，下一步是去搞一个探测温湿度的子系统，用单片机+RT-Thread+MQTT+DHT11来完成。</p>
 <h1 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h1><p>​	可以看到我们最终没有用到消息队列，这是因为当前的系统功能还很简单，不需要这个操作，但是读者可以在此基础上进行扩展，使这个系统不仅能订阅子系统的消息，还能发送消息给子系统来完成某个控制，这时候可以看下使用消息队列是否会更科学。</p>
@@ -586,7 +586,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/" title="【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示" target="_blank">http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/</a>
+          <a href="http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/" title="【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示" target="_blank">http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/</a>
         </li>
         
         <li>
@@ -664,7 +664,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/07/02/LinuxApp-6-finishproducts/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/07/05/LinuxApp-6-finishproducts/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -679,18 +679,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/07/04/LinuxApp-5-MultiThreadAndShowTemp/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/07/01/LinuxApp-4-TempHumiChart/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">【嵌入式Linux应用开发】温湿度监控系统——绘制温湿度折线图</div>
+    <a href="/2022/07/04/LinuxApp-5-MultiThreadAndShowTemp/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -877,11 +868,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
               </li>
              
               <li class="article-tag-list-item">
