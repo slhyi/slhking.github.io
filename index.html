@@ -227,7 +227,7 @@
   
   
 <a href="/2022/07/05/LinuxApp-3-SquareLineAndSimulator/" class="archive-article-date">
-        <time datetime="2022-07-05T10:51:01.013Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-05</time>
+        <time datetime="2022-07-05T10:59:36.335Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-05</time>
 </a>
 
   
@@ -239,20 +239,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="温湿度监控系统应用开发所有文章"><a href="#温湿度监控系统应用开发所有文章" class="headerlink" title="温湿度监控系统应用开发所有文章"></a>温湿度监控系统应用开发所有文章</h1><ol>
-<li><a href>【嵌入式Linux应用开发】移植LVGL到Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】初步移植MQTT到Ubuntu和Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】SquareLine Studio与LVGL模拟器</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——绘制温湿度折线图</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示</a></li>
-</ol>
-<h1 id="适用平台"><a href="#适用平台" class="headerlink" title="适用平台"></a>适用平台</h1><p>​	适用于百问网的STM32MP157开发板和IMX6ULL开发板及其对应的屏幕，需要注意的是编译链要对应更改。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a230r.1.14.7.67ce2ea7H03xGz&id=623233533961&ns=1&abbucket=12#detail">100ASK_STM32MP157</a></li>
-<li><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?spm=a230r.1.14.13.67ce2ea7H03xGz&id=624976567583&ns=1&abbucket=12&skuId=4594403007751">100ASK_IMX6ULL</a></li>
-</ul>
-<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇重点是讲LVGL的开发辅助工具，以及利用这些工具将LVGL制作UI之后移植到嵌入式Linux开发板上显示。</p>
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇重点是讲LVGL的开发辅助工具，以及利用这些工具将LVGL制作UI之后移植到嵌入式Linux开发板上显示。</p>
     
     <a class="article-more-a" href="/2022/07/05/LinuxApp-3-SquareLineAndSimulator/#more">more >></a>
     
@@ -344,20 +331,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="温湿度监控系统应用开发所有文章"><a href="#温湿度监控系统应用开发所有文章" class="headerlink" title="温湿度监控系统应用开发所有文章"></a>温湿度监控系统应用开发所有文章</h1><ol>
-<li><a href>【嵌入式Linux应用开发】移植LVGL到Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】初步移植MQTT到Ubuntu和Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】SquareLine Studio与LVGL模拟器</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——绘制温湿度折线图</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示</a></li>
-</ol>
-<h1 id="适用平台"><a href="#适用平台" class="headerlink" title="适用平台"></a>适用平台</h1><p>​	适用于百问网的STM32MP157开发板和IMX6ULL开发板及其对应的屏幕，需要注意的是编译链要对应更改。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a230r.1.14.7.67ce2ea7H03xGz&id=623233533961&ns=1&abbucket=12#detail">100ASK_STM32MP157</a></li>
-<li><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?spm=a230r.1.14.13.67ce2ea7H03xGz&id=624976567583&ns=1&abbucket=12&skuId=4594403007751">100ASK_IMX6ULL</a></li>
-</ul>
-<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇的重点是解析paho mqtt官方例程，学习它的一些结构体、API和回调的处理，然后再学习下Linux中的线程和线程间数据通信，掌握相关API的使用，最后综合起来，使用多线程publish或处理subscribe的主题的消息，将订阅的温湿度消息解析出来在LVGL的表格中用折线图的方式显示出来。</p>
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇的重点是解析paho mqtt官方例程，学习它的一些结构体、API和回调的处理，然后再学习下Linux中的线程和线程间数据通信，掌握相关API的使用，最后综合起来，使用多线程publish或处理subscribe的主题的消息，将订阅的温湿度消息解析出来在LVGL的表格中用折线图的方式显示出来。</p>
     
     <a class="article-more-a" href="/2022/07/04/LinuxApp-5-MultiThreadAndShowTemp/#more">more >></a>
     
@@ -445,20 +419,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="温湿度监控系统应用开发所有文章"><a href="#温湿度监控系统应用开发所有文章" class="headerlink" title="温湿度监控系统应用开发所有文章"></a>温湿度监控系统应用开发所有文章</h1><ol>
-<li><a href>【嵌入式Linux应用开发】移植LVGL到Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】初步移植MQTT到Ubuntu和Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】SquareLine Studio与LVGL模拟器</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——绘制温湿度折线图</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示</a></li>
-</ol>
-<h1 id="适用平台"><a href="#适用平台" class="headerlink" title="适用平台"></a>适用平台</h1><p>​	适用于百问网的STM32MP157开发板和IMX6ULL开发板及其对应的屏幕，需要注意的是编译链要对应更改。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a230r.1.14.7.67ce2ea7H03xGz&id=623233533961&ns=1&abbucket=12#detail">100ASK_STM32MP157</a></li>
-<li><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?spm=a230r.1.14.13.67ce2ea7H03xGz&id=624976567583&ns=1&abbucket=12&skuId=4594403007751">100ASK_IMX6ULL</a></li>
-</ul>
-<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	在前几篇的文章中，我们已经学习了LVGL界面绘制以及paho mqtt的同步客户端和异步客户端的操作，那么本篇就会综合前面的知识，加上Linux系统的多线程以及线程间通信的知识，将LVGL、MQTT、多线程、消息队列这些知识使用起来，形成我们最终的产品。</p>
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	在前几篇的文章中，我们已经学习了LVGL界面绘制以及paho mqtt的同步客户端和异步客户端的操作，那么本篇就会综合前面的知识，加上Linux系统的多线程以及线程间通信的知识，将LVGL、MQTT、多线程、消息队列这些知识使用起来，形成我们最终的产品。</p>
     
     <a class="article-more-a" href="/2022/07/02/LinuxApp-6-finishproducts/#more">more >></a>
     
@@ -546,20 +507,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="温湿度监控系统应用开发所有文章"><a href="#温湿度监控系统应用开发所有文章" class="headerlink" title="温湿度监控系统应用开发所有文章"></a>温湿度监控系统应用开发所有文章</h1><ol>
-<li><a href>【嵌入式Linux应用开发】移植LVGL到Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】初步移植MQTT到Ubuntu和Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】SquareLine Studio与LVGL模拟器</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——绘制温湿度折线图</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示</a></li>
-</ol>
-<h1 id="适用平台"><a href="#适用平台" class="headerlink" title="适用平台"></a>适用平台</h1><p>​	适用于百问网的STM32MP157开发板和IMX6ULL开发板及其对应的屏幕，需要注意的是编译链要对应更改。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a230r.1.14.7.67ce2ea7H03xGz&id=623233533961&ns=1&abbucket=12#detail">100ASK_STM32MP157</a></li>
-<li><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?spm=a230r.1.14.13.67ce2ea7H03xGz&id=624976567583&ns=1&abbucket=12&skuId=4594403007751">100ASK_IMX6ULL</a></li>
-</ul>
-<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇的主要内容是使用SquareLine Studio绘制一个显示温湿度曲线图的表格，将其移植到100ASK STM32MP157开发板上显示，效果图如图所示：</p>
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇的主要内容是使用SquareLine Studio绘制一个显示温湿度曲线图的表格，将其移植到100ASK STM32MP157开发板上显示，效果图如图所示：</p>
     
     <a class="article-more-a" href="/2022/07/01/LinuxApp-4-TempHumiChart/#more">more >></a>
     
@@ -647,20 +595,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="温湿度监控系统应用开发所有文章"><a href="#温湿度监控系统应用开发所有文章" class="headerlink" title="温湿度监控系统应用开发所有文章"></a>温湿度监控系统应用开发所有文章</h1><ol>
-<li><a href>【嵌入式Linux应用开发】移植LVGL到Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】初步移植MQTT到Ubuntu和Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】SquareLine Studio与LVGL模拟器</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——绘制温湿度折线图</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示</a></li>
-</ol>
-<h1 id="适用平台"><a href="#适用平台" class="headerlink" title="适用平台"></a>适用平台</h1><p>​	适用于百问网的STM32MP157开发板和IMX6ULL开发板及其对应的屏幕，需要注意的是编译链要对应更改。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a230r.1.14.7.67ce2ea7H03xGz&id=623233533961&ns=1&abbucket=12#detail">100ASK_STM32MP157</a></li>
-<li><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?spm=a230r.1.14.13.67ce2ea7H03xGz&id=624976567583&ns=1&abbucket=12&skuId=4594403007751">100ASK_IMX6ULL</a></li>
-</ul>
-<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要是记录将MQTT移植安装到百问网STM32MP157开发板上，并且是跑一下MQTT的一个例程来验证，要完成本次移植安装，必须要保证电脑和开发板都能上网。。</p>
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要是记录将MQTT移植安装到百问网STM32MP157开发板上，并且是跑一下MQTT的一个例程来验证，要完成本次移植安装，必须要保证电脑和开发板都能上网。</p>
     
     <a class="article-more-a" href="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/#more">more >></a>
     
@@ -748,20 +683,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="温湿度监控系统应用开发所有文章"><a href="#温湿度监控系统应用开发所有文章" class="headerlink" title="温湿度监控系统应用开发所有文章"></a>温湿度监控系统应用开发所有文章</h1><ol>
-<li><a href>【嵌入式Linux应用开发】移植LVGL到Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】初步移植MQTT到Ubuntu和Linux开发板</a></li>
-<li><a href>【嵌入式Linux应用开发】SquareLine Studio与LVGL模拟器</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——绘制温湿度折线图</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作</a></li>
-<li><a href>【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示</a></li>
-</ol>
-<h1 id="适用平台"><a href="#适用平台" class="headerlink" title="适用平台"></a>适用平台</h1><p>​	适用于百问网的STM32MP157开发板和IMX6ULL开发板及其对应的屏幕，需要注意的是编译链要对应更改。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a230r.1.14.7.67ce2ea7H03xGz&id=623233533961&ns=1&abbucket=12#detail">100ASK_STM32MP157</a></li>
-<li><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?spm=a230r.1.14.13.67ce2ea7H03xGz&id=624976567583&ns=1&abbucket=12&skuId=4594403007751">100ASK_IMX6ULL</a></li>
-</ul>
-<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要是记录将LVGL移植到百问网STM32MP157开发板上，并且仅是跑一下LVGL的一些例程。</p>
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要是记录将LVGL移植到百问网STM32MP157开发板上，并且仅是跑一下LVGL的一些例程。</p>
     
     <a class="article-more-a" href="/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/#more">more >></a>
     
@@ -1373,11 +1295,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">梅菜扣肉</a>
               </li>
              
               <li class="article-tag-list-item">
