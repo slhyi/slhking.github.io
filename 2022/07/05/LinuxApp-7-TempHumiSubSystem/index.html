@@ -6,19 +6,37 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://slhking.github.io">
-  <title>Archives | 摘星</title>
+  <title>【嵌入式Linux应用开发】设计温湿度采集MCU子系统 | 摘星</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
-<meta property="og:type" content="website">
-<meta property="og:title" content="摘星">
-<meta property="og:url" content="http://slhking.github.io/archives/index.html">
+  <meta name="description" content="1. 概述​	本篇主要是使用百问网的100ASK_STM32F103_PRO开发板加上ESP8266和DHT11设计一个采集环境温湿度的子系统，将温湿度数据上云，让阿里云服务器转发给订阅了该温湿度数据主体的MQTT客户端，也就是之前做的基于STM32MP157开发板的温湿度监控系统。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【嵌入式Linux应用开发】设计温湿度采集MCU子系统">
+<meta property="og:url" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/index.html">
 <meta property="og:site_name" content="摘星">
-<meta property="og:description" content="站在巨人的肩膀上仰望星辰，俯瞰寰宇">
+<meta property="og:description" content="1. 概述​	本篇主要是使用百问网的100ASK_STM32F103_PRO开发板加上ESP8266和DHT11设计一个采集环境温湿度的子系统，将温湿度数据上云，让阿里云服务器转发给订阅了该温湿度数据主体的MQTT客户端，也就是之前做的基于STM32MP157开发板的温湿度监控系统。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706094310343.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706094636314.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706094716058.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706101617296.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706101826511.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706102246189.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706103704730.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706104006030.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706104322171.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706104530612.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706104609722.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706104838100.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706162252163.png">
+<meta property="og:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706162338409.png">
+<meta property="article:published_time" content="2022-07-05T14:23:57.000Z">
+<meta property="article:modified_time" content="2022-07-06T08:24:30.399Z">
 <meta property="article:author" content="摘星星的小朋友">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706094310343.png">
   
     <link rel="alternative" href="/atom.xml" title="摘星" type="application/atom+xml">
   
@@ -203,41 +221,185 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-LinuxApp-7-TempHumiSubSystem" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      【嵌入式Linux应用开发】设计温湿度采集MCU子系统
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2022/07/05/LinuxApp-7-TempHumiSubSystem/" class="archive-article-date">
         <time datetime="2022-07-05T14:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-05</time>
 </a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">1.7k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">7分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>​	本篇主要是使用百问网的<strong>100ASK_STM32F103_PRO</strong>开发板加上ESP8266和DHT11设计一个采集环境温湿度的子系统，将温湿度数据上云，让阿里云服务器转发给订阅了该温湿度数据主体的MQTT客户端，也就是之前做的基于STM32MP157开发板的温湿度监控系统。<span id="more"></span></p>
+<h2 id="温湿度监控系统应用开发所有文章"><a href="#温湿度监控系统应用开发所有文章" class="headerlink" title="温湿度监控系统应用开发所有文章"></a>温湿度监控系统应用开发所有文章</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/">【嵌入式Linux应用开发】移植LVGL到Linux开发板</a></li>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/">【嵌入式Linux应用开发】初步移植MQTT到Ubuntu和Linux开发板</a></li>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/06/21/LinuxApp-3-SquareLineAndSimulator/">【嵌入式Linux应用开发】SquareLine Studio与LVGL模拟器</a></li>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/07/01/LinuxApp-4-TempHumiChart/">【嵌入式Linux应用开发】温湿度监控系统——绘制温湿度折线图</a></li>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/07/04/LinuxApp-5-MultiThreadAndShowTemp/">【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作</a></li>
+<li><a target="_blank" rel="noopener" href="https://slhuan.cn/2022/07/05/LinuxApp-6-finishproducts/">【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示</a></li>
+<li><a href>【嵌入式Linux应用开发】设计温湿度采集MCU子系统</a></li>
+</ol>
+<h2 id="适用开发板"><a href="#适用开发板" class="headerlink" title="适用开发板"></a>适用开发板</h2><p>​	适用于百问网的<a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18944745104.12.674178d5BwdDQI&id=676044382014"><strong>100ASK_STM32F103_PRO</strong>开发板</a>。</p>
+<h1 id="2-软件平台"><a href="#2-软件平台" class="headerlink" title="2. 软件平台"></a>2. 软件平台</h1><p>​	这个温湿度采集子系统是基于RT-Thread操作系统，使用的ide是RTT的studio，因为可以用它的生态软件包快速实现我们的需求。</p>
+<h1 id="3-配置软件包"><a href="#3-配置软件包" class="headerlink" title="3. 配置软件包"></a>3. 配置软件包</h1><p>​	新建rt-thread studio的STM32F103的工程就不介绍了，依照官方文档做很简单的，下面开始添加和配置软件包。</p>
+<h2 id="3-1-配置DHT11"><a href="#3-1-配置DHT11" class="headerlink" title="3.1 配置DHT11"></a>3.1 配置DHT11</h2><p>​	如果再RT-Thread Settings的软件包里面搜索不到DHT11的软件包的话，可以去官网的软件包中查看一下分类，然后再去软件包中设置：</p>
+<img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706094310343.png" alt="image-20220706094310343" style="zoom:80%;">
+
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706094636314.png" alt="image-20220706094636314"></p>
+<p>在这里面找到DHT11的软件包：</p>
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706094716058.png" alt="image-20220706094716058"></p>
+<p>这里油两种，都可以使用，如果不清楚使用的引脚序号是多少的话可以暂时不设置。</p>
+<h2 id="3-2-配置MQTT"><a href="#3-2-配置MQTT" class="headerlink" title="3.2 配置MQTT"></a>3.2 配置MQTT</h2><p>​	mqtt在RT-Thread Settings软件包的IoT-物联网中的：</p>
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706101617296.png" alt="image-20220706101617296"></p>
+<p>这里选择的是其中一种，也是前面几篇文章用的mqtt库paho mqtt，使能了示例。</p>
+<h2 id="3-3-配置AT设备"><a href="#3-3-配置AT设备" class="headerlink" title="3.3 配置AT设备"></a>3.3 配置AT设备</h2><p>​	因为我们的方案是使用的ESP8266连接WiFi入网然后再去和阿里云服务器建立连接的，因而就需要使用到ESP8266的库，在RT-Thread Settings里面ESP8266的应用是在AT设备里面设置的，而AT设备也是在IoT-物联网里面的：</p>
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706101826511.png" alt="image-20220706101826511"></p>
+<p>我们需要设置连接的WiFi名称和密码，然后和ESP8266连接的串口是哪个也需要指定。</p>
+<p>​	当DHT11、MQTT、AT设备都配置到之后就选择保存，将配置生效生成代码到工程里面去。</p>
+<h1 id="4-温湿度数据上云"><a href="#4-温湿度数据上云" class="headerlink" title="4. 温湿度数据上云"></a>4. 温湿度数据上云</h1><h2 id="4-1-修改DHT11示例代码"><a href="#4-1-修改DHT11示例代码" class="headerlink" title="4.1 修改DHT11示例代码"></a>4.1 修改DHT11示例代码</h2><p>​	在DHT11的示例代码中，使用的引脚是用引脚序号来定义的，如果不熟悉这种用法可以将源码注释掉，改成使用<code>GET_PIN</code>宏函数来选择GPIO：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源代码</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;rtthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;rtdevice.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;board.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;dhtxx.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DATA_PIN                 PKG_USING_DHTXX_SAMPLE_PIN</span></span><br></pre></td></tr></table></figure>
+
+<p>修改后的代码：</p>
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706102246189.png" alt="image-20220706102246189"></p>
+<p>可以看到这里添加了一个驱动层的头文件，这是因为<code>GET_PIN</code>是在里面宏定义的，通过此函数可以方便的指定我们用的是哪一组GPIO的哪一个引脚。</p>
+<p>​	DHT的源码是将读取数据的app注册放到了终端去输入指令调用的，我们期望的是每隔固定周期自动读取，因而可以自己创建一个线程：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">dht_thread_entry</span><span class="params">(<span class="type">void</span> *parameter)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">dht_device_t</span> sensor = dht_create(DATA_PIN);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(dht_read(sensor))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">rt_int32_t</span> temp = dht_get_temperature(sensor);</span><br><span class="line">            <span class="type">rt_int32_t</span> humi = dht_get_humidity(sensor);</span><br><span class="line"></span><br><span class="line">            rt_kprintf(<span class="string">&quot;Temp: %d, Humi: %d\n&quot;</span>, temp, humi);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            rt_kprintf(<span class="string">&quot;Read dht sensor failed.\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        rt_thread_delay(<span class="number">5000</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dht_delete(sensor);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">dht_thread_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">rt_thread_t</span> <span class="type">dht_t</span> = rt_thread_create(<span class="string">&quot;DHT&quot;</span>, \</span><br><span class="line">                                         dht_thread_entry, \</span><br><span class="line">                                         RT_NULL, \</span><br><span class="line">                                         <span class="number">512</span>, \</span><br><span class="line">                                         RT_THREAD_PRIORITY_MAX&gt;&gt;<span class="number">1</span>, \</span><br><span class="line">                                         <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="type">dht_t</span> == RT_NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        rt_kprintf(<span class="string">&quot;Failed to create dht thread.\n\r&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    rt_thread_startup(<span class="type">dht_t</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">INIT_APP_EXPORT(dht_thread_init);</span><br></pre></td></tr></table></figure>
+
+<p>这样F103就会每隔大约5s的时间读取一次温湿度数据：</p>
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706103704730.png" alt="image-20220706103704730"></p>
+<p>可以看到数据是放大了10倍的，如果没有精度需求的哈，可以只保留整数位也就是将数据除以10：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">rt_int32_t</span> temp = dht_get_temperature(sensor)/<span class="number">10</span>;</span><br><span class="line"><span class="type">rt_int32_t</span> humi = dht_get_humidity(sensor)/<span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-添加MQTT线程"><a href="#4-2-添加MQTT线程" class="headerlink" title="4.2 添加MQTT线程"></a>4.2 添加MQTT线程</h2><p>​	MQTT使用的AT设备是使用UART3连接的ESP8266，但是我们的源码里面是没有使能和定义UART3及其引脚的，因而我们需要去<code>board.h</code>里面将UART3的设置定义出来：</p>
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706104006030.png" alt="image-20220706104006030"></p>
+<p>然后再去MQTT的示例里面修改登录服务器的地址、客户端ID等信息：</p>
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706104322171.png" alt="image-20220706104322171"></p>
+<p>接着定义一个静态全局变量<code>is_connect</code>来表明客户端和服务器是断开还是连接状态，这个标志在paho mqtt的连接成功回调函数和连接断开回调函数中改变：</p>
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706104530612.png" alt="image-20220706104530612"></p>
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706104609722.png" alt="image-20220706104609722"></p>
+<ul>
+<li>1-连接状态</li>
+<li>-1断开状态</li>
+</ul>
+<p>随后去<code>mqtt_start</code>中将客户端ID的赋值改成我们宏定义的值，且保活时间周期设置为60s：</p>
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706104838100.png" alt="image-20220706104838100"></p>
+<p>最后创建线程，等待DHT线程传来数据，线程传输数据我们使用rtt的消息队列，我们在mqtt的线程中初始化一个消息队列，mqtt的线程读取队列，dht的线程发送队列，所以这个消息队列应该没定义成一个全局变量，好让两个不同的源文件调用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">rt_mq_t</span> pmq;</span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">mqtt_thread_entry</span><span class="params">(<span class="type">void</span> *parameter)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 如果没有开启mqtt客户端，先开启</span></span><br><span class="line">    <span class="keyword">if</span>(is_started != <span class="number">1</span>) mqtt_start(<span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个消息队列</span></span><br><span class="line">    pmq = rt_mq_create(<span class="string">&quot;TempHumi mq&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">rt_uint16_t</span>), <span class="number">4</span>, RT_IPC_FLAG_FIFO);</span><br><span class="line">    <span class="keyword">if</span>(pmq ==RT_NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        rt_kprintf(<span class="string">&quot;Failed to create data message queue.\r\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 只有在mqtt客户端连接上了服务器之后才能坐后面的事情</span></span><br><span class="line">        <span class="keyword">if</span>(is_connect == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">rt_uint16_t</span> value = <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> ret = rt_mq_recv(pmq, &amp;value, <span class="keyword">sizeof</span>(value), <span class="number">10</span>);</span><br><span class="line">            <span class="keyword">if</span>(ret==RT_EOK)</span><br><span class="line">            &#123;</span><br><span class="line">                rt_kprintf(<span class="string">&quot;Success to receive message queue data:%d°C-%dRH.\r\n&quot;</span>, (value&gt;&gt;<span class="number">8</span>)&amp;<span class="number">0xFF</span>, value&amp;<span class="number">0xFF</span>);</span><br><span class="line">                <span class="type">char</span> buf[<span class="number">8</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">                rt_sprintf(buf, <span class="string">&quot;%d&quot;</span>, value);</span><br><span class="line">                <span class="comment">// 调用发布API</span></span><br><span class="line">                <span class="type">int</span> rc = paho_mqtt_publish(&amp;client, QOS1, MQTT_PUBTOPIC, buf);</span><br><span class="line">                <span class="keyword">if</span>(rc != PAHO_SUCCESS)</span><br><span class="line">                &#123;</span><br><span class="line">                    rt_kprintf(<span class="string">&quot;Failed to publish message.\r\n&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            rt_thread_delay(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">mqtt_thread_init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">rt_thread_t</span> <span class="type">mqtt_t</span> = rt_thread_create(<span class="string">&quot;mqtt thread&quot;</span>, \</span><br><span class="line">                                           mqtt_thread_entry, \</span><br><span class="line">                                           RT_NULL, \</span><br><span class="line">                                           <span class="number">1024</span>, \</span><br><span class="line">                                           RT_THREAD_PRIORITY_MAX&gt;&gt;<span class="number">1</span>, \</span><br><span class="line">                                           <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="type">mqtt_t</span> == RT_NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        rt_kprintf(<span class="string">&quot;Failed to create mqtt thread.\r\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    rt_thread_startup(<span class="type">mqtt_t</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">INIT_APP_EXPORT(mqtt_thread_init);</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-3-dht线程发送消息队列"><a href="#4-3-dht线程发送消息队列" class="headerlink" title="4.3 dht线程发送消息队列"></a>4.3 dht线程发送消息队列</h2><p>​	将在mqtt示例源码中定义的消息队列放到dht示例源码中声明，然后在线程中使用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">rt_mq_t</span> pmq;</span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">dht_thread_entry</span><span class="params">(<span class="type">void</span> *parameter)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">dht_device_t</span> sensor = dht_create(DATA_PIN);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(dht_read(sensor))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">rt_int32_t</span> temp = dht_get_temperature(sensor)/<span class="number">10</span>;</span><br><span class="line">            <span class="type">rt_int32_t</span> humi = dht_get_humidity(sensor)/<span class="number">10</span>;</span><br><span class="line">            <span class="keyword">if</span>(pmq != RT_NULL)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">rt_uint16_t</span> value = (temp&lt;&lt;<span class="number">8</span>) + humi;</span><br><span class="line">                <span class="type">int</span> ret = rt_mq_send(pmq, &amp;value, <span class="keyword">sizeof</span>(value));</span><br><span class="line">                <span class="keyword">if</span>(ret != RT_EOK)</span><br><span class="line">                &#123;</span><br><span class="line">                    rt_kprintf(<span class="string">&quot;Failed to send message.\r\n&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"><span class="comment">//            rt_kprintf(&quot;Temp: %d, Humi: %d\n&quot;, temp, humi);</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            rt_kprintf(<span class="string">&quot;Read dht sensor failed.\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        rt_thread_delay(<span class="number">5000</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dht_delete(sensor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-编译烧写运行"><a href="#5-编译烧写运行" class="headerlink" title="5. 编译烧写运行"></a>5. 编译烧写运行</h1><p>​	将程序改好之后直接编译，然后使用ST-Link烧录到板子里面运行，然后让STM32MP157开发板也运行前面编译好的那个demo，就可以看到温湿度数据在Linux开发板上的屏幕上，显示出来了。</p>
+<p><img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706162252163.png" alt="image-20220706162252163"></p>
+<img src="/2022/07/05/LinuxApp-7-TempHumiSubSystem/image-20220706162338409.png" alt="image-20220706162338409" style="zoom: 33%;">
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/05/LinuxApp-7-TempHumiSubSystem/">【嵌入式Linux应用开发】设计温湿度采集MCU子系统</a>
-	
-    </h1>
-  
+      </a>
+    </div>
+    
 
-
-        <div class="article-info info-on-right">
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          摘星星的小朋友
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/" title="【嵌入式Linux应用开发】设计温湿度采集MCU子系统" target="_blank">http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -249,459 +411,120 @@
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://slhking.github.io/2022/07/05/LinuxApp-7-TempHumiSubSystem/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/05/LinuxApp-6-finishproducts/" class="archive-article-date">
-        <time datetime="2022-07-05T08:10:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-05</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2022/07/05/LinuxApp-6-finishproducts/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/05/LinuxApp-6-finishproducts/">【嵌入式Linux应用开发】温湿度监控系统——多线程与温湿度的获取显示</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%A9%E6%B9%BF%E5%BA%A6%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%89%80%E6%9C%89%E6%96%87%E7%AB%A0"><span class="toc-number">1.1.</span> <span class="toc-text">温湿度监控系统应用开发所有文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%BC%80%E5%8F%91%E6%9D%BF"><span class="toc-number">1.2.</span> <span class="toc-text">适用开发板</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E8%BD%AF%E4%BB%B6%E5%B9%B3%E5%8F%B0"><span class="toc-number">2.</span> <span class="toc-text">2. 软件平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">3.</span> <span class="toc-text">3. 配置软件包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E9%85%8D%E7%BD%AEDHT11"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 配置DHT11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E9%85%8D%E7%BD%AEMQTT"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 配置MQTT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E9%85%8D%E7%BD%AEAT%E8%AE%BE%E5%A4%87"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 配置AT设备</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E6%B8%A9%E6%B9%BF%E5%BA%A6%E6%95%B0%E6%8D%AE%E4%B8%8A%E4%BA%91"><span class="toc-number">4.</span> <span class="toc-text">4. 温湿度数据上云</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E4%BF%AE%E6%94%B9DHT11%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 修改DHT11示例代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E6%B7%BB%E5%8A%A0MQTT%E7%BA%BF%E7%A8%8B"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 添加MQTT线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-dht%E7%BA%BF%E7%A8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 dht线程发送消息队列</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E7%BC%96%E8%AF%91%E7%83%A7%E5%86%99%E8%BF%90%E8%A1%8C"><span class="toc-number">5.</span> <span class="toc-text">5. 编译烧写运行</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/04/LinuxApp-5-MultiThreadAndShowTemp/" class="archive-article-date">
-        <time datetime="2022-07-04T08:00:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-04</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/04/LinuxApp-5-MultiThreadAndShowTemp/">【嵌入式Linux应用开发】温湿度监控系统——学习paho mqtt的基本操作</a>
-	
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/07/01/LinuxApp-4-TempHumiChart/" class="archive-article-date">
-        <time datetime="2022-07-01T13:56:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-01</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/07/01/LinuxApp-4-TempHumiChart/">【嵌入式Linux应用开发】温湿度监控系统——绘制温湿度折线图</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-3-SquareLineAndSimulator/" class="archive-article-date">
-        <time datetime="2022-06-21T10:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-3-SquareLineAndSimulator/">【嵌入式Linux应用开发】SquareLine Studio与LVGL模拟器</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LVGL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T09:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-2-PortingMQTTForSTM32MP157/">【嵌入式Linux应用开发】初步移植MQTT到Ubuntu和Linux开发板</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/" class="archive-article-date">
-        <time datetime="2022-06-21T06:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/06/21/LinuxApp-1-PortingLVGLForSTM32MP157/">【嵌入式Linux应用开发】移植LVGL到Linux开发板</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/05/12/MM32-6-PortFreeRTOS/" class="archive-article-date">
-        <time datetime="2022-05-12T08:06:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-12</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/05/12/MM32-6-PortFreeRTOS/">【MM32】第六篇——移植FreeRTOS</a>
-	
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mcu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MM32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/mcu//" class="article-tag-list-link color4">mcu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/05/12/MM32-5-UartAndPrintf/" class="archive-article-date">
-        <time datetime="2022-05-12T08:06:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-12</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/05/12/MM32-5-UartAndPrintf/">【MM32】第五篇——串口与printf重定向</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mcu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MM32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/mcu//" class="article-tag-list-link color4">mcu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/05/10/MM32-4-TickClock/" class="archive-article-date">
-        <time datetime="2022-05-10T15:21:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-10</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/05/10/MM32-4-TickClock/">【MM32】第四篇——滴答定时器</a>
-	
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mcu</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">MM32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/mcu//" class="article-tag-list-link color4">mcu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -742,8 +565,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
