@@ -18,7 +18,7 @@
 <meta property="og:description" content="说明：本文档作为Hexo新手学习笔记文档，遇到新命令即记录，不定时更新ing。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-04T09:36:50.000Z">
-<meta property="article:modified_time" content="2022-07-04T08:03:09.984Z">
+<meta property="article:modified_time" content="2022-07-14T14:01:59.141Z">
 <meta property="article:author" content="摘星星的小朋友">
 <meta property="article:tag" content="随笔">
 <meta name="twitter:card" content="summary">
@@ -239,7 +239,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">341字</span>
+      <span class="post-count">336字</span>
     </span>
   </span>
 
@@ -349,10 +349,10 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">categories</span>:</span><br><span class="line">- 分类</span><br><span class="line">- 子分类</span><br><span class="line">- 子子分类</span><br><span class="line"><span class="attr">tags</span>:</span><br><span class="line">- 标签<span class="number">1</span></span><br><span class="line">- 标签<span class="number">2</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="2-push空文件夹"><a href="#2-push空文件夹" class="headerlink" title="2. push空文件夹"></a>2. push空文件夹</h1><p>在每个空文件夹内加入名为.gitkeep的无意义文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find . \( -type d -empty \) -and \( -not -regex ./\.git.* \) -exec touch &#123;&#125;/.gitkeep \;</span><br><span class="line"></span><br><span class="line">GIT 复制 全屏</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . \( -type d -empty \) -and \( -not -regex ./\.git.* \) -exec touch &#123;&#125;/.gitkeep \;</span><br></pre></td></tr></table></figure>
 
 <p>批量删除添加的.gitkeep文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -type f -name &#x27;.gitkeep&#x27; -delete</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -type f -name &#x27;.gitkeep&#x27; -delete</span><br></pre></td></tr></table></figure>
 
     
 
